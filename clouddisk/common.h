@@ -11,6 +11,9 @@
 #include<QDebug>
 #include<QNetworkAccessManager>
 #include "des.h"
+#include "base64.h"
+#include<QCryptographicHash>
+
 //定义几个用于正则表达式匹配的宏
 #define USER_MATCH      "^[a-zA-Z][a-zA-Z0-9_]{7,15}$"
 #define Nickname_MATCH  "^[a-zA-Z][a-zA-Z0-9_]{4,15}$"
@@ -26,6 +29,9 @@
 #define RECORD_DIR    "conf/record/"     //保存用户上传下载文件记录的目录
 
 
+
+//定义一个枚举来表示操作的状态
+enum transferstatus{upload,download,record};
 
 class common
 {
@@ -48,6 +54,9 @@ public:
 
     //提供一个获得静态变量manager的接口
     QNetworkAccessManager * getmanager();
+
+    //得到文件的md5值的函数
+    QString getfilemd5(QString filepath);
 
 
 

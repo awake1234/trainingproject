@@ -31,7 +31,14 @@ SOURCES += \
     mytitlewidget.cpp \
     common.cpp \
     des.c \
-    logininfoinstance.cpp
+    logininfoinstance.cpp \
+    base64.c \
+    buttongroup.cpp \
+    mydiskwg.cpp \
+    mymenu.cpp \
+    uploadtask.cpp \
+    dataprocess.cpp \
+    uploadlayout.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,12 +46,22 @@ HEADERS += \
     mytitlewidget.h \
     common.h \
     des.h \
-    logininfoinstance.h
+    logininfoinstance.h \
+    base64.h \
+    buttongroup.h \
+    mydiskwg.h \
+    mymenu.h \
+    uploadtask.h \
+    dataprocess.h \
+    uploadlayout.h
 
 FORMS += \
         mainwindow.ui \
     login.ui \
-    mytitlewidget.ui
+    mytitlewidget.ui \
+    buttongroup.ui \
+    mydiskwg.ui \
+    dataprocess.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

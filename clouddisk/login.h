@@ -12,6 +12,8 @@
 #include<QNetworkAccessManager>
 #include<QNetworkReply>
 #include<QNetworkRequest>
+#include "mainwindow.h"
+#include "logininfoinstance.h"
 
 
 
@@ -38,7 +40,10 @@ public:
 
     //初始化界面的操作，将一些账号或者密码等通过配置文件来放到界面上
     bool init_ui(QString conf_path);
-
+   
+    //定义一个发送登录界面数据的函数
+    int send_logininfo(QString ip,QString port, QString code,QString  token);
+    
 protected slots:
     //重写绘图事件
    void paintEvent(QPaintEvent *event);
@@ -69,9 +74,9 @@ private:
     bool m_flg[6]={false};
     //定义一个标志数组来判断网络设置是否正确
     bool m_netflg[2]={false};
-
-
-
+    
+    //创建主界面窗口对象
+    MainWindow w;
 
 
 };

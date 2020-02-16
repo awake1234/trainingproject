@@ -184,9 +184,8 @@ void common::savelogininfo(QString username, QString password, bool isremember,Q
     webinfo.insert("port",QVariant(port));
 
     //用来保存加密后的用户名和密码
-    unsigned char Encode_username[1024] = {0};
-    unsigned char Encode_password[1024] = {0};
-
+    unsigned char Encode_username[128] = {0};
+    unsigned char Encode_password[128] = {0};
     //用来保存加密后的数据长度
     int Encode_username_len;
     int Encode_password_len;
@@ -195,27 +194,34 @@ void common::savelogininfo(QString username, QString password, bool isremember,Q
 
     //首先要用des加密
     //将用户名和密码加密,参数1要进行数据类型转换
-    ret = DesEnc((unsigned char *)username.toUtf8().data(),username.toUtf8().size(),Encode_username,&Encode_username_len);
+    ret = DesEnc((unsigned char *)username.toUtf8().data(),username.toUtf8().length(),Encode_username,&Encode_username_len);
     if(ret!=0)
     {
         qDebug()<<"des加密用户名失败";
     }
 
-    ret = DesEnc((unsigned char *)password.toUtf8().data(),password.toUtf8().size(),Encode_password,&Encode_password_len);
+
+    ret = DesEnc((unsigned char *)password.toUtf8().data(),password.toUtf8().length(),Encode_password,&Encode_password_len);
     if(ret!=0)
     {
         qDebug()<<"des加密密码失败";
     }
 
-   /* qDebug()<<"desenc username"<<Encode_username;
+    qDebug()<<"desenc username"<<Encode_username;
     qDebug()<<"desenc_username_len"<<Encode_username_len;
     qDebug()<<"desenc pwd"<<Encode_password;
     qDebug()<<"desenc_pwd_len"<<Encode_password_len;
-   */
+
 
     //然后再使用base64进行加密,将加密后的二进制转化成base64字符串
-    QByteArray username_base64 = QByteArray((char *)Encode_username,Encode_username_len).toBase64();
-    QByteArray password_base64 = QByteArray((char *)Encode_password,Encode_password_len).toBase64();
+   // QByteArray username_base64 = QByteArray((char *)Encode_username,Encode_username_len).toBase64();
+    //QByteArray password_base64 = QByteArray((char *)Encode_password,Encode_password_len).toBase64();
+    //base64加密
+    char username_base64[128] ={0};
+    char password_base64[128] = {0};
+    base64_encode(static_cast<const unsigned char *>(Encode_username), Encode_username_len, username_base64);
+    base64_encode(static_cast<const unsigned char *>(Encode_password),Encode_password_len,password_base64);
+
 
     //创建用户信息的map
     QMap<QString,QVariant> userinfo;
@@ -282,8 +288,62 @@ QByteArray common::packinfo(QString username, QString nickname, QString password
 
 }
 
+//获得网络管理的句柄
 QNetworkAccessManager *common::getmanager()
 {
 
     return m_manager;
+}
+
+
+//读写文件的内容并得到该文件的md5值
+QString common::getfilemd5(QString filepath)
+{
+
+    quint64 totalfilesize = 0;   //文件的总大小
+    quint64 byteswritten = 0;    //已经写入的字节数
+    quint64 bytestowrite = 0;    //还要写的文件的字节数
+    quint64 loadsize = 1024*4;   //一次从文件中读取四个字节
+    QByteArray buf;              //存放文件内容的缓冲区
+
+    QFile m_openfile(filepath);
+    bool flg = m_openfile.open(QIODevice::ReadOnly);
+    if(flg==false)
+    {
+       qDebug()<<"getfilemd5:打开文件失败";
+       return nullptr;
+    }
+
+    totalfilesize = m_openfile.size(); //总的文件的大小
+    bytestowrite = totalfilesize;    //要写入的文件的大小
+
+    //创建一个转换工具的指针
+    QCryptographicHash * ch = new QCryptographicHash(QCryptographicHash::Md5);
+
+
+    while(1)
+   {
+       //如果要写的文件大于0
+       if(bytestowrite>0)
+       {
+          buf = m_openfile.read(qMin(bytestowrite,loadsize));    //如果要写的文件的大小比单次加载的字节数还要小，就加载总的文件
+          ch->addData(buf);
+          byteswritten+=static_cast<quint64>(buf.size());
+          bytestowrite-=static_cast<quint64>(buf.size());
+       }
+       else  if(byteswritten==totalfilesize)   //全部已经写完了
+       {
+            break;
+       }
+
+   }
+
+   //返回的结果
+   QByteArray file_md5 = ch->result();
+
+   m_openfile.close();   //关闭这个文件
+   delete  ch;           //删除指针
+
+   return file_md5.toHex();
+
 }

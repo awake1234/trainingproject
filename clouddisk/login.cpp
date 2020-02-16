@@ -225,7 +225,6 @@ void login::settips()
 {
 
     //设置悬浮消息
-    /*
     ui->lineEdit_username->setToolTip(QString("请输入字母开头，8-16个字符，只能包含字母数字下划线"));
     ui->lineEdit_username->setToolTipDuration(0);
     ui->lineEdit_nickname->setToolTip(QString("请输入字母开头，5-16个字符，只能包含字母数字下划线"));
@@ -238,7 +237,7 @@ void login::settips()
     ui->lineEdit_phonenum->setToolTipDuration(0);
     ui->lineEdit_email->setToolTip(QString("请输入你的邮箱"));
     ui->lineEdit_email->setToolTipDuration(0);
-    */
+
 
     ui->lineEdit_username->setPlaceholderText(QString("字母开头8-16个字符仅字母数字下划线回车键键入"));
     ui->lineEdit_nickname->setPlaceholderText(QString("字母开头5-16个字符仅字母数字下划线回车键键入"));
@@ -381,13 +380,13 @@ bool login::init_ui(QString conf_path)
 
             //使用des解密方法
             //定义保存解密后的用户名和密码的内存空间
-            unsigned char username[1024] = {0};
-            unsigned char password[1024] = {0};
+            unsigned char username[128] = {0};
+            unsigned char password[128] = {0};
             int  username_len = 0;
             int  password_len = 0;
 
-            DesDec((unsigned char *)username_des.data(),username_des.size(),username,&username_len);
-            DesDec((unsigned char *)password_des.data(),password_des.size(),password,&password_len);
+            DesDec((unsigned char *)username_des.data(),username_des.length(),username,&username_len);
+            DesDec((unsigned char *)password_des.data(),password_des.length(),password,&password_len);
 
             QString isremember = sublogin.value("isremember").toString();
 
@@ -417,7 +416,93 @@ bool login::init_ui(QString conf_path)
             ui->lineEdit_set_port->setText(port);
         }
     }
-         return true;
+    return true;
+}
+
+
+//发送登录界面用户信息的函数,参数三和四作为传出参数
+int login::send_logininfo(QString ip,QString port, QString code,QString  token)
+{
+    int ret = 0;
+    //首先获取配置文件中加密后的用户名和密码的信息
+ //   QString username_base64 = m_common->getcfgValue("login","user");
+   // QString pwd_base64 = m_common->getcfgValue("login","pwd");
+    
+    //从界面获取字符串
+    QString username = ui->lineEdit_login_username->text();
+    QString pwd = ui->lineEdit_login_pass->text();
+
+    
+    //组织一个发送的json字符串
+    QMap<QString,QVariant> logininfo;
+    logininfo.insert("user",username);
+    logininfo.insert("pwd",pwd);
+    
+    //转换成json对象
+    QJsonDocument doc = QJsonDocument::fromVariant(logininfo);
+    //转换成QByteaerray
+    QByteArray  loginArray = doc.toJson();
+    
+    //发送json包
+    QNetworkAccessManager * manager = m_common->getmanager();
+    
+    QNetworkRequest req;
+    
+    //设置请求头
+    req.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    req.setHeader(QNetworkRequest::ContentLengthHeader,loginArray.size());  //发送的数据的长度
+    
+    req.setUrl(QUrl(QString("http://%1:%2/login").arg(ip).arg(port)));
+    
+    //发送数据
+    QNetworkReply * reply = manager->post(req,loginArray);
+    
+    
+    //监听接收的数据
+    connect(reply,&QNetworkReply::readyRead,[=]()mutable
+    {
+        //读取数据
+        QByteArray  result = reply->readAll();
+        if(result==nullptr)
+        {
+            ret = -1;
+            qDebug()<<"receive data error";
+        }
+        //解析json对象
+        /*成功
+        {"code": "000",
+        "token": "xxx"
+        }
+        */
+        /*失败
+         * {"code":"001",
+         *  "token":"failed"
+         * }
+        */
+       
+        QJsonDocument root = QJsonDocument::fromJson(result);
+        if(root.isObject())
+        {
+            QJsonObject par = root.object();
+            //得到相应的数据
+            code = par.value("code").toString();
+            token = par.value("token").toString();
+            //如果成功
+            if(code=="000")
+            {
+                logininfoinstance * userlogininfo = logininfoinstance::getinstance();
+                userlogininfo->setlogininfo(username,ip,port,token);
+
+                //进入主界面
+                this->hide();
+                w.show();
+
+            }else if(code=="001"){
+               QMessageBox::warning(this,"result","登录失败，用户名或密码错误");
+           }
+        }
+       });
+      return ret;
 }
 
 
@@ -505,6 +590,7 @@ void login::reg_senddata()
     connect(reply,&QNetworkReply::readyRead,[=]()
     {
         QByteArray result = reply->readAll();
+      //  qDebug()<<"reply result:"<<result;
 
         //转换成Json格式
         QJsonDocument doc =QJsonDocument::fromJson(result);
@@ -547,11 +633,16 @@ void login::on_toolButton_login_clicked()
     //服务器的IP和端口
     QString IP = ui->lineEdit_set_IP->text();
     QString port = ui->lineEdit_set_port->text();
-
+   
+    //保存接收到的结果
+    QString code;
+    QString token;
+    
     //将用户的登录信息写入到配置文件中
     m_common->savelogininfo(username,password,isremember,CONFILE_PATH);
-
-
+    
+    //将用户信息发送到服务器端，并检测是否正确
+    send_logininfo(IP,port,code,token);
 
 
 }
