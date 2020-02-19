@@ -61,7 +61,7 @@
        <bool>false</bool>
       </property>
       <widget class="mydiskwg" name="page_mydisk"/>
-      <widget class="QWidget" name="page_transfer_record"/>
+      <widget class="transferwg" name="page_transfer_record"/>
       <widget class="QWidget" name="page_sharelist"/>
       <widget class="QWidget" name="page_downloadlist"/>
      </widget>
@@ -81,6 +81,12 @@
    <class>mydiskwg</class>
    <extends>QWidget</extends>
    <header location="global">mydiskwg.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>transferwg</class>
+   <extends>QWidget</extends>
+   <header location="global">transferwg.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

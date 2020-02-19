@@ -56,6 +56,40 @@ void MainWindow::managesignals()
     });
 
 
+    //切换窗口
+    connect(ui->title_widget,&Buttongroup::sigmydisk,[=]()
+    {
+        ui->stackedWidget->setCurrentIndex(0);
+    });
+
+
+    connect(ui->title_widget,&Buttongroup::sigtransfer,[=]()
+    {
+        ui->stackedWidget->setCurrentIndex(1);
+    });
+
+    connect(ui->title_widget,&Buttongroup::sigshare,[=]()
+    {
+        ui->stackedWidget->setCurrentIndex(2);
+    });
+
+    connect(ui->title_widget,&Buttongroup::sigdownloadrank,[=]()
+    {
+        ui->stackedWidget->setCurrentIndex(3);
+    });
+
+    //检测是否要切换到传输界面
+    connect(ui->page_mydisk,&mydiskwg::switchto_transferui,[=](transferstatus status)
+    {
+       ui->title_widget->slotButtonClick_page(Page::TRANSFER);  //触发转换到传输界面的函数
+
+       if(status==upload)
+       {
+          ui->page_transfer_record->showuploadtask();  //切换到上传列表的界面
+       }
+
+    });
+
 }
 
 

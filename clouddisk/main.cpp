@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
 
 
     //显示一下登录的界面
-    //login h;
-    //h.show();
+     //login h;
+     //h.show();
 
     return a.exec();
 }

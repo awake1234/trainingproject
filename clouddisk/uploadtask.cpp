@@ -51,9 +51,7 @@ int uploadtask::appendtolist(QString filepath)
         }
     }
 
-    //加载一个上传的进度条
-    dataprocess * fileprogress = new dataprocess();
-    fileprogress->setfilename(Fileinfo_filename);
+
 
 
     //正常上传操作，设置上传文件的相关信息
@@ -66,32 +64,43 @@ int uploadtask::appendtolist(QString filepath)
     tempfileinfo->filesize = fileinfo.size();
     tempfileinfo->isupload = false;
     tempfileinfo->filepoint = &file;
-    tempfileinfo->dp = fileprogress;
+    tempfileinfo->dp = nullptr;    //这边暂时先设为空指针
     tempfileinfo->filepath = filepath;
-
-    //获取放置进度条的布局实例
-    UploadLayout * uploadlayout_instance = UploadLayout::getInstance();
-    if(uploadlayout_instance==nullptr)
-    {
-        ret = -3;
-        file.close();
-        qDebug()<<"获取上传文件布局实例失败";
-        return ret;
-    }
-
-    //获取布局
-    QVBoxLayout *vlayout = static_cast<QVBoxLayout * >(uploadlayout_instance->getUploadLayout());
-    vlayout->insertWidget(vlayout->count()-1,fileprogress);    //因为下标是从0开始计算的，加入进度条
 
     qDebug()<<Fileinfo_filename<<":添加到队列成功";
 
+    //加锁
+    mutex.lock();
     uploadfile_list.append(tempfileinfo);  //加入到文件列表的数据结构list中
+    //解锁
+    mutex.unlock();
+
+    //发送信号给主线程
+    emit emtfilename(Fileinfo_filename);
 
     return 0;
 
 }
 
+//将文件添加到上传列表中
+void uploadtask::adduploadfiles()
+{ //这里面做上传文件到文件列表中的操作
 
+    for(int i = 0;i<filepath.size();i++)
+    {
+        int ret = appendtolist(filepath.at(i));
+        if(ret==0)
+        {
+           qDebug()<<"文件已经成功添加到上传列表";
+
+        }else {
+           qDebug()<<"文件添加到上传列表失败";
+           return;
+        }
+    }
+    emit finished();  //发送线程结束信号
+    return;
+}
 
 uploadtask::uploadtask()
 {

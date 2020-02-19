@@ -13,6 +13,20 @@ mydiskwg::mydiskwg(QWidget *parent) :
     this->AddMenuAction();
     //添加上传文件的按钮
     this->Adduploaditem();
+
+    uploadtask = uploadtask::get_uploadtask_instance();
+
+    uploadtask->moveToThread(&thread_adduploadfiles);
+
+
+    //线程启动后就执行相应的操作
+    connect(&thread_adduploadfiles,&QThread::started,uploadtask,&uploadtask::adduploadfiles,Qt::QueuedConnection);
+    //线程结束要删除
+    connect(&thread_adduploadfiles,&QThread::finished,uploadtask,&QObject::deleteLater);
+
+    //监听子线程发送的信号
+    connect(uploadtask,SIGNAL(emtfilename(QString)),this,SLOT(addprogress(QString)));
+
 }
 
 mydiskwg::~mydiskwg()
@@ -42,8 +56,11 @@ void mydiskwg::initlistwidget()
     {
        if(selected->text()=="上传文件")
        {
-           //添加文件到上传队列中
-            this->adduploadfiles();
+           QStringList path = QFileDialog::getOpenFileNames(this,tr("select one or more files to upload"),"./","files(*.*)");
+          // QStringList path = fileopendialog();
+           uploadtask->filepath = path;    //将值传给filepath
+           //启动线程
+           thread_adduploadfiles.start();
        }
     });
 
@@ -86,29 +103,22 @@ void mydiskwg::Adduploaditem(QString iconpath, QString text)
 }
 
 
-//将文件添加到上传列表中
-void mydiskwg::adduploadfiles()
+//自定义文件打开的窗口
+QStringList mydiskwg::fileopendialog()
 {
-    //这里面做上传文件到文件列表中的操作
-    QStringList path = QFileDialog::getOpenFileNames(this,tr("select one or more files to upload"),"./","files(*.*)");
+    QStringList ltFilePath;
+    QFileDialog dialog(this, tr("Open Files"), tr("./"),"files(*.*)");
+    dialog.setAcceptMode(QFileDialog::AcceptOpen);
+    dialog.setModal(QFileDialog::ExistingFiles);
+    dialog.setOption(QFileDialog::DontUseNativeDialog);
+    dialog.exec();
+    ltFilePath = dialog.selectedFiles();
 
-
-   uploadtask *uploadtask = uploadtask::get_uploadtask_instance();
-
-    for(int i = 0;i<path.size();i++)
-    {
-        int ret = uploadtask->appendtolist(path.at(i));
-        if(ret==0)
-        {
-           qDebug()<<"文件已经成功添加到上传列表";
-        }else {
-           qDebug()<<"文件添加到上传列表失败";
-           return;
-        }
-    }
-
-    return;
+    return  ltFilePath;
 }
+
+
+
 
 
 //右键菜单槽函数
@@ -128,4 +138,45 @@ void mydiskwg::rightMenu(const QPoint pos)
        }
        m_menu1->exec(QCursor::pos());
     }
+}
+
+//在UI界面中加入进度条
+void mydiskwg::addprogress(QString filename)
+{
+    //加载一个上传的进度条
+    dataprocess * fileprogress = new dataprocess();
+    fileprogress->setfilename(filename);
+
+    //获取放置进度条的布局实例
+    UploadLayout * uploadlayout_instance = UploadLayout::getInstance();
+    if(uploadlayout_instance==nullptr)
+    {
+        qDebug()<<"获取上传文件布局实例失败";
+        return;
+    }
+
+    //获取布局
+    QVBoxLayout *vlayout = static_cast<QVBoxLayout * >(uploadlayout_instance->getUploadLayout());
+    vlayout->insertWidget(vlayout->count()-1,fileprogress);    //因为下标是从0开始计算的，加入进度条
+
+    //加锁
+    mutex.lock();
+    //将上传队列中的进度条重新设置一下
+    //查找当前文件的结构体
+    for(int i =0;i<uploadtask->uploadfile_list.size();i++)
+    {
+        if(uploadtask->uploadfile_list.at(i)->filename==filename)
+        {
+            uploadtask->uploadfile_list.at(i)->dp = fileprogress;
+        }
+    }
+    mutex.unlock();  //解锁
+
+    //发送切换界面的信号
+    emit switchto_transferui(upload);
+    //唤醒所有的线程
+    notempty.wakeAll();
+
+
+
 }

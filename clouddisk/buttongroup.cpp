@@ -8,6 +8,35 @@ Buttongroup::Buttongroup(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //分配空间
+    m_mapper = new QSignalMapper(this);
+    m_curButton = ui->toolButton_myfile;
+    m_curButton->setStyleSheet("color:red");  //设置字体颜色
+
+
+    //建立按钮和按钮内容的映射关系
+    m_btns.insert(ui->toolButton_myfile->text(),ui->toolButton_myfile);
+    m_btns.insert(ui->toolButton_changeruser->text(),ui->toolButton_changeruser);
+    m_btns.insert(ui->toolButton_download_rank->text(),ui->toolButton_download_rank);
+    m_btns.insert(ui->toolButton_sharefilelist->text(),ui->toolButton_sharefilelist);
+    m_btns.insert(ui->toolButton_transfer_record->text(),ui->toolButton_transfer_record);
+
+
+    //建立页面与text的映射关系
+    m_pages.insert(Page::MYDISK,ui->toolButton_myfile->text());
+    m_pages.insert(Page::SHARE,ui->toolButton_sharefilelist->text());
+    m_pages.insert(Page::TRANSFER,ui->toolButton_transfer_record->text());
+    m_pages.insert(Page::SWITCHUSER,ui->toolButton_changeruser->text());
+    m_pages.insert(Page::DOWNLOADRANK,ui->toolButton_download_rank->text());
+
+    //设置按钮信号映射
+    for(QMap<QString,QToolButton *>::iterator it = m_btns.begin();it!=m_btns.end();++it)
+    {
+        m_mapper->setMapping(it.value(),it.value()->text());  //按钮--》按钮上的文字
+        connect(it.value(),SIGNAL(clicked(bool)),m_mapper,SLOT(map()));
+    }
+
+    connect(m_mapper,SIGNAL(mapped(QString)),this,SLOT(slotButtonClick_str(QString)));
 
     //检测窗口关闭按钮
     connect(ui->toolButton_close,&QToolButton::clicked,[=]()
@@ -55,6 +84,50 @@ Buttongroup::~Buttongroup()
 void Buttongroup::setParent(QWidget *parent)
 {
     m_parent = parent;
+}
+
+
+void Buttongroup::slotButtonClick_str(QString text)
+{
+    QToolButton * btn = m_btns[text];
+    //等于当前按钮时不做处理
+    if(btn==m_curButton&&btn!=ui->toolButton_changeruser)
+    {
+        return;
+    }
+
+    m_curButton->setStyleSheet("color:black");
+    btn->setStyleSheet("color:red");
+    m_curButton = btn;
+
+    //发信号
+    if(text==ui->toolButton_myfile->text())
+    {
+        emit sigmydisk();
+    }else if(text==ui->toolButton_download_rank->text())
+    {
+        emit sigdownloadrank();
+    }else if(text==ui->toolButton_sharefilelist->text())
+    {
+        emit sigshare();
+    }else if(text==ui->toolButton_transfer_record->text())
+    {
+        emit sigtransfer();
+    }else if(text==ui->toolButton_changeruser->text())
+    {
+        emit sigswitchuser();
+    }
+
+
+
+
+}
+
+
+void Buttongroup::slotButtonClick_page(Page cur)
+{
+    QString text = m_pages[cur];
+    slotButtonClick_str(text);
 }
 
 //重写绘图事件

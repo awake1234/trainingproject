@@ -32,7 +32,7 @@ private:
     public:
         ~Garbo()
         {
-          if(NULL != UploadLayout::instance)
+          if(nullptr != UploadLayout::instance)
           {
             delete UploadLayout::instance;
             UploadLayout::instance = nullptr;

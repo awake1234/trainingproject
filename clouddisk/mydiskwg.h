@@ -8,6 +8,8 @@
 #include <QPoint>
 #include<QFileDialog>
 #include "uploadtask.h"
+#include <QThread>
+
 
 //我的网盘的widget
 
@@ -33,10 +35,19 @@ public:
     //添加上传文件的item
     void Adduploaditem(QString iconpath=":/ico/images/upload.png",QString text = "上传文件");
 
-    void adduploadfiles();
+    //自定义文件打开窗口 不使用windows系统界面
+    QStringList  fileopendialog();
 
 public   slots:
     void rightMenu(const QPoint pos);
+
+    //定义一个槽函数在主线程中插入进度条
+    void addprogress(QString filename);
+
+signals:
+   //定义一个信号来切换传输的任务的界面
+   //transferstatus为枚举类型在common.h中定义
+   void switchto_transferui(transferstatus status);
 
 private:
     Ui::mydiskwg *ui;
@@ -57,6 +68,10 @@ private:
     QAction *m_Download_ASC;//按下载量升序
     QAction *m_Download_Des; //按下载量降序
 
+    QThread thread_adduploadfiles;  //生产者线程
+
+
+    uploadtask * uploadtask;   //上传任务的实例
 };
 
 #endif // MYDISKWG_H

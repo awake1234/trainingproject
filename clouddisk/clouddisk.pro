@@ -38,7 +38,8 @@ SOURCES += \
     mymenu.cpp \
     uploadtask.cpp \
     dataprocess.cpp \
-    uploadlayout.cpp
+    uploadlayout.cpp \
+    transferwg.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -53,7 +54,8 @@ HEADERS += \
     mymenu.h \
     uploadtask.h \
     dataprocess.h \
-    uploadlayout.h
+    uploadlayout.h \
+    transferwg.h
 
 FORMS += \
         mainwindow.ui \
@@ -61,7 +63,8 @@ FORMS += \
     mytitlewidget.ui \
     buttongroup.ui \
     mydiskwg.ui \
-    dataprocess.ui
+    dataprocess.ui \
+    transferwg.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
