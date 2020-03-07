@@ -1,6 +1,6 @@
 #include "buttongroup.h"
 #include "ui_buttongroup.h"
-
+#include <QDebug>
 #include <QPainter>
 Buttongroup::Buttongroup(QWidget *parent) :
     QWidget(parent),
@@ -11,7 +11,10 @@ Buttongroup::Buttongroup(QWidget *parent) :
     //分配空间
     m_mapper = new QSignalMapper(this);
     m_curButton = ui->toolButton_myfile;
-    m_curButton->setStyleSheet("color:red");  //设置字体颜色
+    m_curButton->setStyleSheet("color:black");  //设置字体颜色
+
+    labelusername = ui->label_nickname;
+
 
 
     //建立按钮和按钮内容的映射关系
@@ -73,6 +76,13 @@ Buttongroup::Buttongroup(QWidget *parent) :
      });
 
 
+
+}
+
+
+QLabel *Buttongroup::getlabelusername()
+{
+   return   labelusername;
 }
 
 Buttongroup::~Buttongroup()
@@ -117,11 +127,9 @@ void Buttongroup::slotButtonClick_str(QString text)
     {
         emit sigswitchuser();
     }
-
-
-
-
 }
+
+
 
 
 void Buttongroup::slotButtonClick_page(Page cur)

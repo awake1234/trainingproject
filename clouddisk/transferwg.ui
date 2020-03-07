@@ -40,7 +40,7 @@ color: rgb(255, 85, 0);</string>
      </property>
      <widget class="QWidget" name="uploadlist">
       <attribute name="title">
-       <string>上传记录</string>
+       <string>上传列表</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -65,7 +65,7 @@ color: rgb(255, 85, 0);</string>
      </widget>
      <widget class="QWidget" name="downloadlist">
       <attribute name="title">
-       <string>下载记录</string>
+       <string>下载列表</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>

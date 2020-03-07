@@ -39,7 +39,9 @@ SOURCES += \
     uploadtask.cpp \
     dataprocess.cpp \
     uploadlayout.cpp \
-    transferwg.cpp
+    transferwg.cpp \
+    consumerthread_file.cpp \
+    fileproperty.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,7 +57,9 @@ HEADERS += \
     uploadtask.h \
     dataprocess.h \
     uploadlayout.h \
-    transferwg.h
+    transferwg.h \
+    consumerthread_file.h \
+    fileproperty.h
 
 FORMS += \
         mainwindow.ui \
@@ -64,7 +68,8 @@ FORMS += \
     buttongroup.ui \
     mydiskwg.ui \
     dataprocess.ui \
-    transferwg.ui
+    transferwg.ui \
+    fileproperty.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

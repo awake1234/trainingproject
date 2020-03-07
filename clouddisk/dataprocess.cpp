@@ -21,7 +21,7 @@ void dataprocess::setfilename(QString name)
 }
 
 //设置进度条当前的值
-void dataprocess::setprogress(int value, int max)
+void dataprocess::setprogress(qint64 value, qint64 max)
 {
     ui->progressBar->setRange(0,max);
     ui->progressBar->setValue(value);

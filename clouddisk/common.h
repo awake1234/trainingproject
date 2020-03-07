@@ -13,6 +13,9 @@
 #include "des.h"
 #include "base64.h"
 #include<QCryptographicHash>
+#include <qdatetime.h>
+#include <QDir>
+#include <QListWidgetItem>
 
 //定义几个用于正则表达式匹配的宏
 #define USER_MATCH      "^[a-zA-Z][a-zA-Z0-9_]{7,15}$"
@@ -24,9 +27,27 @@
 #define PORT_MATCH      "^[1-9]$|(^[1-9][0-9]$)|(^[1-9][0-9][0-9]$)|(^[1-9][0-9][0-9][0-9]$)|(^[1-6][0-5][0-5][0-3][0-5]$)"
 
 
-#define CONFILE_PATH "conf/config.json"    //定义保存配置文件的路径
-#define FILETYPE_DIR    "conf/filetype"  //存放文件类型图片的目录
+#define CONFILE_PATH  "conf/config.json"    //定义保存配置文件的路径
+#define FILETYPE_DIR  "conf/filetype"  //存放文件类型图片的目录
 #define RECORD_DIR    "conf/record/"     //保存用户上传下载文件记录的目录
+
+//文件信息结构体
+struct FileInfo
+{
+    QString md5;       //文件md5
+    QString filename; //文件名
+    QString user;    //用户
+    QString time;    //上传时间
+    QString url;     //文件url
+    QString type;    //文件类型
+    qint64  size;    //文件大小
+    int shareStatus; //是否共享 1共享 0不共享
+    int pv;          //下载量
+
+    QListWidgetItem *item;  //filelistwidget的item
+};
+
+
 
 
 
@@ -58,11 +79,26 @@ public:
     //得到文件的md5值的函数
     QString getfilemd5(QString filepath);
 
+    //得到服务器回复的状态码
+    QString getcode(QByteArray json);
 
+    //制作分隔线
+    QString getBoundry();
 
+    //保存传输记录到本地文件
+    void writeRecord(QString user,QString name,QString code,QString path=RECORD_DIR);
+
+    //得到文件后缀，去conf/filetype中寻找对应的图片，如果没有，使用other.png
+    QString getFileType(QString filetype);
+
+    //得到文件类型列表
+    void getFileTypeList();
+
+    static QStringList  m_typelist;  //可以找的文件类型列表
  private:
     static QNetworkAccessManager * m_manager;   //保证只有一个manager对象
 
+    static QString m_typepath;  //需要返回的文件类型的路径
 
 };
 

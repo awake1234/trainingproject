@@ -5,6 +5,8 @@
 #include<QPaintEvent>
 #include<QSignalMapper>
 #include<QMap>
+#include "logininfoinstance.h"
+
 
 namespace Ui {
 class Buttongroup;
@@ -19,6 +21,9 @@ class Buttongroup : public QWidget
 
 public:
     explicit Buttongroup(QWidget *parent = nullptr);
+    //获得显示用户名的label的地址
+    QLabel *getlabelusername();
+
     ~Buttongroup();
 signals:
     void closewindow();   //窗口关闭信号
@@ -30,6 +35,8 @@ signals:
     void sigdownloadrank();
     void sigtransfer();
     void sigswitchuser();
+
+
 
 public slots:
     //设置父对象
@@ -48,6 +55,7 @@ private:
     QMap<QString,QToolButton *> m_btns;
     QMap<Page,QString> m_pages;
 
+    QLabel * labelusername;
 
 protected slots:
     //重写绘图事件

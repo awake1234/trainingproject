@@ -7,8 +7,6 @@ logininfoinstance *  logininfoinstance::instance = new logininfoinstance();
 logininfoinstance::logininfoinstance()
 {
     
-    
-    
 }
 
 //得到这个实例
@@ -56,7 +54,6 @@ logininfoinstance logininfoinstance::operator=(const logininfoinstance &)
 {
     //*this返回的还是当前的对象，可以避免被复制
     return *this;
-
 }
 
 

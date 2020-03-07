@@ -13,7 +13,7 @@
 #include<QWaitCondition>
 
 
-static QMutex mutex;   //加锁文件列表资源
+static  QMutex mutex;   //加锁文件列表资源
 static QWaitCondition notempty;  //条件变量文件列表不为空
 //上传文件任务的队列的类，这是一个单例模式的类，保证整个程序只有这一个实例
 
@@ -41,29 +41,34 @@ public:
    //对外提供一个得到实例的接口
    static uploadtask *  get_uploadtask_instance();
 
-   //将文件添加到uploadfilelist中
-   int appendtolist(QString filepath);
 
-   //将文件添加到上传文件列表
-   void adduploadfiles();
-
-   //选中上传的文件名列表
-   QStringList filepath;
 
    //上传的文件的列表
    QList<uploadfileinfo*> uploadfile_list;
 
+   //判断上传列表是否为空
+   bool isEmpty();
+
+   //取任务
+   uploadfileinfo * takeTask(int index);
+
+   void clearlist();
+
+   int appendtolist(QString filepath);
+
+   //删除掉已经完成的任务
+   void delete_uploadtask();
+
 protected :
 
 signals:
-   void emtfilename(QString filename);   //将文件姓名传递给主线程用来创建进度条
-   void finished();
+
+
+
 
 
 private:
     uploadtask();   //构造函数私有化
-
-    common m_common;
 
     //要在外面初始化
     static uploadtask * uploadtaskinstance;

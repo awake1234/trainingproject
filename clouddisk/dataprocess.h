@@ -19,7 +19,7 @@ public:
 
     //设置文件的名字
     void setfilename(QString name="测试");
-    void setprogress(int value,int max=100);   //value，当前值，最大值设为100
+    void setprogress(qint64 value,qint64 max=100);   //value，当前值，最大值设为100
 
 private:
     Ui::dataprocess *ui;

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,9 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
 
     //将title_widget的父对象设置为mainwindow
-   // ui->title_widget->setParent(this);
+    ui->title_widget->setParent(this);
+
 
     managesignals();
+
 
 }
 
@@ -89,6 +92,25 @@ void MainWindow::managesignals()
        }
 
     });
+
+
+
+
+
+}
+
+//显示窗口
+void MainWindow::ShowMainWindow()
+{
+   this->show();
+
+   //显示用户的文件列表
+   ui->page_mydisk->getuserfilecount();
+
+   //获取设置用户名信息的label的地址
+   QLabel * temp = ui->title_widget->getlabelusername();
+   logininfoinstance * info = logininfoinstance::getinstance();
+   temp->setText(info->getuser());
 
 }
 

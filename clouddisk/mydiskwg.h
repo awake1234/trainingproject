@@ -9,6 +9,11 @@
 #include<QFileDialog>
 #include "uploadtask.h"
 #include <QThread>
+#include "consumerthread_file.h"
+#include<QJsonArray>
+#include "fileproperty.h"
+
+
 
 
 //我的网盘的widget
@@ -26,35 +31,65 @@ public:
     explicit mydiskwg(QWidget *parent = nullptr);
     ~mydiskwg();
 
+    /********item相关*****/
     //初始化filelistwidget文件列表
     void initlistwidget();
-
     //添加右键菜单的action
     void AddMenuAction();
-
-    //添加上传文件的item
-    void Adduploaditem(QString iconpath=":/ico/images/upload.png",QString text = "上传文件");
-
     //自定义文件打开窗口 不使用windows系统界面
     QStringList  fileopendialog();
+    //清除所有的item
+    void clearitems();
 
+    //处理选中文件item所做的操作
+    void dealselectedfile(QString cmd);
+
+    //细分到每个功能的具体操作
+    void deal_property(FileInfo * info);
+
+
+    /******上传文件的操作******/
+    //添加上传文件的item
+    void Adduploaditem(QString iconpath=":/ico/images/upload.png",QString text = "上传文件");
+    void adduploadfiles();
+    int  appendtolist(QString filepath);
+
+
+    /*****显示用户的文件列表******/
+    //用来展示文件排列的枚举类型
+    //normal:普通用户列表
+    //pvASC按下载量升序排序
+    //pvDES按下载量降序
+    enum DISPLAY{normal,pvASC,pvDES};
+    void getuserfilelist(DISPLAY cmd);                  //获取用户的文件列表
+    void refreshFileItems();//显示文件Item
+    QByteArray setfileslistjson(QString user,QString token,int start,int count);
+    void getFileJsonInfo(QByteArray data);    //获取返回的文件信息
+    void getuserfilecount(DISPLAY cmd=normal);       //先查询用户文件的数量并且去获得用户文件信息
+    QByteArray setcountjson(QString user,QString token);  //设置查询用户文件数量的json包
+    QStringList getcountstatus(QByteArray json);    //得到服务器返回的json文件
+    void clearfilelist();               //清空文件列表
 public   slots:
     void rightMenu(const QPoint pos);
-
-    //定义一个槽函数在主线程中插入进度条
-    void addprogress(QString filename);
+    //定义一个槽函数来刷新进度条的值
+    void update_progress_value(qint64,qint64,dataprocess *);
+    //定义槽函数删除已经上传的文件的进度条
+    void delete_finishedfile();
 
 signals:
    //定义一个信号来切换传输的任务的界面
    //transferstatus为枚举类型在common.h中定义
    void switchto_transferui(transferstatus status);
+   void startproducer();
+   void startconsumer();
+   void loginAgainSignal();
+
 
 private:
     Ui::mydiskwg *ui;
 
     //创建菜单
     mymenu * m_menu1; //点击文件时产生的菜单
-
     QAction * m_download;  //下载
     QAction * m_share;     //分享
     QAction * m_delete;    //删除
@@ -62,16 +97,34 @@ private:
 
 
     mymenu * m_empty;    //点击空白处生成的菜单
-
     QAction *m_upload;   //上传文件
     QAction *m_refresh;  //刷新
     QAction *m_Download_ASC;//按下载量升序
     QAction *m_Download_Des; //按下载量降序
 
-    QThread thread_adduploadfiles;  //生产者线程
+    /*线程*/
+    QThread * thread_adduploadfiles;  //生产者线程
+    QVector <QThread *> thread_consume_uploadfiles; //消费者线程数组
+    QVector <consumerthread_file *> consumer_thread;  //消费者线程处理工作的对象指针数组
+    QThread * thread_consumer;
 
+    //上传任务的实例
+    uploadtask * uploadtask;
+    dataprocess *m_process;
 
-    uploadtask * uploadtask;   //上传任务的实例
+    //消费者
+    int thread_num = 3;  //定义一个消费者线程数，默认为3，后期加上UI操作
+
+    //用户文件数量
+    long m_userfilecount;   //用户文件数量
+    int  m_start;    //文件位置起点
+    int  m_count;    //每次请求文件的数量
+
+    QNetworkAccessManager *m_manager;
+    common m_common;
+
+    QList<FileInfo *> m_fileList;                  //维护一个保存文件信息的列表
+
 };
 
 #endif // MYDISKWG_H

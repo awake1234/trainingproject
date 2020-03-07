@@ -18,6 +18,7 @@ public:
 
     //集中管理监听信号的函数
     void managesignals();
+    void ShowMainWindow();
 
 private:
     Ui::MainWindow *ui;

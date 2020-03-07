@@ -43,6 +43,10 @@ public:
    
     //定义一个发送登录界面数据的函数
     int send_logininfo(QString ip,QString port, QString code,QString  token);
+
+signals:
+
+
     
 protected slots:
     //重写绘图事件

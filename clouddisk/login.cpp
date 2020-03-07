@@ -388,6 +388,9 @@ bool login::init_ui(QString conf_path)
             DesDec((unsigned char *)username_des.data(),username_des.length(),username,&username_len);
             DesDec((unsigned char *)password_des.data(),password_des.length(),password,&password_len);
 
+            qDebug()<<"init ui: username"<<username<<"length:"<<username_len;
+
+
             QString isremember = sublogin.value("isremember").toString();
 
             //判断是否记住用户名
@@ -493,9 +496,10 @@ int login::send_logininfo(QString ip,QString port, QString code,QString  token)
                 logininfoinstance * userlogininfo = logininfoinstance::getinstance();
                 userlogininfo->setlogininfo(username,ip,port,token);
 
+
                 //进入主界面
                 this->hide();
-                w.show();
+                w.ShowMainWindow();
 
             }else if(code=="001"){
                QMessageBox::warning(this,"result","登录失败，用户名或密码错误");

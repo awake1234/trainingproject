@@ -5,7 +5,8 @@
 
 //给manager申请空间
 QNetworkAccessManager * common::m_manager = new QNetworkAccessManager();
-
+QString common::m_typepath = FILETYPE_DIR;
+QStringList common::m_typelist = QStringList();
 common::common()
 {
 
@@ -346,4 +347,183 @@ QString common::getfilemd5(QString filepath)
 
    return file_md5.toHex();
 
+}
+
+//得到服务器返回的状态码
+QString common::getcode(QByteArray json)
+{
+    QJsonParseError error;
+
+    QJsonDocument doc = QJsonDocument::fromJson(json,&error);
+    if(error.error==QJsonParseError::NoError)
+    {
+        if(doc.isNull()||doc.isEmpty())
+        {
+            qDebug()<<"doc is NULL || doc is empty";
+            return "";
+        }
+        if(doc.isObject())
+        {
+            QJsonObject obj = doc.object();
+            return obj.value("code").toString();
+        }
+    }else {
+
+      qDebug()<<"err"<<error.errorString();
+    }
+    return nullptr;
+}
+
+
+//制作分隔线
+QString common::getBoundry()
+{
+    //使用时间种子生成的随机数
+    srand(static_cast<uint>((QTime(0,0,0).secsTo(QTime::currentTime()))));
+    QString temp;
+
+    for(int i=0;i<16;++i)
+    {
+        // 48~122, '0'~'A'~'z'
+        temp[i] = rand()%74+48;
+    }
+
+    //返回分隔线
+    return QString("------WebKitFormBoundary%1").arg(temp);
+
+}
+
+//保存传输的记录 name:操作的文件
+void common::writeRecord(QString user, QString name, QString code, QString path)
+{
+    //这里的filename是记录文件的名字
+    QString filename = path+user;
+
+    //检查目录是否存在，如果不存在，则创建目录
+    QDir dir(path);
+    if(!dir.exists())
+    {
+        if(dir.mkdir(path))
+        {
+            qDebug()<<path<<"目录创建成功";
+        }
+        else {
+         qDebug()<<path<<"目录创建失败";
+        }
+     }
+
+     qDebug()<<"filename="<<filename;
+
+     QByteArray array;
+
+     QFile file(filename);
+     //如果记录文件存在，先读取文件中的内容
+     if(true==file.exists())
+     {
+         if(false==file.open(QIODevice::ReadOnly))
+         {
+             qDebug()<<"record file open for read err";
+             return;
+         }
+
+         array = file.readAll();
+         file.close();
+     }
+     //还要再写入文件中去
+     if(false==file.open(QIODevice::WriteOnly))
+     {
+         qDebug()<<"record  file open for  write err";
+         return;
+     }
+
+     QDateTime time = QDateTime::currentDateTime();  //获取系统的当前时间
+     //ddd本地化日期的缩写（例如，“Mon”至“Sun”）
+     QString timestr = time.toString("yyyy-MM-dd hh:mm:ss ddd");  //设置显示格式
+
+
+     QString actionstr;
+     if("005"==code)
+     {
+         actionstr = "上传失败，文件已经存在";
+     }else if("006"==code)
+     {
+         actionstr = "秒传成功";
+     }else if("008"==code)
+     {
+         actionstr = "上传成功";
+     }else if("009"==code)
+     {
+         actionstr = "上传失败";
+     }else if("010"==code)
+     {
+         actionstr = "下载成功";
+     }else if("011"==code)
+     {
+         actionstr = "下载失败";
+     }
+
+     QString str = QString("[%1]\t%2\t[%3]\r\n").arg(name).arg(timestr).arg(actionstr);
+     qDebug()<<"记录信息"<<str;
+
+     //要转化成本地字符集
+     file.write(str.toLocal8Bit());
+
+     if(array.isEmpty()==false)
+     {
+         file.write(array);
+     }
+
+     file.close();
+}
+
+//去图片类型文件夹中寻找相应的图片
+QString common::getFileType(QString filetype)
+{
+   //如果包含该文件类型
+   if(true==m_typelist.contains(filetype))
+   {
+       return m_typepath+"/"+filetype;  //封装路径
+   }
+   //没有找到
+   return m_typepath+"/other.png";
+}
+
+//获得文件类型列表
+void common::getFileTypeList()
+{
+    QDir dir(m_typepath);
+    if(!dir.exists())
+    {
+        dir.mkpath(m_typepath);
+        qDebug()<<m_typepath<<"创建成功";
+    }
+    /*
+          QDir::Dirs      列出目录；
+          QDir::AllDirs   列出所有目录，不对目录名进行过滤；
+          QDir::Files     列出文件；
+          QDir::Drives    列出逻辑驱动器名称，该枚举变量在Linux/Unix中将被忽略；
+          QDir::NoSymLinks        不列出符号链接；
+          QDir::NoDotAndDotDot    不列出文件系统中的特殊文件.及..；
+          QDir::NoDot             不列出.文件，即指向当前目录的软链接
+          QDir::NoDotDot          不列出..文件；
+          QDir::AllEntries        其值为Dirs | Files | Drives，列出目录、文件、驱动器及软链接等所有文件；
+          QDir::Readable      列出当前应用有读权限的文件或目录；
+          QDir::Writable      列出当前应用有写权限的文件或目录；
+          QDir::Executable    列出当前应用有执行权限的文件或目录；
+          Readable、Writable及Executable均需要和Dirs或Files枚举值联合使用；
+          QDir::Modified      列出已被修改的文件，该值在Linux/Unix系统中将被忽略；
+          QDir::Hidden        列出隐藏文件；
+          QDir::System        列出系统文件；
+          QDir::CaseSensitive 设定过滤器为大小写敏感。
+    */
+    dir.setFilter(QDir::Files | QDir::NoDot | QDir::NoDotDot | QDir::NoSymLinks); //过滤文件
+    dir.setSorting(QDir::Size | QDir::Reversed);  //排序
+
+    QFileInfoList list = dir.entryInfoList();
+
+    for(int i = 0;i<list.size();i++)
+    {
+        QFileInfo fileinfo = list.at(i);
+        m_typelist.append(fileinfo.fileName());  //将文件名添加到列表
+    }
 }
