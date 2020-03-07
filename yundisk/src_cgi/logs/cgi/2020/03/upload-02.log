@@ -1,0 +1,371 @@
+[2020-03-02 15:47:51]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 15:48:04]--[upload_cgi.c:500]--len = 1335
+[2020-03-02 15:48:04]--[upload_cgi.c:70]--buf = ------WebKitFormBoundaryeP1AHyfs2K\6uQE`
+Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093
+Content-Type:multipart/form-data
+
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/lib \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib
+
+------WebKitFormBoundaryeP1AHyfs2K\6uQE`
+[2020-03-02 15:48:04]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundaryeP1AHyfs2K\6uQE`]
+[2020-03-02 15:48:04]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093]
+[2020-03-02 15:48:04]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 15:48:04]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 15:48:04]--[upload_cgi.c:194]--open file .qmake.stash successfully
+[2020-03-02 15:48:04]--[upload_cgi.c:508]--lp13773477582成功上传[.qmake.stash, 大小：1093, md5码：79d37deb46514fec4e3760cff63e9dfb]到本地
+[2020-03-02 15:48:04]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 15:48:04]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5cujSALep6AAAERUNRolk5.stash] succ!
+[2020-03-02 15:48:04]--[upload_cgi.c:328]--uploadfile stat:
+[2020-03-02 15:48:04]--[upload_cgi.c:334]--strstr ip address fail
+[2020-03-02 15:52:38]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 15:52:51]--[upload_cgi.c:500]--len = 1335
+[2020-03-02 15:52:51]--[upload_cgi.c:70]--buf = ------WebKitFormBoundaryM]Y\Kh7s`^isZj[6
+Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093
+Content-Type:multipart/form-data
+
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/lib \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib
+
+------WebKitFormBoundaryM]Y\Kh7s`^isZj[6
+[2020-03-02 15:52:51]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundaryM]Y\Kh7s`^isZj[6]
+[2020-03-02 15:52:51]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093]
+[2020-03-02 15:52:51]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 15:52:51]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 15:52:51]--[upload_cgi.c:194]--open file .qmake.stash successfully
+[2020-03-02 15:52:51]--[upload_cgi.c:508]--lp13773477582成功上传[.qmake.stash, 大小：1093, md5码：79d37deb46514fec4e3760cff63e9dfb]到本地
+[2020-03-02 15:52:51]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 15:52:51]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5cu1OAPpaRAAAERUNRolk4.stash] succ!
+[2020-03-02 15:52:51]--[upload_cgi.c:328]--uploadfile stat:
+[2020-03-02 15:52:51]--[upload_cgi.c:334]--strstr ip address fail
+[2020-03-02 15:57:11]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 15:57:35]--[upload_cgi.c:501]--len = 1335
+[2020-03-02 15:57:35]--[upload_cgi.c:70]--buf = ------WebKitFormBoundarytnaApJFiV8h;G;2B
+Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093
+Content-Type:multipart/form-data
+
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/lib \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib
+
+------WebKitFormBoundarytnaApJFiV8h;G;2B
+[2020-03-02 15:57:35]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundarytnaApJFiV8h;G;2B]
+[2020-03-02 15:57:35]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093]
+[2020-03-02 15:57:35]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 15:57:35]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 15:57:35]--[upload_cgi.c:194]--open file .qmake.stash successfully
+[2020-03-02 15:57:35]--[upload_cgi.c:509]--lp13773477582成功上传[.qmake.stash, 大小：1093, md5码：79d37deb46514fec4e3760cff63e9dfb]到本地
+[2020-03-02 15:57:35]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 15:57:35]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5cvG-AMIS5AAAERUNRolk8.stash] succ!
+[2020-03-02 15:57:35]--[upload_cgi.c:312]--client conf:
+[2020-03-02 15:57:35]--[upload_cgi.c:329]--uploadfile stat:
+[2020-03-02 15:57:35]--[upload_cgi.c:335]--strstr ip address fail
+[2020-03-02 16:00:09]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 16:00:20]--[upload_cgi.c:501]--len = 1335
+[2020-03-02 16:00:20]--[upload_cgi.c:70]--buf = ------WebKitFormBoundary?7xlObBr\swJ1cX;
+Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093
+Content-Type:multipart/form-data
+
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0 \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib/gcc \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/x86_64-w64-mingw32/lib \
+    C:/Qt/Qt5.12.2/Tools/mingw730_64/lib
+
+------WebKitFormBoundary?7xlObBr\swJ1cX;
+[2020-03-02 16:00:20]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundary?7xlObBr\swJ1cX;]
+[2020-03-02 16:00:20]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename=".qmake.stash"md5="79d37deb46514fec4e3760cff63e9dfb"size=1093]
+[2020-03-02 16:00:20]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 16:00:20]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 16:00:20]--[upload_cgi.c:194]--open file .qmake.stash successfully
+[2020-03-02 16:00:20]--[upload_cgi.c:509]--lp13773477582成功上传[.qmake.stash, 大小：1093, md5码：79d37deb46514fec4e3760cff63e9dfb]到本地
+[2020-03-02 16:00:20]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 16:00:20]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5cvRSASzZeAAAERUNRolk2.stash] succ!
+[2020-03-02 16:00:20]--[upload_cgi.c:312]--client conf:../conf/client.conf
+[2020-03-02 16:00:20]--[upload_cgi.c:329]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-02 16:00:20
+file size: 1093
+file crc32: 1129423449 (0x4351A259)
+
+[2020-03-02 16:00:20]--[upload_cgi.c:358]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5cvRSASzZeAAAERUNRolk2.stash
+[2020-03-02 16:00:20]--[upload_cgi.c:411]--insert into file_info (md5, file_id, url, size, type, count) values ('79d37deb46514fec4e3760cff63e9dfb', 'group1/M00/00/00/wKgrIl5cvRSASzZeAAAERUNRolk2.stash', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5cvRSASzZeAAAERUNRolk2.stash', '1093', 'stash', 1) 文件信息插入成功
+[2020-03-02 16:00:20]--[upload_cgi.c:501]--len = 1335
+[2020-03-02 16:00:20]--[upload_cgi.c:66]--fread(filebuf,1,len,stdin) error
+[2020-03-02 16:17:15]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 17:11:20]--[upload_cgi.c:501]--len = 353639
+[2020-03-02 17:49:09]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 17:50:40]--[upload_cgi.c:501]--len = 67286
+[2020-03-02 17:50:40]--[upload_cgi.c:70]--buf = ------WebKitFormBoundaryWQqUunP`bucQ8Wft
+Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048
+Content-Type:multipart/form-data
+
+�PNG
+
+
+[2020-03-02 17:50:40]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundaryWQqUunP`bucQ8Wft]
+[2020-03-02 17:50:40]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048]
+[2020-03-02 17:50:40]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 17:50:40]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 17:50:40]--[upload_cgi.c:194]--open file 123.png successfully
+[2020-03-02 17:50:40]--[upload_cgi.c:509]--lp13773477582成功上传[123.png, 大小：67048, md5码：65e69a4b4bdfc9bf1fa6a694b8867b92]到本地
+[2020-03-02 17:50:40]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 17:50:40]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5c1vCAC9QhAAEF6BNQWIM246.png] succ!
+[2020-03-02 17:50:40]--[upload_cgi.c:312]--client conf:../conf/client.conf
+[2020-03-02 17:50:40]--[upload_cgi.c:329]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-02 17:50:40
+file size: 67048
+file crc32: 324032643 (0x13505883)
+
+[2020-03-02 17:50:40]--[upload_cgi.c:358]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c1vCAC9QhAAEF6BNQWIM246.png
+[2020-03-02 17:50:40]--[upload_cgi.c:411]--insert into file_info (md5, file_id, url, size, type, count) values ('65e69a4b4bdfc9bf1fa6a694b8867b92', 'group1/M00/00/00/wKgrIl5c1vCAC9QhAAEF6BNQWIM246.png', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c1vCAC9QhAAEF6BNQWIM246.png', '67048', 'png', 1) 文件信息插入成功
+[2020-03-02 18:01:55]--[upload_cgi.c:501]--len = 12818
+[2020-03-02 18:01:55]--[upload_cgi.c:70]--buf = ------WebKitFormBoundaryGJdjcG:^SgxOnKc;
+Content-Disposition:form-data;user="lp13773477582"filename="ui_buttongroup.h"md5="91c9e9ccdf9c93712630f662f8f09758"size=12571
+Content-Type:multipart/form-data
+
+/********************************************************************************
+** Form generated from reading UI file 'buttongroup.ui'
+**
+** Created by: Qt User Interface Compiler version 5.12.2
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_BUTTONGROUP_H
+#define UI_BUTTONGROUP_H
+
+#include <QtCore/QVariant>
+#include <QtGui/QIcon>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_Buttongroup
+{
+public:
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *ICON_label;
+    QLabel *Name_label;
+    QSpacerItem *horizontalSpacer_3;
+    QHBoxLayout *horizontalLayout;
+    QToolButton *toolButton_myfile;
+    QToolButton *toolButton_transfer_record;
+    QToolButton *toolButton_sharefilelist;
+    QToolButton *toolButton_download_rank;
+    QToolButton *toolButton_changeruser;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_nickname_pic;
+    QLabel *label_nickname;
+    QSpacerItem *horizontalSpacer_2;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_3;
+    QSpacerItem *horizontalSpacer;
+    QHBoxLayout *horizontalLayout_2;
+    QToolButton *toolButton_minsize;
+    QToolButton *toolButton_maxsize;
+    QToolButton *toolButton_close;
+    QSpacerItem *verticalSpacer;
+
+    void setupUi(QWidget *Buttongroup)
+    {
+        if (Buttongroup->objectName().isEmpty())
+            Buttongroup->setObjectName(QString::fromUtf8("Buttongroup"));
+        Buttongroup->resize(1160, 112);
+        Buttongroup->setMaximumSize(QSize(16777215, 115));
+        horizontalLayout_4 = new QHBoxLayout(Buttongroup);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        ICON_label = new QLabel(Buttongroup);
+        ICON_label->setObjectName(QString::fromUtf8("ICON_label"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ICON_label->sizePolicy().hasHeightForWidth());
+        ICON_label->setSizePolicy(sizePolicy);
+        ICON_label->setMaximumSize(QSize(60, 60));
+        ICON_label->setPixmap(QPixmap(QString::fromUtf8(":/ico/images/njitlogo.jpg")));
+        ICON_label->setScaledContents(true);
+
+        horizontalLayout_4->addWidget(ICON_label);
+
+        Name_label = new QLabel(Buttongroup);
+        Name_label->setObjectName(QString::fromUtf8("Name_label"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(Name_label->sizePolicy().hasHeightForWidth());
+        Name_label->setSizePolicy(sizePolicy1);
+        QFont font;
+        font.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
+        font.setPointSize(12);
+        font.setBold(true);
+        font.setWeight(75);
+        Name_label->setFont(font);
+
+        horizontalLayout_4->addWidget(Name_label);
+
+        horizontalSpacer_3 = new QSpacerItem(50, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        toolButton_myfile = new QToolButton(Buttongroup);
+        toolButton_myfile->setObjectName(QString::fromUtf8("toolButton_myfile"));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("\345\21[2020-03-02 18:26:52]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 18:28:36]--[upload_cgi.c:501]--len = 399999
+[2020-03-02 18:28:36]--[upload_cgi.c:70]--buf = ------WebKitFormBoundarywr_GCw>[_WTgtA?I
+Content-Disposition:form-data;user="lp13773477582"filename="实验结果.png"md5="ca2bf7f8f010757f807a360944357eed"size=399751
+Content-Type:multipart/form-data
+
+�PNG
+
+
+[2020-03-02 18:28:36]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundarywr_GCw>[_WTgtA?I]
+[2020-03-02 18:28:36]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="实验结果.png"md5="ca2bf7f8f010757f807a360944357eed"size=399751]
+[2020-03-02 18:28:36]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 18:28:36]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 18:28:36]--[upload_cgi.c:194]--open file 实验结果.png successfully
+[2020-03-02 18:28:36]--[upload_cgi.c:509]--lp13773477582成功上传[实验结果.png, 大小：399751, md5码：ca2bf7f8f010757f807a360944357eed]到本地
+[2020-03-02 18:28:36]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 18:28:36]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5c39SAPomCAAYZh6KE_bU575.png] succ!
+[2020-03-02 18:28:36]--[upload_cgi.c:312]--client conf:../conf/client.conf
+[2020-03-02 18:28:36]--[upload_cgi.c:329]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-02 18:28:36
+file size: 399751
+file crc32: 2726624693 (0xA284FDB5)
+
+[2020-03-02 18:28:36]--[upload_cgi.c:358]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c39SAPomCAAYZh6KE_bU575.png
+[2020-03-02 18:28:37]--[upload_cgi.c:411]--insert into file_info (md5, file_id, url, size, type, count) values ('ca2bf7f8f010757f807a360944357eed', 'group1/M00/00/00/wKgrIl5c39SAPomCAAYZh6KE_bU575.png', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c39SAPomCAAYZh6KE_bU575.png', '399751', 'png', 1) 文件信息插入成功
+[2020-03-02 18:30:06]--[upload_cgi.c:501]--len = 58567
+[2020-03-02 18:30:06]--[upload_cgi.c:70]--buf = ------WebKitFormBoundaryuw\yTk9pm9]G8a@7
+Content-Disposition:form-data;user="lp13773477582"filename="图像处理.png"md5="f0057f237e4354b7c4344fe2a72383c8"size=58320
+Content-Type:multipart/form-data
+
+�PNG
+
+
+[2020-03-02 18:30:06]--[upload_cgi.c:98]--boundary:[------WebKitFormBoundaryuw\yTk9pm9]G8a@7]
+[2020-03-02 18:30:06]--[upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="图像处理.png"md5="f0057f237e4354b7c4344fe2a72383c8"size=58320]
+[2020-03-02 18:30:06]--[upload_cgi.c:129]--trim_space user before
+[2020-03-02 18:30:06]--[upload_cgi.c:184]--trim_spcae user after
+[2020-03-02 18:30:06]--[upload_cgi.c:194]--open file 图像处理.png successfully
+[2020-03-02 18:30:06]--[upload_cgi.c:509]--lp13773477582成功上传[图像处理.png, 大小：58320, md5码：f0057f237e4354b7c4344fe2a72383c8]到本地
+[2020-03-02 18:30:06]--[upload_cgi.c:240]--dup2() success
+[2020-03-02 18:30:06]--[upload_cgi.c:268]--get [group1/M00/00/00/wKgrIl5c4C6AJxc5AADj0PYYWXU296.png] succ!
+[2020-03-02 18:30:06]--[upload_cgi.c:312]--client conf:../conf/client.conf
+[2020-03-02 18:30:06]--[upload_cgi.c:329]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-02 18:30:06
+file size: 58320
+file crc32: 4128790901 (0xF6185975)
+
+[2020-03-02 18:30:06]--[upload_cgi.c:358]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c4C6AJxc5AADj0PYYWXU296.png
+[2020-03-02 18:30:06]--[upload_cgi.c:411]--insert into file_info (md5, file_id, url, size, type, count) values ('f0057f237e4354b7c4344fe2a72383c8', 'group1/M00/00/00/wKgrIl5c4C6AJxc5AADj0PYYWXU296.png', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c4C6AJxc5AADj0PYYWXU296.png', '58320', 'png', 1) 文件信息插入成功
+[2020-03-02 18:48:17]--[upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-02 20:12:40]--[upload_cgi.c:505]--len = 67286
+[2020-03-02 20:12:40]--[upload_cgi.c:71]--buf = ------WebKitFormBoundarydRR:CZvT308nWsxN
+Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048
+Content-Type:multipart/form-data
+
+�PNG
+
+
+[2020-03-02 20:12:40]--[upload_cgi.c:99]--boundary:[------WebKitFormBoundarydRR:CZvT308nWsxN]
+[2020-03-02 20:12:40]--[upload_cgi.c:115]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048]
+[2020-03-02 20:12:40]--[upload_cgi.c:130]--trim_space user before
+[2020-03-02 20:12:40]--[upload_cgi.c:188]--trim_spcae user after
+[2020-03-02 20:12:40]--[upload_cgi.c:198]--open file 123.png successfully
+[2020-03-02 20:12:40]--[upload_cgi.c:513]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[123.png, 大小：67048, md5码：65e69a4b4bdfc9bf1fa6a694b8867b92]到本地
+[2020-03-02 20:12:40]--[upload_cgi.c:244]--dup2() success
+[2020-03-02 20:12:40]--[upload_cgi.c:272]--get [group1/M00/00/00/wKgrIl5c-DiAM62dAAEF6BNQWIM728.png] succ!
+[2020-03-02 20:12:40]--[upload_cgi.c:316]--client conf:../conf/client.conf
+[2020-03-02 20:12:40]--[upload_cgi.c:333]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-02 20:12:40
+file size: 67048
+file crc32: 324032643 (0x13505883)
+
+[2020-03-02 20:12:40]--[upload_cgi.c:362]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c-DiAM62dAAEF6BNQWIM728.png
+[2020-03-02 20:12:40]--[upload_cgi.c:415]--insert into file_info (md5, file_id, url, size, type, count) values ('65e69a4b4bdfc9bf1fa6a694b8867b92', 'group1/M00/00/00/wKgrIl5c-DiAM62dAAEF6BNQWIM728.png', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5c-DiAM62dAAEF6BNQWIM728.png', '67048', 'png', 1) 文件信息插入成功

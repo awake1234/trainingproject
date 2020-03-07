@@ -1,0 +1,26 @@
+fastdfs的一些可执行文件在/usr/bin/　目录下
+配置文件在/etc/fdfs/ 下面
+mysql的配置文件在/etc/mysql下面
+nginx等安装的软件在/usr/local下面
+
+nginx服务器的端口是80
+
+nginx配置文件里面添加的一些命令的端口
+test 8848
+upload 8849
+reg   8850
+login 8851
+md5   8852
+
+启动的命令
+spawn-fcgi -a 127.0.0.1 -p 8852 ./md5.cgi
+spawn-fcgi -a 127.0.0.1 -p 8849 ./upload.cgi
+spawn-fcgi -a 127.0.0.1 -p 8850 ./reg.cgi
+spawn-fcgi -a 127.0.0.1 -p 8851 ./login.cgi
+
+编译cgi程序时用到的命令：
+reg.cgi: gcc  reg_cgi.c ../common/*.c -I ../include -I /usr/include/mysql/  -I /usr/local/include/hiredis  -L /usr/lib/ -lmysqlclient  -lfcgi  -lhiredis -o  reg.cgi -lm
+md5.cgi:gcc  md5_cgi.c ../common/*.c -I ../include -I /usr/include/mysql/ -I /usr/local/include/hiredis/  -L /usr/lib/ -lmysqlclient  -lfcgi -lpthread -lhiredis  -o  md5.cgi -lm
+upload.cgi:gcc  upload_cgi.c ../common/*.c -I ../include -I /usr/include/mysql/ -I /usr/local/include/hiredis/  -L /usr/lib/ -lmysqlclient  -lfcgi -lpthread -lhiredis  -o  upload.cgi -lm
+
+
