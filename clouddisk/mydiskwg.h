@@ -39,11 +39,10 @@ public:
     //自定义文件打开窗口 不使用windows系统界面
     QStringList  fileopendialog();
     //清除所有的item
-    void clearitems();
+     void clearitems();
 
     //处理选中文件item所做的操作
     void dealselectedfile(QString cmd);
-
     //细分到每个功能的具体操作
     void deal_property(FileInfo * info);
 
@@ -69,12 +68,24 @@ public:
     QByteArray setcountjson(QString user,QString token);  //设置查询用户文件数量的json包
     QStringList getcountstatus(QByteArray json);    //得到服务器返回的json文件
     void clearfilelist();               //清空文件列表
+
+
+
+    //维护图片列表
+    QList<FileInfo *>  m_fileList;                  //维护一个保存文件信息的列表
+    QList<FileInfo * > m_picList;                  //维护一个图片信息的列表
+    //公有成员变量
+    QAction *m_upload;   //上传文件
+
 public   slots:
     void rightMenu(const QPoint pos);
     //定义一个槽函数来刷新进度条的值
     void update_progress_value(qint64,qint64,dataprocess *);
     //定义槽函数删除已经上传的文件的进度条
     void delete_finishedfile();
+
+    //得到filelistwidget的指针
+    QListWidget * getfilelistwidget();
 
 signals:
    //定义一个信号来切换传输的任务的界面
@@ -86,6 +97,8 @@ signals:
 
 
 private:
+
+
     Ui::mydiskwg *ui;
 
     //创建菜单
@@ -97,7 +110,7 @@ private:
 
 
     mymenu * m_empty;    //点击空白处生成的菜单
-    QAction *m_upload;   //上传文件
+
     QAction *m_refresh;  //刷新
     QAction *m_Download_ASC;//按下载量升序
     QAction *m_Download_Des; //按下载量降序
@@ -123,7 +136,8 @@ private:
     QNetworkAccessManager *m_manager;
     common m_common;
 
-    QList<FileInfo *> m_fileList;                  //维护一个保存文件信息的列表
+
+
 
 };
 

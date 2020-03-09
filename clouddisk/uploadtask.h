@@ -69,7 +69,6 @@ signals:
 
 private:
     uploadtask();   //构造函数私有化
-
     //要在外面初始化
     static uploadtask * uploadtaskinstance;
 

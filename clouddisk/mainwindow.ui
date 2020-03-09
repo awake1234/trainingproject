@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>1229</width>
     <height>800</height>
    </rect>
   </property>
@@ -27,21 +27,6 @@
     <string notr="true">color: rgb(255, 0, 0);</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
     <item>
      <widget class="Buttongroup" name="title_widget" native="true">
       <property name="minimumSize">
@@ -60,7 +45,51 @@
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
-      <widget class="mydiskwg" name="page_mydisk"/>
+      <widget class="QWidget" name="mydisk">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 255);
+font: 10pt &quot;宋体&quot;;</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="mydiskwg" name="page_mydisk">
+           <attribute name="title">
+            <string>全部文件</string>
+           </attribute>
+          </widget>
+          <widget class="mypicwg" name="page_mydoc">
+           <attribute name="title">
+            <string>我的文档</string>
+           </attribute>
+          </widget>
+          <widget class="mypicwg" name="page_mypics">
+           <attribute name="title">
+            <string>我的图片</string>
+           </attribute>
+          </widget>
+          <widget class="mypicwg" name="page_mysound">
+           <attribute name="title">
+            <string>我的音频</string>
+           </attribute>
+          </widget>
+          <widget class="mypicwg" name="page_myvideo">
+           <attribute name="title">
+            <string>我的视频</string>
+           </attribute>
+          </widget>
+          <widget class="mypicwg" name="page_other">
+           <attribute name="title">
+            <string>其他文件</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="transferwg" name="page_transfer_record"/>
       <widget class="QWidget" name="page_sharelist"/>
       <widget class="QWidget" name="page_downloadlist"/>
@@ -87,6 +116,12 @@
    <class>transferwg</class>
    <extends>QWidget</extends>
    <header location="global">transferwg.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mypicwg</class>
+   <extends>QWidget</extends>
+   <header location="global">mypicwg.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

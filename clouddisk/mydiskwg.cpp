@@ -4,17 +4,14 @@
 extern QMutex mutex;   //加锁文件列表资源
 extern QWaitCondition notempty;  //条件变量文件列表不为空
 
-mydiskwg::mydiskwg(QWidget *parent) :
-    QWidget(parent),
+mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
     ui(new Ui::mydiskwg)
 {
     ui->setupUi(this);
-    //初始化文件列表
-    this->initlistwidget();
+
     //添加右键菜单的内容
     this->AddMenuAction();
-    //添加上传文件的按钮
-    this->Adduploaditem();
+
 
     //获取上传文件的QNetworkAcessmanager
     m_manager = m_common.getmanager();
@@ -37,7 +34,6 @@ mydiskwg::mydiskwg(QWidget *parent) :
     //thread_consumer = new QThread();
     //consumerthread_file *  consumer = new consumerthread_file;
     //consumer->moveToThread(thread_consumer);
-
 
 
 
@@ -67,6 +63,8 @@ mydiskwg::mydiskwg(QWidget *parent) :
 
     //thread_consumer->start();
     //qDebug()<<"thread has been started";
+
+
 
   }
 
@@ -306,6 +304,13 @@ void mydiskwg::delete_finishedfile()
 }
 
 
+//得到filelistwidget指针
+QListWidget *mydiskwg::getfilelistwidget()
+{
+    return ui->filelistWidget;
+}
+
+
 
 //将文件添加到上传列表中
 void mydiskwg::adduploadfiles()
@@ -423,9 +428,9 @@ void mydiskwg::refreshFileItems()
             //重新添加到widget中
             ui->filelistWidget->addItem(m_fileList.at(i)->item);
         }
-        //重新添加上传的按钮
-        this->Adduploaditem();
     }
+    //重新添加上传的按钮
+    this->Adduploaditem();
 
 }
 
@@ -476,11 +481,17 @@ void mydiskwg::getFileJsonInfo(QByteArray data)
 
     }
 
+
+
+
 }
 
 //获取用户文件的数量
 void mydiskwg::getuserfilecount(mydiskwg::DISPLAY cmd)
 {
+    //初始化文件列表
+    this->initlistwidget();
+
     logininfoinstance * info = logininfoinstance::getinstance();
     QByteArray CountJson = setcountjson(info->getuser(),info->gettoken());
 

@@ -261,6 +261,7 @@ void MainWindow::setmytabwig(int index)
              {
                  continue;
              }
+             
              //解析文件名得到后缀名
              int n = filename.indexOf(QChar('.'),0);
 

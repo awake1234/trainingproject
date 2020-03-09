@@ -20,6 +20,7 @@ public:
     void managesignals();
     void ShowMainWindow();
 
+
 private:
     Ui::MainWindow *ui;
 
@@ -32,6 +33,9 @@ private:
 protected slots:
     void mousePressEvent(QMouseEvent * ev);
     void mouseMoveEvent(QMouseEvent *event);
+    //设置tabwidget界面
+    void setmytabwig(int index);
+
 };
 
 #endif // MAINWINDOW_H
