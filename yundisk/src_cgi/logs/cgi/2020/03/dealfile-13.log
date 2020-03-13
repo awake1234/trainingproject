@@ -1,0 +1,163 @@
+[2020-03-13 12:32:57]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 12:32:57]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 12:38:09]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 12:38:09]--[dealfile_cgi.c:584]--buf = {
+    "filename": "图片1.png",
+    "md5": "b981e210bfa8684ff14e96be191def66",
+    "token": "55",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 12:38:09]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 12:38:09]--[dealfile_cgi.c:93]--token='55'
+[2020-03-13 12:38:09]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 55, md5 = b981e210bfa8684ff14e96be191def66, filename = 图片1.png
+[2020-03-13 12:38:09]--[dealfile_cgi.c:291]--remove from storage ret=5632
+[2020-03-13 12:38:09]--[dealfile_cgi.c:501]--remove file form storage error
+[2020-03-13 13:18:33]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 13:18:33]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 13:19:35]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 13:19:35]--[dealfile_cgi.c:584]--buf = {
+    "filename": "timg.jpg",
+    "md5": "31cfacc0b172e593f522c04f3d4320b6",
+    "token": "88",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 13:19:35]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 13:19:35]--[dealfile_cgi.c:93]--token='88'
+[2020-03-13 13:19:35]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 88, md5 = 31cfacc0b172e593f522c04f3d4320b6, filename = timg.jpg
+[2020-03-13 13:19:35]--[dealfile_cgi.c:291]--remove from storage ret=512
+[2020-03-13 13:19:35]--[dealfile_cgi.c:501]--remove file form storage error
+[2020-03-13 13:42:33]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 13:42:33]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 13:42:48]--[dealfile_cgi.c:557]--cmd = del
+[2020-03-13 13:42:48]--[dealfile_cgi.c:586]--buf = {
+    "filename": "十佳团日活动.jpg",
+    "md5": "aeb4bf6a8c4014ddb642b229372e98cb",
+    "token": "50",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 13:42:48]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 13:42:48]--[dealfile_cgi.c:93]--token='50'
+[2020-03-13 13:42:48]--[dealfile_cgi.c:590]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 50, md5 = aeb4bf6a8c4014ddb642b229372e98cb, filename = 十佳团日活动.jpg
+[2020-03-13 13:46:57]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 13:46:57]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 13:47:16]--[dealfile_cgi.c:557]--cmd = del
+[2020-03-13 13:47:16]--[dealfile_cgi.c:586]--buf = {
+    "filename": "Camera RollIMG_20180310_161554.jpg",
+    "md5": "57101c06cf728c6b1841237e23340b06",
+    "token": "f0",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 13:47:16]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 13:47:16]--[dealfile_cgi.c:93]--token='f0'
+[2020-03-13 13:47:16]--[dealfile_cgi.c:590]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = f0, md5 = 57101c06cf728c6b1841237e23340b06, filename = Camera RollIMG_20180310_161554.jpg
+[2020-03-13 14:20:15]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 14:20:15]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 14:21:12]--[dealfile_cgi.c:557]--cmd = share
+[2020-03-13 14:21:12]--[dealfile_cgi.c:586]--buf = {
+    "filename": "avi.png",
+    "md5": "2869fd80cf88d03946a1d8b74ffabbac",
+    "token": "f7",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:21:12]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:21:12]--[dealfile_cgi.c:93]--token='f7'
+[2020-03-13 14:21:12]--[dealfile_cgi.c:590]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = f7, md5 = 2869fd80cf88d03946a1d8b74ffabbac, filename = avi.png
+[2020-03-13 14:21:22]--[dealfile_cgi.c:557]--cmd = del
+[2020-03-13 14:21:22]--[dealfile_cgi.c:586]--buf = {
+    "filename": "rar.png",
+    "md5": "0141bb5134645ac80764dbff546d4a7b",
+    "token": "f7",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:21:22]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:21:22]--[dealfile_cgi.c:93]--token='f7'
+[2020-03-13 14:21:22]--[dealfile_cgi.c:590]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = f7, md5 = 0141bb5134645ac80764dbff546d4a7b, filename = rar.png
+[2020-03-13 14:30:00]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 14:30:00]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 14:31:21]--[dealfile_cgi.c:556]--cmd = del
+[2020-03-13 14:31:21]--[dealfile_cgi.c:585]--buf = {
+    "filename": "jpg.png",
+    "md5": "da620bb6bf584be1be12390b92e81c91",
+    "token": "16",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:31:21]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:31:21]--[dealfile_cgi.c:93]--token='16'
+[2020-03-13 14:31:21]--[dealfile_cgi.c:589]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 16, md5 = da620bb6bf584be1be12390b92e81c91, filename = jpg.png
+[2020-03-13 14:31:21]--[dealfile_cgi.c:292]--remove file from storage ret=512
+[2020-03-13 14:34:11]--[dealfile_cgi.c:556]--cmd = del
+[2020-03-13 14:34:11]--[dealfile_cgi.c:585]--buf = {
+    "filename": "lp13773477582",
+    "md5": "fbb5fc3d9d583c84a1ba8dc55594cbbb",
+    "token": "16",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:34:11]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:34:11]--[dealfile_cgi.c:93]--token='16'
+[2020-03-13 14:34:11]--[dealfile_cgi.c:589]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 16, md5 = fbb5fc3d9d583c84a1ba8dc55594cbbb, filename = lp13773477582
+[2020-03-13 14:34:11]--[dealfile_cgi.c:292]--remove file from storage ret=512
+[2020-03-13 14:42:57]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 14:42:57]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 14:43:09]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 14:43:09]--[dealfile_cgi.c:584]--buf = {
+    "filename": "xlsx_mac.png",
+    "md5": "2437ab280b4075f0a989e2cdc74159ec",
+    "token": "5c",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:43:09]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:43:09]--[dealfile_cgi.c:93]--token='5c'
+[2020-03-13 14:43:09]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 5c, md5 = 2437ab280b4075f0a989e2cdc74159ec, filename = xlsx_mac.png
+[2020-03-13 14:43:09]--[dealfile_cgi.c:291]--remove file from storage ret=512
+[2020-03-13 14:53:46]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 14:53:46]--[dealfile_cgi.c:584]--buf = {
+    "filename": "config.json",
+    "md5": "f36cbe1ffe2771cf285512d485084186",
+    "token": "22",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:53:46]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:53:46]--[dealfile_cgi.c:93]--token='22'
+[2020-03-13 14:53:46]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 22, md5 = f36cbe1ffe2771cf285512d485084186, filename = config.json
+[2020-03-13 14:53:46]--[dealfile_cgi.c:291]--remove file from storage ret=0
+[2020-03-13 14:56:52]--[dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-13 14:56:52]--[dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-13 14:57:04]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 14:57:04]--[dealfile_cgi.c:584]--buf = {
+    "filename": "Camera RollIMG_20180310_160715.jpg",
+    "md5": "6e0a1e9f0ab322dafc07d12cc32668c9",
+    "token": "8d",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 14:57:04]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 14:57:04]--[dealfile_cgi.c:93]--token='8d'
+[2020-03-13 14:57:04]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 8d, md5 = 6e0a1e9f0ab322dafc07d12cc32668c9, filename = Camera RollIMG_20180310_160715.jpg
+[2020-03-13 14:57:05]--[dealfile_cgi.c:291]--remove file from storage ret=0
+[2020-03-13 15:19:40]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 15:19:40]--[dealfile_cgi.c:584]--buf = {
+    "filename": "accdb.png",
+    "md5": "b2820c96888f984e4d2a269e5165c2e5",
+    "token": "d2",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 15:19:40]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 15:19:40]--[dealfile_cgi.c:93]--token='d2'
+[2020-03-13 15:19:40]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = d2, md5 = b2820c96888f984e4d2a269e5165c2e5, filename = accdb.png
+[2020-03-13 15:19:40]--[dealfile_cgi.c:291]--remove file from storage ret=512
+[2020-03-13 15:19:40]--[dealfile_cgi.c:501]--remove file form storage error
+[2020-03-13 15:19:46]--[dealfile_cgi.c:555]--cmd = del
+[2020-03-13 15:19:46]--[dealfile_cgi.c:584]--buf = {
+    "filename": "accdb.png",
+    "md5": "b2820c96888f984e4d2a269e5165c2e5",
+    "token": "d2",
+    "user": "lp13773477582"
+}
+
+[2020-03-13 15:19:46]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-13 15:19:46]--[dealfile_cgi.c:93]--token='d2'
+[2020-03-13 15:19:46]--[dealfile_cgi.c:588]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = d2, md5 = b2820c96888f984e4d2a269e5165c2e5, filename = accdb.png
+[2020-03-13 15:19:46]--[dealfile_cgi.c:460]--(null)操作失败

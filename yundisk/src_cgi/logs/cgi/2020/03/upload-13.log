@@ -1,0 +1,38 @@
+[2020-03-13 15:22:46]--[upload_cgi.c:505]--len = 521
+[2020-03-13 15:22:46]--[upload_cgi.c:71]--buf = ------WebKitFormBoundaryf_Q=tW=:ZZ0;dBZZ
+Content-Disposition:form-data;user="lp13773477582"filename="config.json"md5="f36cbe1ffe2771cf285512d485084186"size=281
+Content-Type:multipart/form-data
+
+{
+    "filetype_path": {
+        "path": "conf/filetype"
+    },
+    "login": {
+        "isremember": "yes",
+        "pwd": "vcB8Vc9RGpAhobjeLhV4bg==",
+        "user": "iEulVmoNk/kMnEEg0Oav/w=="
+    },
+    "web_server": {
+        "ip": "192.168.43.34",
+        "port": "80"
+    }
+}
+
+------WebKitFormBoundaryf_Q=tW=:ZZ0;dBZZ
+[2020-03-13 15:22:46]--[upload_cgi.c:99]--boundary:[------WebKitFormBoundaryf_Q=tW=:ZZ0;dBZZ]
+[2020-03-13 15:22:46]--[upload_cgi.c:115]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="config.json"md5="f36cbe1ffe2771cf285512d485084186"size=281]
+[2020-03-13 15:22:46]--[upload_cgi.c:130]--trim_space user before
+[2020-03-13 15:22:46]--[upload_cgi.c:188]--trim_spcae user after
+[2020-03-13 15:22:46]--[upload_cgi.c:198]--open file config.json successfully
+[2020-03-13 15:22:46]--[upload_cgi.c:513]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[config.json, 大小：281, md5码：f36cbe1ffe2771cf285512d485084186]到本地
+[2020-03-13 15:22:46]--[upload_cgi.c:244]--dup2() success
+[2020-03-13 15:22:46]--[upload_cgi.c:272]--get [group1/M00/00/00/wKgrIl5rNMaAaLu2AAABGaEthyE27.json] succ!
+[2020-03-13 15:22:46]--[upload_cgi.c:316]--client conf:../conf/client.conf
+[2020-03-13 15:22:46]--[upload_cgi.c:333]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-13 15:22:46
+file size: 281
+file crc32: 2704115489 (0xA12D8721)
+
+[2020-03-13 15:22:46]--[upload_cgi.c:362]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5rNMaAaLu2AAABGaEthyE27.json
+[2020-03-13 15:22:46]--[upload_cgi.c:415]--insert into file_info (md5, file_id, url, size, type, count) values ('f36cbe1ffe2771cf285512d485084186', 'group1/M00/00/00/wKgrIl5rNMaAaLu2AAABGaEthyE27.json', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5rNMaAaLu2AAABGaEthyE27.json', '281', 'json', 1) 文件信息插入成功

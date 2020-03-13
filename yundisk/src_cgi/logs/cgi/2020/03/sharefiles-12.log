@@ -1,0 +1,390 @@
+[2020-03-12 11:49:40]--[sharefile_cgi.c:36]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-12 11:49:40]--[sharefile_cgi.c:41]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-12 11:52:03]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 11:52:03]--[sharefile_cgi.c:77]--line = 2
+[2020-03-12 11:52:03]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 11:52:03]--[sharefile_cgi.c:345]--buf = {
+    "count": 2,
+    "start": 0
+}
+
+[2020-03-12 11:52:03]--[sharefile_cgi.c:351]--start = 0, count = 2
+[2020-03-12 11:52:03]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,2 在操作
+[2020-03-12 11:52:03]--[sharefile_cgi.c:252]--{
+	"files":	[]
+}
+[2020-03-12 15:22:37]--[sharefile_cgi.c:36]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-12 15:22:37]--[sharefile_cgi.c:41]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-12 15:23:08]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:23:08]--[sharefile_cgi.c:77]--line = 3
+[2020-03-12 15:23:08]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:23:08]--[sharefile_cgi.c:345]--buf = {
+    "count": 3,
+    "start": 0
+}
+
+[2020-03-12 15:23:08]--[sharefile_cgi.c:351]--start = 0, count = 3
+[2020-03-12 15:23:08]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,3 在操作
+[2020-03-12 15:23:08]--[sharefile_cgi.c:252]--{
+	"files":	[]
+}
+[2020-03-12 15:32:14]--[sharefile_cgi.c:36]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-12 15:32:14]--[sharefile_cgi.c:41]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-12 15:32:44]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:32:44]--[sharefile_cgi.c:77]--line = 3
+[2020-03-12 15:32:44]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:32:44]--[sharefile_cgi.c:345]--buf = {
+    "count": 3,
+    "start": 0
+}
+
+[2020-03-12 15:32:44]--[sharefile_cgi.c:351]--start = 0, count = 3
+[2020-03-12 15:32:44]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,3 在操作
+[2020-03-12 15:32:44]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}]
+}
+[2020-03-12 15:33:15]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:33:15]--[sharefile_cgi.c:77]--line = 4
+[2020-03-12 15:33:15]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:33:15]--[sharefile_cgi.c:345]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-12 15:33:15]--[sharefile_cgi.c:351]--start = 0, count = 4
+[2020-03-12 15:33:15]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-12 15:33:15]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"aeb4bf6a8c4014ddb642b229372e98cb",
+			"time":	"2020-03-12 15:33:13",
+			"filename":	"十佳团日活动.jpg",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGALe1SAAf4j-SDIus896.jpg",
+			"size":	522383,
+			"type":	"jpg"
+		}]
+}
+[2020-03-12 15:33:17]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:33:17]--[sharefile_cgi.c:77]--line = 4
+[2020-03-12 15:33:17]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:33:17]--[sharefile_cgi.c:345]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-12 15:33:17]--[sharefile_cgi.c:351]--start = 0, count = 4
+[2020-03-12 15:33:17]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-12 15:33:17]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"aeb4bf6a8c4014ddb642b229372e98cb",
+			"time":	"2020-03-12 15:33:13",
+			"filename":	"十佳团日活动.jpg",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGALe1SAAf4j-SDIus896.jpg",
+			"size":	522383,
+			"type":	"jpg"
+		}]
+}
+[2020-03-12 15:50:01]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:50:01]--[sharefile_cgi.c:77]--line = 4
+[2020-03-12 15:50:01]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:50:01]--[sharefile_cgi.c:345]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-12 15:50:01]--[sharefile_cgi.c:351]--start = 0, count = 4
+[2020-03-12 15:50:01]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-12 15:50:01]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"aeb4bf6a8c4014ddb642b229372e98cb",
+			"time":	"2020-03-12 15:33:13",
+			"filename":	"十佳团日活动.jpg",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGALe1SAAf4j-SDIus896.jpg",
+			"size":	522383,
+			"type":	"jpg"
+		}]
+}
+[2020-03-12 15:50:25]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:50:25]--[sharefile_cgi.c:77]--line = 4
+[2020-03-12 15:50:25]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:50:25]--[sharefile_cgi.c:345]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-12 15:50:25]--[sharefile_cgi.c:351]--start = 0, count = 4
+[2020-03-12 15:50:25]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-12 15:50:25]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"aeb4bf6a8c4014ddb642b229372e98cb",
+			"time":	"2020-03-12 15:33:13",
+			"filename":	"十佳团日活动.jpg",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGALe1SAAf4j-SDIus896.jpg",
+			"size":	522383,
+			"type":	"jpg"
+		}]
+}
+[2020-03-12 15:51:49]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:51:49]--[sharefile_cgi.c:77]--line = 4
+[2020-03-12 15:51:49]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:51:49]--[sharefile_cgi.c:345]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-12 15:51:49]--[sharefile_cgi.c:351]--start = 0, count = 4
+[2020-03-12 15:51:49]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-12 15:51:49]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"aeb4bf6a8c4014ddb642b229372e98cb",
+			"time":	"2020-03-12 15:33:13",
+			"filename":	"十佳团日活动.jpg",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGALe1SAAf4j-SDIus896.jpg",
+			"size":	522383,
+			"type":	"jpg"
+		}]
+}
+[2020-03-12 15:51:52]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-12 15:51:52]--[sharefile_cgi.c:77]--line = 4
+[2020-03-12 15:51:52]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-12 15:51:52]--[sharefile_cgi.c:345]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-12 15:51:52]--[sharefile_cgi.c:351]--start = 0, count = 4
+[2020-03-12 15:51:52]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-12 15:51:52]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"b981e210bfa8684ff14e96be191def66",
+			"time":	"2020-03-11 14:17:40",
+			"filename":	"图片1.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAOPdwABJblcJQFSQ479.png",
+			"size":	1203093,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"aeb4bf6a8c4014ddb642b229372e98cb",
+			"time":	"2020-03-12 15:33:13",
+			"filename":	"十佳团日活动.jpg",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGALe1SAAf4j-SDIus896.jpg",
+			"size":	522383,
+			"type":	"jpg"
+		}]
+}

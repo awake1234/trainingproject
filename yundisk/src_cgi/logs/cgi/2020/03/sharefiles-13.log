@@ -1,0 +1,86 @@
+[2020-03-13 14:21:14]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-13 14:21:14]--[sharefile_cgi.c:77]--line = 3
+[2020-03-13 14:21:14]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-13 14:21:14]--[sharefile_cgi.c:345]--buf = {
+    "count": 3,
+    "start": 0
+}
+
+[2020-03-13 14:21:14]--[sharefile_cgi.c:351]--start = 0, count = 3
+[2020-03-13 14:21:14]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,3 在操作
+[2020-03-13 14:21:14]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"2869fd80cf88d03946a1d8b74ffabbac",
+			"time":	"2020-03-13 14:21:12",
+			"filename":	"avi.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eJ-eAPzpQAABe1PgVVJ4068.png",
+			"size":	24276,
+			"type":	"png"
+		}]
+}
+[2020-03-13 15:35:00]--[sharefile_cgi.c:309]--cmd = count
+[2020-03-13 15:35:00]--[sharefile_cgi.c:77]--line = 3
+[2020-03-13 15:35:00]--[sharefile_cgi.c:309]--cmd = normal
+[2020-03-13 15:35:00]--[sharefile_cgi.c:345]--buf = {
+    "count": 3,
+    "start": 0
+}
+
+[2020-03-13 15:35:00]--[sharefile_cgi.c:351]--start = 0, count = 3
+[2020-03-13 15:35:00]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,3 在操作
+[2020-03-13 15:35:00]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"0c39d13254dd1621bba565dc85ab16f3",
+			"time":	"2020-03-12 11:51:59",
+			"filename":	"zip.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eL0SAC6lJAABS7zBy4Ng996.png",
+			"size":	21231,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-12 11:54:06",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"2869fd80cf88d03946a1d8b74ffabbac",
+			"time":	"2020-03-13 14:21:12",
+			"filename":	"avi.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eJ-eAPzpQAABe1PgVVJ4068.png",
+			"size":	24276,
+			"type":	"png"
+		}]
+}

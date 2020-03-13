@@ -1393,13 +1393,15 @@ int rop_zset_exit(redisContext *conn, char *key, char *member)
     redisReply *reply = NULL;
 
     //执行命令
-    reply = redisCommand(conn, "zlexcount %s [%s [%s", key, member, member);
+    //reply = redisCommand(conn, "zlexcount %s [%s [%s", key, member, member);
     //rop_test_reply_type(reply);
+	reply = redisCommand(conn,"SISMEMBER %s %s",key,member);  //判断给出的member是否是key的成员
 
     if (reply->type != REDIS_REPLY_INTEGER)
     {
-         LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "[-][GMS_REDIS]zlexcount: %s,member: %s Error:%s,%s\n", key, member,reply->str, conn->errstr);
-        retn = -1;
+        //LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "[-][GMS_REDIS]zlexcount: %s,member: %s Error:%s,%s\n", key, member,reply->str, conn->errstr);
+        LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "[-][GMS_REDIS]sismember: %s,member: %s Error:%s,%s\n", key, member,reply->str, conn->errstr);
+		retn = -1;
         goto END;
     }
 

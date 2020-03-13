@@ -1,0 +1,33 @@
+[2020-03-12 11:51:59]--[dealfile_cgi.c:298]--cmd = share
+[2020-03-12 11:51:59]--[dealfile_cgi.c:327]--buf = {
+    "filename": "zip.png",
+    "md5": "0c39d13254dd1621bba565dc85ab16f3",
+    "token": "32",
+    "user": "lp13773477582"
+}
+
+[2020-03-12 11:51:59]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-12 11:51:59]--[dealfile_cgi.c:93]--token='32'
+[2020-03-12 11:51:59]--[dealfile_cgi.c:331]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 32, md5 = 0c39d13254dd1621bba565dc85ab16f3, filename = zip.png
+[2020-03-12 11:54:06]--[dealfile_cgi.c:298]--cmd = share
+[2020-03-12 11:54:06]--[dealfile_cgi.c:327]--buf = {
+    "filename": "jsf.png",
+    "md5": "68998a52de5e0dd4f081329b0d6bf736",
+    "token": "9b",
+    "user": "lp13773477582"
+}
+
+[2020-03-12 11:54:06]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-12 11:54:06]--[dealfile_cgi.c:93]--token='9b'
+[2020-03-12 11:54:06]--[dealfile_cgi.c:331]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 9b, md5 = 68998a52de5e0dd4f081329b0d6bf736, filename = jsf.png
+[2020-03-12 15:33:13]--[dealfile_cgi.c:298]--cmd = share
+[2020-03-12 15:33:13]--[dealfile_cgi.c:327]--buf = {
+    "filename": "十佳团日活动.jpg",
+    "md5": "aeb4bf6a8c4014ddb642b229372e98cb",
+    "token": "9a",
+    "user": "lp13773477582"
+}
+
+[2020-03-12 15:33:13]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-12 15:33:13]--[dealfile_cgi.c:93]--token='9a'
+[2020-03-12 15:33:13]--[dealfile_cgi.c:331]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 9a, md5 = aeb4bf6a8c4014ddb642b229372e98cb, filename = 十佳团日活动.jpg
