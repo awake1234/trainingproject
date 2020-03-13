@@ -71,9 +71,12 @@ void MainWindow::managesignals()
         ui->stackedWidget->setCurrentIndex(1);
     });
 
+    //分型页面按钮
     connect(ui->title_widget,&Buttongroup::sigshare,[=]()
     {
+        ui->page_sharelist->refreshFiles();   //刷新文件内容
         ui->stackedWidget->setCurrentIndex(2);
+
     });
 
     connect(ui->title_widget,&Buttongroup::sigdownloadrank,[=]()
@@ -82,7 +85,7 @@ void MainWindow::managesignals()
     });
 
     //检测是否要切换到传输界面
-    connect(ui->page_mydisk,&mydiskwg::switchto_transferui,[=](transferstatus status)
+    connect(ui->page_mydisk,&mydiskwg::switchto_ui,[=](uistatus status)
     {
        ui->title_widget->slotButtonClick_page(Page::TRANSFER);  //触发转换到传输界面的函数
 
@@ -91,7 +94,19 @@ void MainWindow::managesignals()
           ui->page_transfer_record->showuploadtask();  //切换到上传列表的界面
        }
 
+       //分享界面
+       if(status==share)
+       {
+           //初始化界面
+           ui->page_sharelist->refreshFiles();
+           ui->stackedWidget->setCurrentIndex(2);  //切换到分享界面
+       }
+
     });
+
+
+
+
 
     connect(ui->tabWidget,SIGNAL(tabBarClicked(int)),this,SLOT(setmytabwig(int)));
 
@@ -261,6 +276,7 @@ void MainWindow::setmytabwig(int index)
              {
                  continue;
              }
+
              //解析文件名得到后缀名
              int n = filename.indexOf(QChar('.'),0);
 

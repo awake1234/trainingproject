@@ -91,7 +91,7 @@ font: 10pt &quot;宋体&quot;;</string>
        </layout>
       </widget>
       <widget class="transferwg" name="page_transfer_record"/>
-      <widget class="QWidget" name="page_sharelist"/>
+      <widget class="sharefilelist" name="page_sharelist"/>
       <widget class="QWidget" name="page_downloadlist"/>
      </widget>
     </item>
@@ -122,6 +122,12 @@ font: 10pt &quot;宋体&quot;;</string>
    <class>mypicwg</class>
    <extends>QWidget</extends>
    <header location="global">mypicwg.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>sharefilelist</class>
+   <extends>QWidget</extends>
+   <header location="global">sharefilelist.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -42,7 +42,8 @@ SOURCES += \
     transferwg.cpp \
     consumerthread_file.cpp \
     fileproperty.cpp \
-    mypicwg.cpp
+    mypicwg.cpp \
+    sharefilelist.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -61,7 +62,8 @@ HEADERS += \
     transferwg.h \
     consumerthread_file.h \
     fileproperty.h \
-    mypicwg.h
+    mypicwg.h \
+    sharefilelist.h
 
 FORMS += \
         mainwindow.ui \
@@ -72,7 +74,8 @@ FORMS += \
     dataprocess.ui \
     transferwg.ui \
     fileproperty.ui \
-    mypicwg.ui
+    mypicwg.ui \
+    sharefilelist.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

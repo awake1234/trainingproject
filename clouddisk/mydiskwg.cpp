@@ -240,11 +240,26 @@ void mydiskwg::dealselectedfile(QString cmd)
         }
     }
 
+    //处理属性
     if(cmd=="属性")
     {
         //处理显示属性的操作
         deal_property(info);
     }
+
+    //处理分享操作
+    if(cmd=="分享")
+    {
+       deal_share(info);
+    }
+
+
+    if(cmd=="删除")
+    {
+       deal_delete(info);
+    }
+
+
 
 
 }
@@ -261,6 +276,152 @@ void mydiskwg::deal_property(FileInfo *info)
         delete  filepro;
     });
 
+}
+
+
+//分享文件
+void mydiskwg::deal_share(FileInfo *info)
+{
+   //如果已经分享就没有必要再分享
+    if(info->shareStatus==1)
+    {
+        QMessageBox::warning(this,"分享状态","此文件已被分享");
+        return;
+    }
+   logininfoinstance * logininfo = logininfoinstance::getinstance();
+   QByteArray data = this->setdealfilejson(logininfo->getuser(),logininfo->gettoken(),info->md5,info->filename);
+
+   QNetworkRequest request;
+   request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+   request.setHeader(QNetworkRequest::ContentLengthHeader,data.size());
+
+  //设置url
+  QString urL = QString("http://%1:%2/dealfile?cmd=share").arg(logininfo->getip()).arg(logininfo->getport());
+  request.setUrl(QUrl(urL));
+
+  QNetworkReply  * reply = m_manager->post(request,data);
+
+   //读取数据
+   connect(reply,&QNetworkReply::readyRead,[=]()
+   {
+
+       QByteArray ret = reply->readAll();
+
+       if(ret==nullptr)
+       {
+           qDebug()<<"recvive nothing";
+           reply->deleteLater();
+           return;
+       }
+
+       //成功
+       if("010"==m_common.getcode(ret))
+       {
+           QMessageBox::information(this,tr("分享状态"),tr("您已经成功分享"));
+
+           //修改文件列表中该文件的状态
+           for(int i = 0;i<m_fileList.size();i++)
+           {
+               if(m_fileList.at(i)->filename==info->filename&&m_fileList.at(i)->md5==info->md5)
+               {
+                   m_fileList.at(i)->shareStatus=1;
+                   break;
+               }
+           }
+
+           //发送一个信号转到共享文件列表
+           emit switchto_ui(share);
+
+       }
+       else if("011" == m_common.getcode(ret) )
+       {
+           QMessageBox::information(this,tr("分享文件"),tr("文件分享失败"));
+
+       }
+       else if("012" == m_common.getcode(ret) )
+       {
+           QMessageBox::information(this,tr("分享文件"),tr("文件已经被其他用户分享在云盘"));
+       }
+       else
+       {
+           QMessageBox::information(this,tr("用户"),tr("用户登陆验证码失效,请重新登录"));
+           emit loginAgainSignal();
+       }
+   });
+
+
+
+}
+
+
+//删除操作
+void mydiskwg::deal_delete(FileInfo *info)
+{
+    logininfoinstance *login = logininfoinstance::getinstance();
+    QByteArray data = setdealfilejson(login->getuser(),login->gettoken(),info->md5,info->filename);
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setHeader(QNetworkRequest::ContentLengthHeader,data.size());
+
+
+    QString  url = QString("http://%1:%2/dealfile?cmd=del").arg(login->getip()).arg(login->getport());
+    request.setUrl(QUrl(url));
+
+    QNetworkReply * reply = m_manager->post(request,data);
+
+    connect(reply,&QNetworkReply::readyRead,[=]()
+    {
+        if(reply->error()!=QNetworkReply::NoError)
+        {
+            qDebug()<<reply->errorString();
+            reply->deleteLater();
+            return;
+        }
+
+        QByteArray data = reply->readAll();
+        reply->deleteLater();
+
+        if("013"==m_common.getcode(data))
+        {
+           QMessageBox::information(this,tr("删除结果"),tr("删除成功"));
+
+            for(int i = 0;i<m_fileList.size();i++)
+            {
+                if(m_fileList.at(i)->md5==info->md5 && m_fileList.at(i)->filename==info->filename)
+                {
+                    FileInfo * info = m_fileList.takeAt(i);
+                    QListWidgetItem * item = info->item;
+                    ui->filelistWidget->removeItemWidget(item);   //删除图标
+                    delete  item;
+                    delete  info;
+                    break;
+                }
+            }
+        }else if("014"==m_common.getcode(data))
+        {
+            qDebug()<<info->filename<<"delete fail";
+        }else{
+              QMessageBox::information(this,tr("用户"),tr("用户登录验证码失效，请重新登录"));
+              emit loginAgainSignal();   //重新登录信号
+        }
+    });
+        return;
+}
+
+//设置分享的json包
+QByteArray mydiskwg::setdealfilejson(QString username, QString token, QString md5, QString filename)
+{
+    QMap<QString,QVariant> map;
+    map.insert("user",username);
+    map.insert("token",token);
+    map.insert("md5",md5);
+    map.insert("filename",filename);
+
+
+    QJsonDocument doc = QJsonDocument::fromVariant(map);
+
+    return doc.toJson();
 }
 
 
@@ -317,7 +478,7 @@ void mydiskwg::adduploadfiles()
 { //这里面做上传文件到文件列表中的操作
     QStringList filepath=QFileDialog::getOpenFileNames(this, tr("Select one or more files to upload"),"./", "file(*.*)");
 
-    emit switchto_transferui(upload);
+    emit switchto_ui(upload);
     uploadtask = uploadtask::get_uploadtask_instance();
 
 
@@ -370,7 +531,7 @@ void mydiskwg::getuserfilelist(mydiskwg::DISPLAY cmd)
     {
         temp = "pvASC";
     }else {
-       temp = "pvDES";
+        temp = "pvDES";
     }
 
 

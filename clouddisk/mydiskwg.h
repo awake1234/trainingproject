@@ -40,11 +40,18 @@ public:
     QStringList  fileopendialog();
     //清除所有的item
      void clearitems();
-
     //处理选中文件item所做的操作
     void dealselectedfile(QString cmd);
-    //细分到每个功能的具体操作
-    void deal_property(FileInfo * info);
+
+
+    /******细分到每个功能的具体操作*******/
+    void deal_property(FileInfo * info);   //属性操作
+    void deal_share(FileInfo  *info);      //分享操作
+    void deal_delete(FileInfo * info);     //删除操作
+
+    //设置处理文件的发送的json包
+    QByteArray setdealfilejson(QString username,QString token,QString md5,QString filename);
+
 
 
     /******上传文件的操作******/
@@ -88,9 +95,10 @@ public   slots:
     QListWidget * getfilelistwidget();
 
 signals:
-   //定义一个信号来切换传输的任务的界面
+   //定义一个信号来切换界面
    //transferstatus为枚举类型在common.h中定义
-   void switchto_transferui(transferstatus status);
+
+   void switchto_ui(uistatus status);
    void startproducer();
    void startconsumer();
    void loginAgainSignal();

@@ -52,7 +52,7 @@ struct FileInfo
 
 
 //定义一个枚举来表示操作的状态
-enum transferstatus{upload,download,record};
+enum uistatus{upload,download,record,share};
 
 class common
 {
