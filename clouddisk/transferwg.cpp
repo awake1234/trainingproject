@@ -14,6 +14,14 @@ transferwg::transferwg(QWidget *parent) :
 
     ui->tabWidget->setCurrentIndex(0);  //显示为第一页
 
+    connect(ui->tabWidget,&QTabWidget::currentChanged,[=](int index)
+    {
+        if(index==2)
+        {
+          showdatarecord(); //显示传输记录
+        }
+    });
+
 }
 
 transferwg::~transferwg()
@@ -23,5 +31,36 @@ transferwg::~transferwg()
 
 void transferwg::showuploadtask()
 {
-    ui->tabWidget->setCurrentIndex(0);
+        ui->tabWidget->setCurrentIndex(0);
+}
+
+void transferwg::showdatarecord(QString path)
+{
+      logininfoinstance * login = logininfoinstance::getinstance();
+
+      QFile file(path+login->getuser());
+      if(!file.open(QIODevice::ReadOnly))
+      {
+          qDebug()<<"display data record error";
+          return;
+      }
+
+      QByteArray data = file.readAll();
+      ui->textEdit->setText(QString::fromLocal8Bit(data));
+
+
+}
+
+//点击按钮清除记录
+void transferwg::on_toolButton_clearrecord_clicked()
+{
+    logininfoinstance * login = logininfoinstance::getinstance();
+    QString filepath = RECORD_DIR+login->getuser();
+    if(QFile::exists((filepath)))
+    {
+        QFile::remove(filepath);  //删除文件
+        ui->textEdit->clear();
+    }
+
+
 }

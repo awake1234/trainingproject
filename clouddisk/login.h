@@ -80,7 +80,7 @@ private:
     bool m_netflg[2]={false};
     
     //创建主界面窗口对象
-    MainWindow w;
+    MainWindow * w;
 
 
 };

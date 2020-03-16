@@ -496,10 +496,19 @@ int login::send_logininfo(QString ip,QString port, QString code,QString  token)
                 logininfoinstance * userlogininfo = logininfoinstance::getinstance();
                 userlogininfo->setlogininfo(username,ip,port,token);
 
-
+                w = new MainWindow;   //分配空间
                 //进入主界面
                 this->hide();
-                w.ShowMainWindow();
+                w->ShowMainWindow();
+                //监听切换用户的信号
+                connect(w,&MainWindow::changeuser,[=]()
+                {
+                    //主界面隐藏
+                    w->hide();
+                    this->show(); //登录界面显示
+                    w->deleteLater();
+                });
+
 
             }else if(code=="001"){
                QMessageBox::warning(this,"result","登录失败，用户名或密码错误");

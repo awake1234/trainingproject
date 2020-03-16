@@ -30,5 +30,7 @@
         <file>images/njitlogo.jpg</file>
         <file>images/username.PNG</file>
         <file>images/password.PNG</file>
+        <file>images/fire.gif</file>
+        <file>images/firegray.jpg</file>
     </qresource>
 </RCC>

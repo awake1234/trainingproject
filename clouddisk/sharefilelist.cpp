@@ -85,6 +85,17 @@ void sharefilelist::AddMenuAction()
        this->DealSelectedFile(property);
     });
 
+    //取消分享
+    connect(m_cancleAction,&QAction::triggered,[=]()
+    {
+       this->DealSelectedFile(cancel);
+    });
+
+    //转存
+    connect(m_saveAction,&QAction::triggered,[=]()
+    {
+        this->DealSelectedFile(save);
+    });
 
 
 }
@@ -275,11 +286,21 @@ void sharefilelist::DealSelectedFile(sharefilelist::CMD cmd)
         }
     }
 
+    //属性
     if(cmd==property)
     {
         showproperty(temp);
     }
+    //取消分享
+    if(cmd==cancel)
+    {
+        cancelshare(temp);
+    }
 
+    if(cmd==save)
+    {
+        savefiletolist(temp);
+    }
 
 }
 
@@ -294,6 +315,110 @@ void sharefilelist::showproperty(FileInfo *info)
 }
 
 
+//取消分享
+void sharefilelist::cancelshare(FileInfo *info)
+{
+    logininfoinstance * login  = logininfoinstance::getinstance();
+    //别人分享的文件无法取消分享
+    //将加密的用户名解密
+
+    QByteArray data = SetCancelfilejson(login->getuser(),info->md5,info->filename);
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setHeader(QNetworkRequest::ContentLengthHeader,data.size());
+
+    QString url = QString("http://%1:%2/dealsharefile?cmd=cancel").arg(login->getip()).arg(login->getport());
+    request.setUrl(QUrl(url));
+
+    QNetworkReply * reply = m_manager->post(request,data);
+
+
+    connect(reply,&QNetworkReply::readyRead,[=]()
+    {
+
+        if(reply->error()!=QNetworkReply::NoError)
+        {
+            qDebug()<<reply->errorString();
+            reply->deleteLater();
+            return;
+        }
+
+        QByteArray data = reply->readAll();
+        reply->deleteLater();
+
+        if("018"==m_common.getcode(data))
+        {
+            QMessageBox::information(this,"操作成功","此文件已取消分享");
+
+            for(int i=0;i<m_shareFileList.size();i++)
+            {
+                if(m_shareFileList.at(i)->md5==info->md5 &&m_shareFileList.at(i)->filename==info->filename)
+                {
+                    FileInfo * tempinfo = m_shareFileList.takeAt(i);
+                    QListWidgetItem * item = tempinfo->item;
+                    ui->listWidget->removeItemWidget(item);
+                    delete  item;
+                    delete  info;
+                    break;
+                }
+
+            }
+         }else if("019"==m_common.getcode(data))
+        {
+            QMessageBox::warning(this,"操作失败","取消分享文件操作失败");
+        }else if("020"==m_common.getcode(data))
+        {
+            QMessageBox::warning(this,"操作失败","该文件不属于当前用户");
+        }
+
+
+    });
+
+    return;
+}
+
+//转存
+void sharefilelist::savefiletolist(FileInfo *info)
+{
+    logininfoinstance * login  = logininfoinstance::getinstance();
+
+     QByteArray data = SetCancelfilejson(login->getuser(),info->md5,info->filename);
+     QNetworkRequest request;
+     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+     request.setHeader(QNetworkRequest::ContentLengthHeader,data.size());
+
+     QString url = QString("http://%1:%2/dealsharefile?cmd=save").arg(login->getip()).arg(login->getport());
+     request.setUrl(QUrl(url));
+
+     QNetworkReply * reply = m_manager->post(request,data);
+     connect(reply,&QNetworkReply::readyRead,[=]()
+     {
+
+         if(reply->error()!=QNetworkReply::NoError)
+         {
+             qDebug()<<reply->errorString();
+             reply->deleteLater();
+             return;
+         }
+
+         QByteArray data = reply->readAll();
+         reply->deleteLater();
+
+         if("020"==m_common.getcode(data))
+         {
+            QMessageBox::information(this,"操作成功","此文件转存成功");
+         }else if("021"==m_common.getcode(data))
+         {
+             QMessageBox::information(this,"操作失败","此文件已经在您的列表中");
+         }else if ("022"==m_common.getcode(data)) {
+             QMessageBox::warning(this,"操作失败","转存文件操作失败");
+         }
+     });
+     return;
+}
+
+
 
 QByteArray  sharefilelist::SetShaerfilejson(int m_start, int m_count)
 {
@@ -302,5 +427,17 @@ QByteArray  sharefilelist::SetShaerfilejson(int m_start, int m_count)
     countjson.insert("count",m_count);
 
     QJsonDocument doc = QJsonDocument::fromVariant(countjson);
+    return doc.toJson();
+}
+
+//设置取消文件分享要发送的json格式包
+QByteArray sharefilelist::SetCancelfilejson(QString user, QString md5, QString filename)
+{
+    QMap<QString,QVariant> canclefilejson;
+    canclefilejson.insert("user",user);
+    canclefilejson.insert("md5",md5);
+    canclefilejson.insert("filename",filename);
+
+    QJsonDocument doc = QJsonDocument::fromVariant(canclefilejson);
     return doc.toJson();
 }

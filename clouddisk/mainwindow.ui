@@ -92,7 +92,7 @@ font: 10pt &quot;宋体&quot;;</string>
       </widget>
       <widget class="transferwg" name="page_transfer_record"/>
       <widget class="sharefilelist" name="page_sharelist"/>
-      <widget class="QWidget" name="page_downloadlist"/>
+      <widget class="ranklist" name="page_downloadlist"/>
      </widget>
     </item>
    </layout>
@@ -128,6 +128,12 @@ font: 10pt &quot;宋体&quot;;</string>
    <class>sharefilelist</class>
    <extends>QWidget</extends>
    <header location="global">sharefilelist.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ranklist</class>
+   <extends>QWidget</extends>
+   <header location="global">ranklist.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "uploadlayout.h"
 #include "common.h"
+#include "logininfoinstance.h"
+#include <QFile>
 
 namespace Ui {
 class transferwg;
@@ -20,6 +22,12 @@ public:
 
     //显示上传任务的函数
     void showuploadtask();
+
+    //显示传输记录
+    void showdatarecord(QString path=RECORD_DIR);
+
+private slots:
+    void on_toolButton_clearrecord_clicked();
 
 private:
     Ui::transferwg *ui;

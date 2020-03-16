@@ -9,6 +9,7 @@
 #include <QNetworkReply>
 #include <QJsonArray>
 #include "fileproperty.h"
+#include "des.h"
 
 namespace Ui {
 class sharefilelist;
@@ -22,7 +23,7 @@ public:
     explicit sharefilelist(QWidget *parent = nullptr);
     ~sharefilelist();
 
-    enum CMD{property,cancel,download};   //鼠标右键文件可以做的操作
+    enum CMD{property,cancel,download,save};   //鼠标右键文件可以做的操作
 
     /*******界面操作*******/
     void initlistwidget();   //初始化listwidget的属性
@@ -43,9 +44,12 @@ public:
     /****鼠标右键文件可以使用的操作*****/
     void DealSelectedFile(CMD cmd);   //抽象的处理函数
     void showproperty(FileInfo * info);  //显示属性
+    void cancelshare(FileInfo * info);  //取消分享
+    void savefiletolist(FileInfo *info); //转存功能
 
-
+    /********设置json文件包******/
     QByteArray SetShaerfilejson(int m_start,int m_count);
+    QByteArray SetCancelfilejson(QString user,QString md5,QString filename);
 
 private:
     mymenu * m_menuEmpty;       //右键空白处的菜单

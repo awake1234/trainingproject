@@ -60,12 +60,13 @@ void MainWindow::managesignals()
 
 
     //切换窗口
+    //我的文件界面
     connect(ui->title_widget,&Buttongroup::sigmydisk,[=]()
     {
         ui->stackedWidget->setCurrentIndex(0);
     });
 
-
+    //传输界面
     connect(ui->title_widget,&Buttongroup::sigtransfer,[=]()
     {
         ui->stackedWidget->setCurrentIndex(1);
@@ -79,10 +80,30 @@ void MainWindow::managesignals()
 
     });
 
+    //下载排行榜界面
     connect(ui->title_widget,&Buttongroup::sigdownloadrank,[=]()
     {
+        ui->page_downloadlist->refreshFiles();  //刷新文件列表
         ui->stackedWidget->setCurrentIndex(3);
     });
+
+
+    //切换用户
+    connect(ui->title_widget,&Buttongroup::sigswitchuser,[=]()
+    {
+           //重新登录
+           this->loginagain();
+    });
+
+
+    //其他操作失败重新登录的信号
+    connect(ui->page_mydisk,&mydiskwg::loginAgainSignal,[=]()
+    {
+         //重新登录
+         this->loginagain();
+    });
+
+
 
     //检测是否要切换到传输界面
     connect(ui->page_mydisk,&mydiskwg::switchto_ui,[=](uistatus status)
@@ -103,9 +124,6 @@ void MainWindow::managesignals()
        }
 
     });
-
-
-
 
 
     connect(ui->tabWidget,SIGNAL(tabBarClicked(int)),this,SLOT(setmytabwig(int)));
@@ -131,6 +149,17 @@ void MainWindow::ShowMainWindow()
    temp->setText(info->getuser());
 
    this->show();
+
+}
+
+//重新登录
+void MainWindow::loginagain()
+{
+
+    emit changeuser();
+    ui->page_mydisk->clearitems();
+    ui->page_mydisk->clearfilelist();
+    //清除所有的传输任务
 
 }
 
