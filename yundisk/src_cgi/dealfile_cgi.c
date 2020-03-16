@@ -275,7 +275,7 @@ END:
     return ret;
 }
 
-
+//在fastdfs中删除文件
 int remove_file_from_storage(char * fileid)
 {
 	int ret = 0;
@@ -532,6 +532,7 @@ END:
 }
 
 
+
 int main()
 {
 
@@ -606,9 +607,9 @@ int main()
            {
                share_file(user,md5,filename);
            }else if(strcmp(cmd,"del")==0)    //删除文件
-		   {
+		       {
               del_file(user,md5,filename);
-		   }
+		       }
 
       }
 

@@ -488,7 +488,7 @@ int main()
            if(num<0)
            {
               LOG(MYFILES_LOG_MODULE,MYFILES_LOG_PROC,"get_user_file_count error\n");
-              return -1;
+			  continue;
            }
 
 

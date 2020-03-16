@@ -291,6 +291,232 @@ END:
 }
 
 
+
+//获取共享文件按下载量排行榜
+int get_ranking_filelist(int start,int count)
+{
+   //１.mysql共享文件数量和redis共享文件数量对比　判断是否相等,
+   //2.如果不相等　清空redis数据,从mysql中的导入数据到redis中
+   //3.从redis中读取数据，给前端反馈信息
+   int ret = 0;
+   char sql_cmd[SQL_MAX_LEN]={0};
+   MYSQL * conn = NULL;
+   cJSON * root = NULL;
+   RVALUES value = NULL;
+   cJSON * array = NULL;
+   char * out = NULL;
+   char * out2 = NULL;
+   char tmp[512]={0};
+   int ret2 = 0;
+   MYSQL_RES * res_set = NULL;
+   redisContext * redis_conn = NULL;
+
+  //连接redis数据库
+  redis_conn = rop_connectdb_nopwd(redis_ip,redis_port);
+  if(redis_conn==NULL)
+  {
+	  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"redis_conn error\n");
+	  ret = -1;
+	  goto END;
+  }
+
+  //连接数据库
+  conn = msql_conn(mysql_user,mysql_pwd,mysql_db);
+  if(conn==NULL)
+  {
+	  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"msql_conn error\n");
+	  ret = -1;
+	  goto END;
+  }
+
+  //设置数库编码
+  mysql_query(conn,"set names utf8");
+
+
+  //1.查询mysql共享文件数量
+  sprintf(sql_cmd,"select count from user_file_count where user='%s'","sharefile_account");
+  ret2 = process_result_one(conn,sql_cmd,tmp);
+  if(ret2!=0)
+  {
+	  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"%s操作失败\n",sql_cmd);
+	  ret = -1;
+	  goto END;
+  }
+
+  int sql_num = atoi(tmp);
+   
+
+  //redis共享文件数量
+ int  redis_num = rop_zset_zcard(redis_conn,FILE_PUBLIC_ZSET);
+ if(redis_num==-1)
+ {
+	 LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"rop_zset_zcard error\n");
+	 ret = -1;
+	 goto END;
+ }
+
+ LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"sql_num=%d,redis_num=%d\n",sql_num,redis_num);
+
+ //如果两者不相等
+ if(redis_num!=sql_num)
+ {
+
+	  //清空redis数据
+	  rop_del_key(redis_conn,FILE_PUBLIC_ZSET);
+	  rop_del_key(redis_conn,FILE_NAME_HASH);
+
+	  //从mysql中导入数据到redis
+	  strcpy(sql_cmd,"select md5,filename,pv from share_file_list order by pv desc");
+
+	  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"%s在操作\n",sql_cmd);
+
+	  if(mysql_query(conn,sql_cmd)!=0)
+	  {
+		  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"%s操作失败\n",sql_cmd);
+	      ret = -1;
+		  goto END;
+	  }
+
+
+	  res_set = mysql_store_result(conn);  //生成结果集
+	  if(res_set==NULL)
+	  {
+		  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"mysql_store_result error\n");
+		  ret = -1;
+		  goto END;
+	  }
+
+	  ulong line = 0;
+	  line = mysql_num_rows(res_set);  //得到结果集的行数
+      if(line==0)
+	  {
+		  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"mysql_num_rows error\n");
+		  ret = -1;
+		  goto END;
+	  }
+
+	  MYSQL_ROW row;
+	  while((row=mysql_fetch_row(res_set))!=NULL)
+	  {
+		  if(row[0]==NULL||row[1]==NULL||row[2]==NULL)
+		  {
+			  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"mysql_fetch_row failed\n");
+			  ret = -1;
+			  goto END;
+		  }
+	  }
+
+
+	  char fileid[1024]={0};
+	  sprintf(fileid,"%s%s",row[0],row[1]);    //redis中zset中的文件标示
+
+	  rop_zset_add(redis_conn,FILE_PUBLIC_ZSET,atoi(row[2]),fileid); //下载量作为权重
+      //增加hash记录
+	  rop_hash_set(redis_conn,FILE_NAME_HASH,fileid,row[1]);
+ }
+
+
+     //从redis读取数据给前端反馈消息
+	 value = (RVALUES)calloc(count,VALUES_ID_SIZE);  //堆区请求空间
+     if(value==NULL)
+	 {
+		 ret = -1;
+		 goto END;
+	 }
+
+	 int n = 0;
+	 int end = start+count-1;  //加载资源结束位置
+     //降序获得有序结合的元素
+	 ret = rop_zset_zrevrange(redis_conn,FILE_PUBLIC_ZSET,start,end,value,&n);
+	 if(ret!=0)
+	 {
+       LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"rop_zset_zreverange error\n");
+	   goto END;
+	 }
+
+	 root = cJSON_CreateObject();
+	 array = cJSON_CreateArray();
+
+	 int i;
+	 for(i = 0;i<n;++i)
+	 {
+		 cJSON * item = cJSON_CreateObject();
+
+		 char filename[1024]={0};
+		 ret = rop_hash_get(redis_conn,FILE_NAME_HASH,value[i],filename);
+		 if(ret!=0)
+		 {
+			 LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"rop_hash_get error\n");
+			 ret = -1;
+			 goto END;
+		 }
+
+		 cJSON_AddStringToObject(item,"filename",filename);
+
+
+		 //下载文件数
+		 int score = rop_zset_get_score(redis_conn,FILE_PUBLIC_ZSET,value[i]);
+		 if(score==-1)
+		 {
+            LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"rop_zset_get_score error\n");
+			ret = -1;
+			goto END;
+		 }
+
+		 cJSON_AddNumberToObject(item,"pv",score);
+
+		 cJSON_AddItemToArray(array,item);
+	 }
+
+	 cJSON_AddItemToObject(root,"files",array);
+	 out = cJSON_Print(root);
+
+	 LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"out:%s\n",out);
+
+END:
+	 if(ret==0)
+	 {
+        printf("%s",out);
+	 }else{
+		 out2 = NULL;
+		 out2 = return_status("015");
+	 }
+
+	 if(out2!=NULL)
+	 {
+		 printf(out2);
+		 free(out2);
+	 }
+
+	 if(res_set!=NULL)
+	 {
+		 mysql_free_result(res_set);
+	 }
+
+	 if(redis_conn!=NULL)
+	 {
+		 rop_disconnect(redis_conn);
+	 }
+	 if(conn!=NULL)
+	 {
+		 mysql_close(conn);
+	 }
+	 if(value!=NULL)
+	 {
+		 free(value);
+	 }
+	 if(out!=NULL)
+	 {
+		 free(out);
+	 }
+	 if(root!=NULL)
+	 {
+		 cJSON_Delete(root);
+	 }
+   
+	 return ret;
+}
+
 int main()
 {
 
@@ -357,7 +583,7 @@ int main()
                       get_share_filelist(start,count);
                  }else if(strcmp(cmd,"pvdesc")==0)   //按下载量降序排序
                  {
-                      // get_ranking_filelist(start,count);
+                      get_ranking_filelist(start,count);  //获取共享文件按下载量排行榜
                  }
 
             }
