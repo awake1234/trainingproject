@@ -1,0 +1,22 @@
+[2020-03-16 16:26:53]--[dealfile_cgi.c:556]--cmd = share
+[2020-03-16 16:26:53]--[dealfile_cgi.c:585]--buf = {
+    "filename": "截图.png",
+    "md5": "59381fec7e122866f2232188b924a829",
+    "token": "c2",
+    "user": "lp13773477582"
+}
+
+[2020-03-16 16:26:53]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-16 16:26:53]--[dealfile_cgi.c:93]--token='c2'
+[2020-03-16 16:26:53]--[dealfile_cgi.c:589]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = c2, md5 = 59381fec7e122866f2232188b924a829, filename = 截图.png
+[2020-03-16 16:26:58]--[dealfile_cgi.c:556]--cmd = share
+[2020-03-16 16:26:58]--[dealfile_cgi.c:585]--buf = {
+    "filename": "捕获1.PNG",
+    "md5": "bd1e3b47ef1d6634a306c44695367af0",
+    "token": "c2",
+    "user": "lp13773477582"
+}
+
+[2020-03-16 16:26:58]--[dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-16 16:26:58]--[dealfile_cgi.c:93]--token='c2'
+[2020-03-16 16:26:58]--[dealfile_cgi.c:589]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = c2, md5 = bd1e3b47ef1d6634a306c44695367af0, filename = 捕获1.PNG

@@ -1,0 +1,34 @@
+[2020-03-15 15:15:15]--[dealsharefile_cgi.c:400]--cmd = save
+[2020-03-15 15:15:15]--[dealsharefile_cgi.c:432]--buf = {
+    "filename": "jsf.png",
+    "md5": "68998a52de5e0dd4f081329b0d6bf736",
+    "user": "lp1620811656"
+}
+
+[2020-03-15 15:15:15]--[dealsharefile_cgi.c:435]--user = OF9I+Fw+oMLbiFme28hxRA==, md5 = 68998a52de5e0dd4f081329b0d6bf736, filename = jsf.png
+[2020-03-15 15:15:20]--[dealsharefile_cgi.c:400]--cmd = cancel
+[2020-03-15 15:15:20]--[dealsharefile_cgi.c:432]--buf = {
+    "filename": "jsf.png",
+    "md5": "68998a52de5e0dd4f081329b0d6bf736",
+    "user": "lp1620811656"
+}
+
+[2020-03-15 15:15:20]--[dealsharefile_cgi.c:435]--user = OF9I+Fw+oMLbiFme28hxRA==, md5 = 68998a52de5e0dd4f081329b0d6bf736, filename = jsf.png
+[2020-03-15 15:15:20]--[dealsharefile_cgi.c:161]--该文件不属于当前用户
+[2020-03-15 16:14:04]--[dealsharefile_cgi.c:400]--cmd = save
+[2020-03-15 16:14:04]--[dealsharefile_cgi.c:432]--buf = {
+    "filename": "bmp.png",
+    "md5": "ca7410cbdbf4ff5c31932ba985daeaba",
+    "user": "lp1620811656"
+}
+
+[2020-03-15 16:14:04]--[dealsharefile_cgi.c:435]--user = OF9I+Fw+oMLbiFme28hxRA==, md5 = ca7410cbdbf4ff5c31932ba985daeaba, filename = bmp.png
+[2020-03-15 16:14:07]--[dealsharefile_cgi.c:400]--cmd = save
+[2020-03-15 16:14:07]--[dealsharefile_cgi.c:432]--buf = {
+    "filename": "jsf.png",
+    "md5": "68998a52de5e0dd4f081329b0d6bf736",
+    "user": "lp1620811656"
+}
+
+[2020-03-15 16:14:07]--[dealsharefile_cgi.c:435]--user = OF9I+Fw+oMLbiFme28hxRA==, md5 = 68998a52de5e0dd4f081329b0d6bf736, filename = jsf.png
+[2020-03-15 16:14:07]--[dealsharefile_cgi.c:288]--OF9I+Fw+oMLbiFme28hxRA==[filename:jsf.png, md5:68998a52de5e0dd4f081329b0d6bf736]已存在

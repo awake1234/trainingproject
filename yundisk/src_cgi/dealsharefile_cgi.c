@@ -379,6 +379,107 @@ END:
     return ret;
 }
 
+
+//处理共享文件下载的操作
+int pv_file(char * md5, char * filename)
+{
+	int ret = 0;
+	char sql_cmd[SQL_MAX_LEN]={0};
+	MYSQL * conn = NULL;
+	char * out = NULL;
+	char tmp[512]={0};
+	int ret2 = 0;
+	redisContext * redis_conn = NULL;
+	char fileid[1024]={0};
+
+	redis_conn = rop_connectdb_nopwd(redis_ip,redis_port);
+	if(redis_conn==NULL)
+	{
+		LOG(DEALSHAREFILE_LOG_MODULE,DEALSHAREFILE_LOG_PROC,"rop connectdb error\n");
+		ret = -1;
+		goto END;
+	}
+
+	sprintf(fileid,"%s%s",md5,filename);
+
+	conn = msql_conn(mysql_user,mysql_pwd,mysql_db);
+    if(conn==NULL)
+	{
+		LOG(DEALSHAREFILE_LOG_MODULE,DEALSHAREFILE_LOG_PROC,"msqlconn error\n");
+		ret = -1;
+		goto END;
+	}
+
+	mysql_query(conn,"set names utf8");
+
+
+	//mysql中的下载量+1
+	sprintf(sql_cmd,"select pv from share_file_list where md5='%s' and filename='%s'",md5,filename);
+	ret2 = process_result_one(conn,sql_cmd,tmp);
+	int pv = 0;
+	if(ret2!=0)
+	{
+		LOG(DEALSHAREFILE_LOG_MODULE,DEALSHAREFILE_LOG_PROC,"%s操作失败\n",sql_cmd);
+		ret = -1;
+		goto END;
+	}else{
+		pv = atoi(tmp);
+	}
+
+	sprintf(sql_cmd,"update share_file_list set pv=%d where md5='%s' and filename='%s'",pv+1,md5,filename);
+
+	if(mysql_query(conn,sql_cmd)!=0)
+	{
+
+		LOG(DEALSHAREFILE_LOG_MODULE,DEALSHAREFILE_LOG_PROC,"%s操作失败\n",sql_cmd);
+		ret = -1;
+		goto END;
+	}
+    
+	//判断元素是否在redis集合中
+	ret2 = rop_zset_exit(redis_conn,FILE_PUBLIC_ZSET,fileid);
+	if(ret2==1)
+	{
+        //存在,集合的权重＋１
+		ret = rop_zset_increment(redis_conn,FILE_PUBLIC_ZSET,fileid);
+
+		if(ret!=0)
+		{
+			LOG(DEALSHAREFILE_LOG_MODULE,DEALSHAREFILE_LOG_PROC,"rop_zset_increment error\n");
+
+		}
+	}else if(ret2==0)//不存在
+	{
+		//从mysql中导入数据
+		rop_zset_add(redis_conn,FILE_PUBLIC_ZSET,pv+1,fileid);
+
+		rop_hash_set(redis_conn,FILE_NAME_HASH,fileid,filename);
+	}else{
+		ret=-1;
+		goto END;
+	}
+END:
+	out = NULL;
+	if(ret==0)
+	{
+		out = return_status("016");
+	}else{
+		out = return_status("017");
+	}
+
+	if(out!=NULL)
+	{
+		printf(out);
+		free(out);
+	}
+
+	if(redis_conn!=NULL)
+	{
+		rop_disconnect(redis_conn);
+	}
+
+}
+
 int main()
 {
     char cmd[20];
@@ -436,7 +537,7 @@ int main()
 
             if(strcmp(cmd, "pv") == 0) //文件下载标志处理
             {
-               // pv_file(md5, filename);
+                pv_file(md5, filename);
             }
             else if(strcmp(cmd, "cancel") == 0) //取消分享文件
             {

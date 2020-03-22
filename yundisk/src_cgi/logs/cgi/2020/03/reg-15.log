@@ -1,0 +1,55 @@
+[2020-03-15 15:05:41]--[reg_cgi.c:259]--buf = {
+    "emailaddress": "lipeng.jack.0103@gamil.com",
+    "nickname": "jack123",
+    "password": "li1357986420",
+    "phonenum": "13773477582",
+    "username": "lp1620811656"
+}
+
+[2020-03-15 15:05:41]--[reg_cgi.c:151]--mysql_user = root, mysql_pwd = lp86282176, mysql_db = cloud_disk
+[2020-03-15 15:05:41]--[reg_cgi.c:165]--user = OF9I+Fw+oMKNGe9Nk0qAkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjack123, nick_name = jack123, pwd = fsYQpP14d0SNGe9Nk0qAkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA13773477582, tel = 13773477582, email = lipeng.jack.0103@gamil.com
+[2020-03-15 15:05:41]--[reg_cgi.c:171]--msql_conn err
+[2020-03-15 15:05:41]--[reg_cgi.c:287]--out:{
+	"code":	"004"
+}
+[2020-03-15 15:05:45]--[reg_cgi.c:259]--buf = {
+    "emailaddress": "lipeng.jack.0103@gamil.com",
+    "nickname": "jack123",
+    "password": "li1357986420",
+    "phonenum": "13773477582",
+    "username": "lp1620811656"
+}
+
+[2020-03-15 15:05:45]--[reg_cgi.c:151]--mysql_user = root, mysql_pwd = lp86282176, mysql_db = cloud_disk
+[2020-03-15 15:05:45]--[reg_cgi.c:165]--user = OF9I+Fw+oMKNGe9Nk0qAkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjack123, nick_name = jack123, pwd = fsYQpP14d0SNGe9Nk0qAkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA13773477582, tel = 13773477582, email = lipeng.jack.0103@gamil.com
+[2020-03-15 15:05:45]--[reg_cgi.c:171]--msql_conn err
+[2020-03-15 15:05:45]--[reg_cgi.c:287]--out:{
+	"code":	"004"
+}
+[2020-03-15 15:06:08]--[reg_cgi.c:259]--buf = {
+    "emailaddress": "lipeng.jack.0103@gamil.com",
+    "nickname": "jack123",
+    "password": "li1357986420",
+    "phonenum": "13773477582",
+    "username": "lp1620811656"
+}
+
+[2020-03-15 15:06:08]--[reg_cgi.c:151]--mysql_user = root, mysql_pwd = lp86282176, mysql_db = cloud_disk
+[2020-03-15 15:06:08]--[reg_cgi.c:165]--user = OF9I+Fw+oMKNGe9Nk0qAkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjack123, nick_name = jack123, pwd = fsYQpP14d0SNGe9Nk0qAkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA13773477582, tel = 13773477582, email = lipeng.jack.0103@gamil.com
+[2020-03-15 15:06:08]--[reg_cgi.c:171]--msql_conn err
+[2020-03-15 15:06:08]--[reg_cgi.c:287]--out:{
+	"code":	"004"
+}
+[2020-03-15 15:13:41]--[reg_cgi.c:259]--buf = {
+    "emailaddress": "lipeng.jack.0103@gamil.com",
+    "nickname": "jack123",
+    "password": "li1357986420",
+    "phonenum": "13773477582",
+    "username": "lp1620811656"
+}
+
+[2020-03-15 15:13:41]--[reg_cgi.c:151]--mysql_user = root, mysql_pwd = lp86282176, mysql_db = cloud_disk
+[2020-03-15 15:13:41]--[reg_cgi.c:165]--user = OF9I+Fw+oMLbiFme28hxRA==, nick_name = jack123, pwd = fsYQpP14d0ROEY/WF4nNqg==, tel = 13773477582, email = lipeng.jack.0103@gamil.com
+[2020-03-15 15:13:41]--[reg_cgi.c:287]--out:{
+	"code":	"002"
+}

@@ -196,8 +196,11 @@ int recvfile_save(long len,char *user,char *filename,char * md5,long *p_size)
         goto END;
       }
 	  LOG(UPLOAD_LOG_MODULE,UPLOAD_LOG_PROC,"open file %s successfully\n",filename);
-      
+    
       //ftruncate会将参数fd指定的文件大小改为参数length指定的文件大小
+	  char tempbuf[1024]={0};
+	  strncpy(tempbuf,begin,p-begin);
+	  LOG(UPLOAD_LOG_MODULE,UPLOAD_LOG_PROC,"%s size %d,content:%s\n",filename,p-begin,tempbuf);
       ftruncate(fd,(p-begin));
       write(fd,begin,(p-begin));
       close(fd);

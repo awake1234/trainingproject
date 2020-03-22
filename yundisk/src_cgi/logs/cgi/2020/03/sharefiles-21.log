@@ -1,0 +1,259 @@
+[2020-03-21 22:16:03]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:16:03]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:16:03]--[sharefile_cgi.c:535]--cmd = normal
+[2020-03-21 22:16:03]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:16:03]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:16:03]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-21 22:16:03]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"ca7410cbdbf4ff5c31932ba985daeaba",
+			"time":	"2020-03-14 20:59:12",
+			"filename":	"bmp.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eJ-eAQcN-AABf_Rg9GcI147.png",
+			"size":	24573,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-14 20:59:18",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"59381fec7e122866f2232188b924a829",
+			"time":	"2020-03-16 16:26:53",
+			"filename":	"截图.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAccHOAAQdtbK6eBw635.png",
+			"size":	269749,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"bd1e3b47ef1d6634a306c44695367af0",
+			"time":	"2020-03-16 16:26:58",
+			"filename":	"捕获1.PNG",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eBsaAPtGOAAKLTlXJHu4165.PNG",
+			"size":	166734,
+			"type":	"PNG"
+		}]
+}
+[2020-03-21 22:16:32]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:16:32]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:16:32]--[sharefile_cgi.c:535]--cmd = pvdesc
+[2020-03-21 22:16:32]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:16:32]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:16:32]--[sharefile_cgi.c:358]--sql_num=4,redis_num=4
+[2020-03-21 22:16:32]--[sharefile_cgi.c:474]--out:{
+	"files":	[{
+			"filename":	"截图.png",
+			"pv":	1
+		}, {
+			"filename":	"bmp.png",
+			"pv":	0
+		}, {
+			"filename":	"捕获1.PNG",
+			"pv":	0
+		}, {
+			"filename":	"jsf.png",
+			"pv":	0
+		}]
+}
+[2020-03-21 22:16:39]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:16:39]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:16:39]--[sharefile_cgi.c:535]--cmd = normal
+[2020-03-21 22:16:39]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:16:39]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:16:39]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-21 22:16:39]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"ca7410cbdbf4ff5c31932ba985daeaba",
+			"time":	"2020-03-14 20:59:12",
+			"filename":	"bmp.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eJ-eAQcN-AABf_Rg9GcI147.png",
+			"size":	24573,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-14 20:59:18",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"59381fec7e122866f2232188b924a829",
+			"time":	"2020-03-16 16:26:53",
+			"filename":	"截图.png",
+			"sharestatus":	1,
+			"pv":	1,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAccHOAAQdtbK6eBw635.png",
+			"size":	269749,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"bd1e3b47ef1d6634a306c44695367af0",
+			"time":	"2020-03-16 16:26:58",
+			"filename":	"捕获1.PNG",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eBsaAPtGOAAKLTlXJHu4165.PNG",
+			"size":	166734,
+			"type":	"PNG"
+		}]
+}
+[2020-03-21 22:16:39]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:16:39]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:16:39]--[sharefile_cgi.c:535]--cmd = pvdesc
+[2020-03-21 22:16:39]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:16:39]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:16:39]--[sharefile_cgi.c:358]--sql_num=4,redis_num=4
+[2020-03-21 22:16:39]--[sharefile_cgi.c:474]--out:{
+	"files":	[{
+			"filename":	"截图.png",
+			"pv":	1
+		}, {
+			"filename":	"bmp.png",
+			"pv":	0
+		}, {
+			"filename":	"捕获1.PNG",
+			"pv":	0
+		}, {
+			"filename":	"jsf.png",
+			"pv":	0
+		}]
+}
+[2020-03-21 22:29:28]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:29:28]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:29:28]--[sharefile_cgi.c:535]--cmd = pvdesc
+[2020-03-21 22:29:28]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:29:28]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:29:28]--[sharefile_cgi.c:358]--sql_num=4,redis_num=4
+[2020-03-21 22:29:28]--[sharefile_cgi.c:474]--out:{
+	"files":	[{
+			"filename":	"截图.png",
+			"pv":	1
+		}, {
+			"filename":	"bmp.png",
+			"pv":	0
+		}, {
+			"filename":	"捕获1.PNG",
+			"pv":	0
+		}, {
+			"filename":	"jsf.png",
+			"pv":	0
+		}]
+}
+[2020-03-21 22:35:38]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:35:38]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:35:38]--[sharefile_cgi.c:535]--cmd = normal
+[2020-03-21 22:35:38]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:35:38]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:35:38]--[sharefile_cgi.c:157]--select share_file_list.*,file_info.url,file_info.size,file_info.type  from file_info,share_file_list where file_info.md5 = share_file_list.md5 limit 0,4 在操作
+[2020-03-21 22:35:38]--[sharefile_cgi.c:254]--{
+	"files":	[{
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"ca7410cbdbf4ff5c31932ba985daeaba",
+			"time":	"2020-03-14 20:59:12",
+			"filename":	"bmp.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eJ-eAQcN-AABf_Rg9GcI147.png",
+			"size":	24573,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"68998a52de5e0dd4f081329b0d6bf736",
+			"time":	"2020-03-14 20:59:18",
+			"filename":	"jsf.png",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eLvGAc8qzAABQHUoyPCU339.png",
+			"size":	20509,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"59381fec7e122866f2232188b924a829",
+			"time":	"2020-03-16 16:26:53",
+			"filename":	"截图.png",
+			"sharestatus":	1,
+			"pv":	1,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eDjGAccHOAAQdtbK6eBw635.png",
+			"size":	269749,
+			"type":	"png"
+		}, {
+			"user":	"vyUyGIUPr84M7jSX+NqX3Q==",
+			"md5":	"bd1e3b47ef1d6634a306c44695367af0",
+			"time":	"2020-03-16 16:26:58",
+			"filename":	"捕获1.PNG",
+			"sharestatus":	1,
+			"pv":	0,
+			"url":	"http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl5eBsaAPtGOAAKLTlXJHu4165.PNG",
+			"size":	166734,
+			"type":	"PNG"
+		}]
+}
+[2020-03-21 22:35:56]--[sharefile_cgi.c:535]--cmd = count
+[2020-03-21 22:35:56]--[sharefile_cgi.c:77]--line = 4
+[2020-03-21 22:35:56]--[sharefile_cgi.c:535]--cmd = pvdesc
+[2020-03-21 22:35:56]--[sharefile_cgi.c:571]--buf = {
+    "count": 4,
+    "start": 0
+}
+
+[2020-03-21 22:35:56]--[sharefile_cgi.c:577]--start = 0, count = 4
+[2020-03-21 22:35:56]--[sharefile_cgi.c:358]--sql_num=4,redis_num=4
+[2020-03-21 22:35:56]--[sharefile_cgi.c:474]--out:{
+	"files":	[{
+			"filename":	"jsf.png",
+			"pv":	1
+		}, {
+			"filename":	"截图.png",
+			"pv":	1
+		}, {
+			"filename":	"bmp.png",
+			"pv":	0
+		}, {
+			"filename":	"捕获1.PNG",
+			"pv":	0
+		}]
+}

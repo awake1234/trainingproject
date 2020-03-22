@@ -532,6 +532,75 @@ END:
 }
 
 
+ //下载文件
+ int  download_file(char * user,char * md5,char * filename)
+ {
+      int ret = 0;
+      char sql_cmd[SQL_MAX_LEN]={0};
+      MYSQL * conn = NULL;
+      char * out = NULL;
+      char tmp[512]={0};
+      int ret2 = 0;
+
+
+      //连接数据库
+      conn = msql_conn(mysql_user,mysql_pwd,mysql_db);
+      if(conn==NULL)
+      {
+        LOG(DEALFILE_LOG_MODULE, DEALFILE_LOG_PROC, "msql_conn err\n");
+        ret = -1;
+        goto END;
+      }
+
+      //设置数据库编码
+      mysql_query(conn,"set names utf8");
+
+      //查看该文件的pv字段
+      sprintf(sql_cmd,"select pv from user_file_list where user='%s' and md5='%s' and filename='%s'",user,md5,filename);
+
+      ret2 = process_result_one(conn,sql_cmd,tmp);
+      int pv = 0;
+      if(ret2==0)
+      {
+        pv = atoi(tmp);
+      }else{
+        LOG(DEALFILE_LOG_MODULE, DEALFILE_LOG_PROC, "%s 操作失败\n", sql_cmd);
+        ret = -1;
+        goto END;
+      }
+     
+      //更新pv字段
+      sprintf(sql_cmd,"update user_file_list set pv=%d where user='%s' and md5='%s' and filename='%s'",pv+1,user,md5,filename);
+
+      if(mysql_query(conn,sql_cmd)!=0)
+      {
+        LOG(DEALFILE_LOG_MODULE, DEALFILE_LOG_PROC, "%s 操作失败: %s\n", sql_cmd, mysql_error(conn));
+        ret = -1;
+        goto END;
+      }
+END:
+     out = NULL;
+     if(ret==0)
+     {
+      out = return_status("016");
+     }else{
+      out = return_status("017");
+     }
+
+     if(out!=NULL)
+     {
+       printf(out);
+       free(out);
+     }
+
+     if(conn!=NULL)
+     {
+       mysql_close(conn);
+     }
+   
+     return ret;
+ }
+
 
 int main()
 {
@@ -609,7 +678,10 @@ int main()
            }else if(strcmp(cmd,"del")==0)    //删除文件
 		       {
               del_file(user,md5,filename);
-		       }
+		       }else if(strcmp(cmd,"pv")==0)
+           {
+              download_file(user,md5,filename);
+           }
 
       }
 
