@@ -12,6 +12,7 @@
 #include "consumerthread_file.h"
 #include<QJsonArray>
 #include "fileproperty.h"
+#include "downloadtask.h"
 
 
 
@@ -48,7 +49,9 @@ public:
     void deal_property(FileInfo * info);   //属性操作
     void deal_share(FileInfo  *info);      //分享操作
     void deal_delete(FileInfo * info);     //删除操作
-
+    void deal_pv(FileInfo *info);          //下载操作
+    void downloadfileAction();             //下载文件的过程
+    void dealFilepv(QString md5,QString filename);  //处理服务器端数据库相关数据的修改
     //设置处理文件的发送的json包
     QByteArray setdealfilejson(QString username,QString token,QString md5,QString filename);
 
@@ -77,6 +80,9 @@ public:
     void clearfilelist();               //清空文件列表
 
 
+    //清除所有的任务
+    void clearAllTask();
+
 
     //维护图片列表
     QList<FileInfo *>  m_fileList;                  //维护一个保存文件信息的列表
@@ -97,7 +103,6 @@ public   slots:
 signals:
    //定义一个信号来切换界面
    //transferstatus为枚举类型在common.h中定义
-
    void switchto_ui(uistatus status);
    void startproducer();
    void startconsumer();
@@ -132,6 +137,8 @@ private:
     //上传任务的实例
     uploadtask * uploadtask;
     dataprocess *m_process;
+
+
 
     //消费者
     int thread_num = 3;  //定义一个消费者线程数，默认为3，后期加上UI操作

@@ -12,6 +12,13 @@ sharefilelist::sharefilelist(QWidget *parent) :
     initlistwidget();
     //添加右键按钮
     AddMenuAction();
+
+    m_downloadTimer.start(500);   //0.5秒检查一次
+
+    connect(&m_downloadTimer,&QTimer::timeout,[=]()
+    {
+       downloadFilesAction();
+    });
 }
 
 sharefilelist::~sharefilelist()
@@ -97,6 +104,12 @@ void sharefilelist::AddMenuAction()
         this->DealSelectedFile(save);
     });
 
+
+    //下载
+    connect(m_downloadAction,&QAction::triggered,[=]()
+    {
+        this->DealSelectedFile(sharefilesdownload);
+    });
 
 }
 
@@ -302,6 +315,11 @@ void sharefilelist::DealSelectedFile(sharefilelist::CMD cmd)
         savefiletolist(temp);
     }
 
+    if(cmd==sharefilesdownload)
+    {
+        adddownloadFiles(temp);
+    }
+
 }
 
 
@@ -416,6 +434,140 @@ void sharefilelist::savefiletolist(FileInfo *info)
          }
      });
      return;
+}
+
+
+//添加下载任务到队列中去
+void sharefilelist::adddownloadFiles(FileInfo *info)
+{
+    QString path;
+    emit gototransfer(download);
+
+    DownloadTask * downloadtask = DownloadTask::getInstance();
+
+    path = QFileDialog::getSaveFileName(this,tr("select one dirctory to save"),info->filename);
+
+    downloadtask->appendDownloadList(info,path,true);  //这里要将分享的标志设为true
+
+    return;
+
+}
+
+
+
+void sharefilelist::downloadFilesAction()
+{
+
+    DownloadTask * downloadtask = DownloadTask::getInstance();
+    if(downloadtask==nullptr)
+    {
+        qDebug()<<"downloadtask get instance fail";
+        return;
+    }
+
+    if(downloadtask->isEmpty())
+    {
+        return;
+    }
+
+    if(downloadtask->isdownload())
+    {
+        return;
+    }
+
+    //不是被分享的文件返回
+    if(!downloadtask->isshared())
+    {
+        return;
+    }
+
+
+    DownloadInfo * downloadfileinfo = downloadtask->takeTask();
+
+
+    logininfoinstance *login = logininfoinstance::getinstance();
+
+
+    QNetworkReply *reply = m_manager->get(QNetworkRequest(downloadfileinfo->url));
+
+    connect(reply,&QNetworkReply::finished,[=]()
+                {
+                    QByteArray data=reply->readAll();
+
+                    downloadfileinfo->file->write(data);
+
+                    qDebug()<<downloadfileinfo->filename<<"下载成功"<<endl;
+                    m_common.writeRecord(login->getuser(), downloadfileinfo->filename, "010");
+
+                    dealFilePv(downloadfileinfo->md5,downloadfileinfo->filename);
+
+                    downloadtask->delDownloadTask();
+
+                    reply->deleteLater();
+                });
+
+        connect(reply,&QNetworkReply::downloadProgress,[=](qint64 bytesReceived, qint64 bytesTotal)
+                {
+                    if(bytesTotal!=0)
+                        downloadfileinfo->dp->setprogress(bytesReceived/1024,bytesTotal/1024);
+
+                });
+
+}
+
+
+//处理服务器数据库的相关参数的操作
+void sharefilelist::dealFilePv(QString md5, QString filename)
+{
+    logininfoinstance * login = logininfoinstance::getinstance();
+
+    QByteArray data = SetCancelfilejson(login->getuser(),md5,filename);
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setHeader(QNetworkRequest::QNetworkRequest::ContentLengthHeader,data.size());
+
+    QString url=QString("http://%1:%2/dealsharefile?cmd=pv").arg(login->getip()).arg(login->getport());
+    request.setUrl(QUrl(url));
+
+    QNetworkReply *reply=m_manager->post(request,data);
+
+    connect(reply,&QNetworkReply::readyRead,[=]()
+               {
+
+                   if(reply->error()!=QNetworkReply::NoError)
+                   {
+                       qDebug()<<reply->errorString();
+                       reply->deleteLater();
+                       return;
+                   }
+
+                   QByteArray data=reply->readAll();
+                   reply->deleteLater();
+
+                   if("016" == m_common.getcode(data) )
+                   {
+                       qDebug()<<filename<<"dealFilePv成功";
+
+                       for(int i=0;i<m_shareFileList.size();i++)
+                       {
+                           if(m_shareFileList.at(i)->md5 == md5 && m_shareFileList.at(i)->filename == filename)
+                           {
+                               m_shareFileList.at(i)->pv+=1;
+
+                               break;
+                           }
+                       }
+                   }
+                   else if("017" == m_common.getcode(data) )
+                   {
+                       qDebug()<<filename<<"dealFilePv失败";
+                   }
+               });
+
+       return;
+
+
 }
 
 

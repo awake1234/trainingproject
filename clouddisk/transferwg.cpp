@@ -12,6 +12,10 @@ transferwg::transferwg(QWidget *parent) :
     UploadLayout * upload = UploadLayout::getInstance();
     upload->setUploadLayout(ui->scroll_contents_upload);  //在这个widget里加入加载条的布局
 
+    //设置下载列表的布局
+    DownloadLayout * download = DownloadLayout::getInstance();
+    download->setDownloadLayout(ui->scroll_Contents_download);
+
     ui->tabWidget->setCurrentIndex(0);  //显示为第一页
 
     connect(ui->tabWidget,&QTabWidget::currentChanged,[=](int index)
@@ -31,7 +35,13 @@ transferwg::~transferwg()
 
 void transferwg::showuploadtask()
 {
-        ui->tabWidget->setCurrentIndex(0);
+    ui->tabWidget->setCurrentIndex(0);
+}
+
+//显示正在下载的任务
+void transferwg::showdownloadtask()
+{
+   ui->tabWidget->setCurrentIndex(1);
 }
 
 void transferwg::showdatarecord(QString path)
@@ -61,6 +71,4 @@ void transferwg::on_toolButton_clearrecord_clicked()
         QFile::remove(filepath);  //删除文件
         ui->textEdit->clear();
     }
-
-
 }

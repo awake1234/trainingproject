@@ -44,7 +44,9 @@ SOURCES += \
     fileproperty.cpp \
     mypicwg.cpp \
     sharefilelist.cpp \
-    ranklist.cpp
+    ranklist.cpp \
+    downloadtask.cpp \
+    downloadlayout.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -65,7 +67,9 @@ HEADERS += \
     fileproperty.h \
     mypicwg.h \
     sharefilelist.h \
-    ranklist.h
+    ranklist.h \
+    downloadtask.h \
+    downloadlayout.h
 
 FORMS += \
         mainwindow.ui \

@@ -153,7 +153,14 @@ int uploadtask::appendtolist(QString filepath)
 //清空上传文件的列表
 void uploadtask::clearlist()
 {
-    uploadfile_list.clear();
+    int count=uploadfile_list.size();
+    for (int i=0;i<count; ++i)
+    {
+        uploadfileinfo  *info=uploadfile_list.takeFirst();
+
+        delete  info;
+    }
+
 }
 
 

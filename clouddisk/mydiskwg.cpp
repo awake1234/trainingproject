@@ -65,8 +65,7 @@ mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
     //qDebug()<<"thread has been started";
 
 
-
-  }
+}
 
 mydiskwg::~mydiskwg()
 {
@@ -260,6 +259,11 @@ void mydiskwg::dealselectedfile(QString cmd)
     }
 
 
+    if(cmd=="下载")
+    {
+        deal_pv(info);
+    }
+
 
 
 }
@@ -406,7 +410,131 @@ void mydiskwg::deal_delete(FileInfo *info)
               emit loginAgainSignal();   //重新登录信号
         }
     });
+    return;
+}
+
+
+//处理下载操作
+void mydiskwg::deal_pv(FileInfo *info)
+{
+    QString filepath =  QFileDialog::getSaveFileName(this,tr("select one dictory to save"),info->filename);
+
+    emit switchto_ui(download);   //切换到下载页面
+
+    DownloadTask * downloadtask = DownloadTask::getInstance();
+
+
+    downloadtask->appendDownloadList(info,filepath);
+
+
+    this->downloadfileAction();
+
+}
+
+void mydiskwg::downloadfileAction()
+{
+    DownloadTask * downloadtask = DownloadTask::getInstance();
+
+
+    if(downloadtask->isEmpty())
+    {
         return;
+    }
+
+    //如果改文件是被分享的不作处理
+    if(downloadtask->isshared())
+    {
+        return;
+    }
+    //取任务
+    DownloadInfo * downloadfileinfo = downloadtask->takeTask();
+
+    logininfoinstance *login = logininfoinstance::getinstance();
+
+    QNetworkReply * reply = m_manager->get(QNetworkRequest(downloadfileinfo->url));
+
+
+    connect(reply,&QNetworkReply::finished,[=]()
+    {
+        QByteArray data = reply->readAll();
+        downloadfileinfo->file->write(data);
+
+        qDebug()<<downloadfileinfo->filename<<"下载成功";
+        m_common.writeRecord(login->getuser(),downloadfileinfo->filename,"010");
+
+        dealFilepv(downloadfileinfo->md5,downloadfileinfo->filename);
+
+        downloadtask->delDownloadTask();
+
+        reply->deleteLater();
+    });
+
+    connect(reply,&QNetworkReply::downloadProgress,[=](qint64 bytesReceived,qint64 bytesTotal){
+        if(bytesTotal!=0)
+        {
+            downloadfileinfo->dp->setprogress(bytesReceived/1024,bytesTotal/1024);
+        }
+
+    });
+
+}
+
+void mydiskwg::dealFilepv(QString md5, QString filename)
+{
+
+       logininfoinstance * login = logininfoinstance::getinstance();
+
+       QByteArray data=setdealfilejson(login->getuser(), login->gettoken() ,md5, filename);
+
+       QNetworkRequest request;
+       request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+       request.setHeader(QNetworkRequest::QNetworkRequest::ContentLengthHeader,data.size());
+
+       QString url=QString("http://%1:%2/dealfile?cmd=pv").arg(login->getip()).arg(login->getport());
+       request.setUrl(QUrl(url));
+
+       QNetworkReply *reply=m_manager->post(request,data);
+
+       connect(reply,&QNetworkReply::readyRead,[=]()
+               {
+
+                   if(reply->error()!=QNetworkReply::NoError)
+                   {
+                       qDebug()<<reply->errorString();
+                       reply->deleteLater();
+                       return;
+                   }
+
+                   QByteArray data=reply->readAll();
+                   reply->deleteLater();
+
+                   if("016" == m_common.getcode(data) )
+                   {
+                       qDebug()<<filename<<"dealFilePv成功";
+
+                       for(int i=0;i<m_fileList.size();i++)
+                       {
+                           if(m_fileList.at(i)->md5 == md5 && m_fileList.at(i)->filename == filename)
+                           {
+                               m_fileList.at(i)->pv+=1;
+                               break;
+                           }
+                       }
+                   }
+                   else if("017" == m_common.getcode(data) )
+                   {
+                       qDebug()<<filename<<"dealFilePv失败";
+                   }
+                   else
+                   {
+                       QMessageBox::information(this,"用户","用户登陆验证码失效,请重新登录");
+                       emit loginAgainSignal();
+                   }
+
+               });
+
+         return;
+
 }
 
 //设置分享的json包
@@ -636,7 +764,7 @@ void mydiskwg::getFileJsonInfo(QByteArray data)
             qDebug()<<"filepath"<<filepath;
             info->item = new QListWidgetItem(QIcon(filepath),info->filename);  //文件名+图标
 
-            qDebug()<<info->user<<":"<<info->md5<<":"<<info->time<<":"<<info->url<<":"<<info->type<<":"<<info->size;
+            //qDebug()<<info->user<<":"<<info->md5<<":"<<info->time<<":"<<info->url<<":"<<info->type<<":"<<info->size;
             m_fileList.append(info);    //添加到文件列表中
         }
 
@@ -739,5 +867,16 @@ void mydiskwg::clearfilelist()
         delete  info;
     }
 
+}
+
+//清除所有的任务
+void mydiskwg::clearAllTask()
+{
+   uploadtask = uploadtask::get_uploadtask_instance();
+
+   uploadtask->clearlist();
+
+   DownloadTask * downloadtask = DownloadTask::getInstance();
+   downloadtask->clearlist();
 }
 

@@ -6,6 +6,7 @@
 #include "common.h"
 #include "logininfoinstance.h"
 #include <QFile>
+#include "downloadlayout.h"
 
 namespace Ui {
 class transferwg;
@@ -22,7 +23,8 @@ public:
 
     //显示上传任务的函数
     void showuploadtask();
-
+    //显示下载任务的函数
+    void showdownloadtask();
     //显示传输记录
     void showdatarecord(QString path=RECORD_DIR);
 

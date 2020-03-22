@@ -110,9 +110,16 @@ void MainWindow::managesignals()
     {
        ui->title_widget->slotButtonClick_page(Page::TRANSFER);  //触发转换到传输界面的函数
 
+       //上传页面
        if(status==upload)
        {
           ui->page_transfer_record->showuploadtask();  //切换到上传列表的界面
+       }
+
+       //下载页面
+       if(status==download)
+       {
+           ui->page_transfer_record->showdownloadtask(); //切换到下载任务界面
        }
 
        //分享界面
@@ -122,6 +129,9 @@ void MainWindow::managesignals()
            ui->page_sharelist->refreshFiles();
            ui->stackedWidget->setCurrentIndex(2);  //切换到分享界面
        }
+
+
+
 
     });
 
@@ -160,7 +170,7 @@ void MainWindow::loginagain()
     ui->page_mydisk->clearitems();
     ui->page_mydisk->clearfilelist();
     //清除所有的传输任务
-
+    ui->page_mydisk->clearAllTask();
 }
 
 
@@ -200,7 +210,6 @@ void MainWindow::setmytabwig(int index)
             QString filename = tempwidget->item(i)->text();
             //解析文件名得到后缀名
             int n = filename.indexOf(QChar('.'),0);
-
             //截取后缀
             QString suffix = filename.mid(n+1);
 

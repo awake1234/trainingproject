@@ -140,7 +140,7 @@ void consumerthread_file::uploadfileslow(uploadfileinfo *info)
     data.append(QString("size=%1").arg(info->filesize));
     data.append("\r\n");
 
-    data.append("Content-Type:multipart/form-data");
+    data.append("Content-Type: multipart/form-data");
     data.append("\r\n");
     data.append("\r\n");
 
@@ -156,7 +156,7 @@ void consumerthread_file::uploadfileslow(uploadfileinfo *info)
     request.setUrl(QUrl(url));
 
     qDebug()<<"send data size"<<data.size();
-
+    qDebug()<<"send data:"<<data.data();          //输出发送的信息
     QNetworkReply *reply  = manager->post(request,data);
 
 
