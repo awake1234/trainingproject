@@ -614,11 +614,12 @@ int main()
    int len;
 
    //读取配置信息
-   read_cfg();
+  // read_cfg();
 
    while(FCGI_Accept()>=0)
    {
-      //获取url参数的内容
+       read_cfg();
+	   //获取url参数的内容
    	  char * query = getenv("QUERY_STRING");
 
       query_parse_key_value(query,"cmd",cmd,NULL);  //util_cgi.h

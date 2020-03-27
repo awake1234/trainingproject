@@ -1,0 +1,39 @@
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:504]--len = 522
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundary[S?s=84?f`wbw?t<
+Content-Disposition:form-data;user="lp13773477582"filename="config.json"md5="f36cbe1ffe2771cf285512d485084186"size=281
+Content-Type: multipart/form-data
+
+{
+    "filetype_path": {
+        "path": "conf/filetype"
+    },
+    "login": {
+        "isremember": "yes",
+        "pwd": "vcB8Vc9RGpAhobjeLhV4bg==",
+        "user": "iEulVmoNk/kMnEEg0Oav/w=="
+    },
+    "web_server": {
+        "ip": "192.168.43.34",
+        "port": "80"
+    }
+}
+
+------WebKitFormBoundary[S?s=84?f`wbw?t<
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundary[S?s=84?f`wbw?t<]
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="config.json"md5="f36cbe1ffe2771cf285512d485084186"size=281]
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:197]--open file config.json successfully
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[config.json, 大小：281, md5码：f36cbe1ffe2771cf285512d485084186]到本地
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl59qayAJJghAAABGaEthyE14.json] succ!
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-27 15:22:20
+file size: 281
+file crc32: 2704115489 (0xA12D8721)
+
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl59qayAJJghAAABGaEthyE14.json
+[2020-03-27 15:22:20]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('f36cbe1ffe2771cf285512d485084186', 'group1/M00/00/00/wKgrIl59qayAJJghAAABGaEthyE14.json', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl59qayAJJghAAABGaEthyE14.json', '281', 'json', 1) 文件信息插入成功

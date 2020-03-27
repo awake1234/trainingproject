@@ -1,0 +1,32 @@
+[2020-03-24 17:29:57]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 17:37:30]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 17:46:33]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 18:03:17]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 18:11:24]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 18:22:56]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 18:23:07]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 18:36:04]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 19:15:55]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 19:17:30]--[common/redis_op.c:363]--[-][GMS_REDIS]Connect :0 Error:Name or service not known
+[2020-03-24 21:53:49]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:53:50]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 21:53:51]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:53:51]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 21:54:10]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:54:10]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 21:54:29]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:54:29]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 21:54:29]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:54:29]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 21:55:45]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:55:45]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 21:55:45]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 21:55:45]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 22:03:59]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 22:03:59]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 22:03:59]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 22:03:59]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 22:04:05]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 22:04:05]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!
+[2020-03-24 22:04:09]--[common/redis_op.c:369]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2020-03-24 22:04:09]--[common/redis_op.c:525]--[+][GMS_REDIS]Disconnect SUCCESS!

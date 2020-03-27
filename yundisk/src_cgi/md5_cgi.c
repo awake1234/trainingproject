@@ -309,11 +309,11 @@ int main()
 {
 	int ret = 0;
 	//读取配置文件信息
-	read_cfg();
+	//read_cfg();
 
 	while(FCGI_Accept()>=0)
 	{
-
+        read_cfg();
 		char *contentlength = getenv("CONTENT_LENGTH");
         
         printf("Content-type: text/html\r\n\r\n");

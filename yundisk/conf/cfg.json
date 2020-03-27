@@ -16,7 +16,7 @@
 	
 	"dfs_path":
 	{
-		"client": "../conf/client.conf"
+		"client": "/etc/fdfs/client.conf"
 	},
 	
 	"web_server":

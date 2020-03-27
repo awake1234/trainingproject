@@ -523,10 +523,11 @@ int main()
     char cmd[20];
     
     //读取配置信息
-    read_cfg();
+//    read_cfg();
 
    while(FCGI_Accept()>=0)
    {
+	    read_cfg();
         char *query = getenv("QUERY_STRING");
 
 

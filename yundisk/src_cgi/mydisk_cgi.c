@@ -426,10 +426,11 @@ int main()
    
    
    //1.读取配置文件信息
-	read_cfg();
+//	read_cfg();
 
    while(FCGI_Accept()>=0)
    {
+	read_cfg();
    	//获取url地址?后面的内容
    	char *query = getenv("QUERY_STRING");
     

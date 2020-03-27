@@ -13,7 +13,8 @@
  #include "make_log.h"
  #include "cfg.h"
  #include "cJSON.h"
-
+ #include<errno.h>
+ #include<string.h>
 /* -------------------------------------------*/
 /**
  * @brief  从配置文件中得到相对应的参数
@@ -44,7 +45,7 @@ int get_cfg_value(const char *profile, char *title, char *key, char *value)
     if(fp == NULL) //打开失败
     {
         perror("fopen");
-        LOG(CFG_LOG_MODULE, CFG_LOG_PROC, "fopen err\n");
+        LOG(CFG_LOG_MODULE, CFG_LOG_PROC, "fopen err:%s\n",strerror(errno));
         ret = -1;
         goto END;
     }

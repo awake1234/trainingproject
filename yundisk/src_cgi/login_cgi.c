@@ -99,7 +99,7 @@ int check_user_info(char *username,char *pwd)
     char mysql_pwd[256] = {0};
     char mysql_db[256] = {0};
     get_mysql_info(mysql_user,mysql_pwd,mysql_db);
-    LOG(LOGIN_LOG_MODULE,LOGIN_LOG_PROC,"mysql_user=%s,mysql_pwd=%s,mysql_db=%s",mysql_user,mysql_pwd,mysql_db);
+    LOG(LOGIN_LOG_MODULE,LOGIN_LOG_PROC,"mysql_user=%s,mysql_pwd=%s,mysql_db=%s\n",mysql_user,mysql_pwd,mysql_db);
     //连接数据库
     conn = msql_conn(mysql_user,mysql_pwd,mysql_db);
     if(conn==NULL)

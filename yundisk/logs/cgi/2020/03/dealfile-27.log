@@ -1,0 +1,13 @@
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:35]--mysql:[user=root,pwd=lp86282176,database=cloud_disk][2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:40]--redis:[ip=127.0.0.1,port=6379]
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:626]--cmd = del
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:655]--buf = {
+    "filename": "config.json",
+    "md5": "f36cbe1ffe2771cf285512d485084186",
+    "token": "10",
+    "user": "lp13773477582"
+}
+
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:82]--user='vyUyGIUPr84M7jSX+NqX3Q=='
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:93]--token='10'
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:659]--user = vyUyGIUPr84M7jSX+NqX3Q==, token = 10, md5 = f36cbe1ffe2771cf285512d485084186, filename = config.json
+[2020-03-27 15:22:09]--[src_cgi/dealfile_cgi.c:291]--remove file from storage ret=0

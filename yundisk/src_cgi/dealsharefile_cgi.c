@@ -488,11 +488,12 @@ int main()
     char filename[FILE_NAME_LEN]; //文件名字
 
     //读取数据库配置信息
-    read_cfg();
+  //  read_cfg();
 
     //阻塞等待用户连接
     while (FCGI_Accept() >= 0)
     {
+		 read_cfg();
          // 获取URL地址 "?" 后面的内容
         char *query = getenv("QUERY_STRING");
 

@@ -1,0 +1,218 @@
+[2020-03-25 14:16:32]--[src_cgi/upload_cgi.c:40]--mysql:user=,pwd=,database=
+[2020-03-25 14:29:47]--[src_cgi/upload_cgi.c:40]--mysql:user=,pwd=,database=
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:40]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:508]--len = 1266968
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:71]--buf = ------WebKitFormBoundarypDAg1@B@VMk59uei
+Content-Disposition:form-data;user="lp13773477582"filename="TIM图片20180628101043_LI.jpg"md5="64dd394afde992859273d38bfee66f9b"size=1266704
+Content-Type: multipart/form-data
+
+����
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:99]--boundary:[------WebKitFormBoundarypDAg1@B@VMk59uei]
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:115]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="TIM图片20180628101043_LI.jpg"md5="64dd394afde992859273d38bfee66f9b"size=1266704]
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:130]--trim_space user before
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:188]--trim_spcae user after
+[2020-03-25 14:37:07]--[src_cgi/upload_cgi.c:198]--open file TIM图片20180628101043_LI.jpg successfully
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:507]--len = 67287
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundaryOcJ4tcAX8IIeLlSk
+Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048
+Content-Type: multipart/form-data
+
+�PNG
+
+
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundaryOcJ4tcAX8IIeLlSk]
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048]
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 15:34:45]--[src_cgi/upload_cgi.c:197]--open file 123.png successfully
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:507]--len = 522
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundary[lVXp<DmEZQ?rO@9
+Content-Disposition:form-data;user="lp13773477582"filename="config.json"md5="f36cbe1ffe2771cf285512d485084186"size=281
+Content-Type: multipart/form-data
+
+{
+    "filetype_path": {
+        "path": "conf/filetype"
+    },
+    "login": {
+        "isremember": "yes",
+        "pwd": "vcB8Vc9RGpAhobjeLhV4bg==",
+        "user": "iEulVmoNk/kMnEEg0Oav/w=="
+    },
+    "web_server": {
+        "ip": "192.168.43.34",
+        "port": "80"
+    }
+}
+
+------WebKitFormBoundary[lVXp<DmEZQ?rO@9
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundary[lVXp<DmEZQ?rO@9]
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="config.json"md5="f36cbe1ffe2771cf285512d485084186"size=281]
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:197]--open file config.json successfully
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:202]--config.json size 281,content:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:515]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[config.json, 大小：281, md5码：f36cbe1ffe2771cf285512d485084186]到本地
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:246]--dup2() success
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:274]--get [group1/M00/00/00/wKgrIl57C6KAFVPzAAABGaEthyE83.json] succ!
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:318]--client conf:/etc/fdfs/client.conf
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:335]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 15:43:30
+file size: 281
+file crc32: 2704115489 (0xA12D8721)
+
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:364]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57C6KAFVPzAAABGaEthyE83.json
+[2020-03-25 15:43:30]--[src_cgi/upload_cgi.c:417]--insert into file_info (md5, file_id, url, size, type, count) values ('f36cbe1ffe2771cf285512d485084186', 'group1/M00/00/00/wKgrIl57C6KAFVPzAAABGaEthyE83.json', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57C6KAFVPzAAABGaEthyE83.json', '281', 'json', 1) 文件信息插入成功
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:504]--len = 67287
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundaryfI7sU>qD9GmNT<jO
+Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048
+Content-Type: multipart/form-data
+
+�PNG
+
+
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundaryfI7sU>qD9GmNT<jO]
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="123.png"md5="65e69a4b4bdfc9bf1fa6a694b8867b92"size=67048]
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:197]--open file 123.png successfully
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[123.png, 大小：67048, md5码：65e69a4b4bdfc9bf1fa6a694b8867b92]到本地
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl57DpGADdIVAAEF6BNQWIM746.png] succ!
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 15:56:01
+file size: 67048
+file crc32: 324032643 (0x13505883)
+
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57DpGADdIVAAEF6BNQWIM746.png
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('65e69a4b4bdfc9bf1fa6a694b8867b92', 'group1/M00/00/00/wKgrIl57DpGADdIVAAEF6BNQWIM746.png', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57DpGADdIVAAEF6BNQWIM746.png', '67048', 'png', 1) 文件信息插入成功
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:504]--len = 967427
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundaryfI7sU>qD9GmNT<jO
+Content-Disposition:form-data;user="lp13773477582"filename="捕获.PNG"md5="adb1565ef8c89e070be0a8b43b8f4c7f"size=967184
+Content-Type: multipart/form-data
+
+�PNG
+
+
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundaryfI7sU>qD9GmNT<jO]
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="捕获.PNG"md5="adb1565ef8c89e070be0a8b43b8f4c7f"size=967184]
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:197]--open file 捕获.PNG successfully
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[捕获.PNG, 大小：967184, md5码：adb1565ef8c89e070be0a8b43b8f4c7f]到本地
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl57DpGACouYAA7CEJTDQlA751.PNG] succ!
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 15:56:01
+file size: 967184
+file crc32: 2495824464 (0x94C34250)
+
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57DpGACouYAA7CEJTDQlA751.PNG
+[2020-03-25 15:56:01]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('adb1565ef8c89e070be0a8b43b8f4c7f', 'group1/M00/00/00/wKgrIl57DpGACouYAA7CEJTDQlA751.PNG', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57DpGACouYAA7CEJTDQlA751.PNG', '967184', 'PNG', 1) 文件信息插入成功
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:504]--len = 400000
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundarya1FZZlcsO;iCJnF1
+Content-Disposition:form-data;user="lp13773477582"filename="实验结果.png"md5="ca2bf7f8f010757f807a360944357eed"size=399751
+Content-Type: multipart/form-data
+
+�PNG
+
+
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundarya1FZZlcsO;iCJnF1]
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="实验结果.png"md5="ca2bf7f8f010757f807a360944357eed"size=399751]
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:197]--open file 实验结果.png successfully
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[实验结果.png, 大小：399751, md5码：ca2bf7f8f010757f807a360944357eed]到本地
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl57DwGAS1ByAAYZh6KE_bU830.png] succ!
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 15:57:53
+file size: 399751
+file crc32: 2726624693 (0xA284FDB5)
+
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57DwGAS1ByAAYZh6KE_bU830.png
+[2020-03-25 15:57:53]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('ca2bf7f8f010757f807a360944357eed', 'group1/M00/00/00/wKgrIl57DwGAS1ByAAYZh6KE_bU830.png', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57DwGAS1ByAAYZh6KE_bU830.png', '399751', 'png', 1) 文件信息插入成功
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:504]--len = 11214
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundaryRmNdUTXPGsEYl@wn
+Content-Disposition:form-data;user="lp13773477582"filename="script.sql"md5="9a7db2b2cd45ee65bf7b576f97bdb6a4"size=10972
+Content-Type: multipart/form-data
+
+��U
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundaryRmNdUTXPGsEYl@wn]
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="script.sql"md5="9a7db2b2cd45ee65bf7b576f97bdb6a4"size=10972]
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:197]--open file script.sql successfully
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[script.sql, 大小：10972, md5码：9a7db2b2cd45ee65bf7b576f97bdb6a4]到本地
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl57E3-AJQUzAAAq3Ly5ewE320.sql] succ!
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 16:17:03
+file size: 10972
+file crc32: 3166272257 (0xBCB97B01)
+
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57E3-AJQUzAAAq3Ly5ewE320.sql
+[2020-03-25 16:17:03]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('9a7db2b2cd45ee65bf7b576f97bdb6a4', 'group1/M00/00/00/wKgrIl57E3-AJQUzAAAq3Ly5ewE320.sql', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57E3-AJQUzAAAq3Ly5ewE320.sql', '10972', 'sql', 1) 文件信息插入成功
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:504]--len = 4654254
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundary;iV0`eJRrmKp=^CE
+Content-Disposition:form-data;user="lp13773477582"filename="DEAMN - Sign.mp3"md5="23088514ba8b64139295d258f7df6d80"size=4654004
+Content-Type: multipart/form-data
+
+ID3
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundary;iV0`eJRrmKp=^CE]
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="DEAMN - Sign.mp3"md5="23088514ba8b64139295d258f7df6d80"size=4654004]
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:197]--open file DEAMN - Sign.mp3 successfully
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[DEAMN - Sign.mp3, 大小：4654004, md5码：23088514ba8b64139295d258f7df6d80]到本地
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl57E7yAC55IAEcDtBOkt5o843.mp3] succ!
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 16:18:04
+file size: 4654004
+file crc32: 329562010 (0x13A4B79A)
+
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57E7yAC55IAEcDtBOkt5o843.mp3
+[2020-03-25 16:18:04]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('23088514ba8b64139295d258f7df6d80', 'group1/M00/00/00/wKgrIl57E7yAC55IAEcDtBOkt5o843.mp3', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57E7yAC55IAEcDtBOkt5o843.mp3', '4654004', 'mp3', 1) 文件信息插入成功
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:39]--mysql:user=root,pwd=lp86282176,database=cloud_disk
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:504]--len = 29772230
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:70]--buf = ------WebKitFormBoundaryWR7^gG0X>8Gj6LQb
+Content-Disposition:form-data;user="lp13773477582"filename="01-学习目标__recv.mkv"md5="4d20d709e83aecbd9d97d5979aae47b9"size=29771970
+Content-Type: multipart/form-data
+
+Eߣ
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:98]--boundary:[------WebKitFormBoundaryWR7^gG0X>8Gj6LQb]
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:114]--content_text:[Content-Disposition:form-data;user="lp13773477582"filename="01-学习目标__recv.mkv"md5="4d20d709e83aecbd9d97d5979aae47b9"size=29771970]
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:129]--trim_space user before
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:187]--trim_spcae user after
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:197]--open file 01-学习目标__recv.mkv successfully
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:512]--vyUyGIUPr84M7jSX+NqX3Q==成功上传[01-学习目标__recv.mkv, 大小：29771970, md5码：4d20d709e83aecbd9d97d5979aae47b9]到本地
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:243]--dup2() success
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:271]--get [group1/M00/00/00/wKgrIl57FCCAPS6UAcZIwvpIMP8087.mkv] succ!
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:315]--client conf:/etc/fdfs/client.conf
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:332]--uploadfile stat:source storage id: 0
+source ip address: 192.168.43.34
+file create timestamp: 2020-03-25 16:19:44
+file size: 29771970
+file crc32: 4199035135 (0xFA4830FF)
+
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:361]--file url is：http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57FCCAPS6UAcZIwvpIMP8087.mkv
+[2020-03-25 16:19:44]--[src_cgi/upload_cgi.c:414]--insert into file_info (md5, file_id, url, size, type, count) values ('4d20d709e83aecbd9d97d5979aae47b9', 'group1/M00/00/00/wKgrIl57FCCAPS6UAcZIwvpIMP8087.mkv', 'http:// 192.168.43.34:80/group1/M00/00/00/wKgrIl57FCCAPS6UAcZIwvpIMP8087.mkv', '29771970', 'mkv', 1) 文件信息插入成功

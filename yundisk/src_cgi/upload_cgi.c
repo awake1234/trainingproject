@@ -22,8 +22,7 @@
 
 #define  UPLOAD_LOG_MODULE "cgi"
 #define  UPLOAD_LOG_PROC  "upload"
-//配置文件的路径
-#define  CONFFILE   "../conf/client.conf"
+
 
 
 //mysql 数据库的配置信息，用户名，密码，数据库名称
@@ -198,9 +197,6 @@ int recvfile_save(long len,char *user,char *filename,char * md5,long *p_size)
 	  LOG(UPLOAD_LOG_MODULE,UPLOAD_LOG_PROC,"open file %s successfully\n",filename);
     
       //ftruncate会将参数fd指定的文件大小改为参数length指定的文件大小
-	  char tempbuf[1024]={0};
-	  strncpy(tempbuf,begin,p-begin);
-	  LOG(UPLOAD_LOG_MODULE,UPLOAD_LOG_PROC,"%s size %d,content:%s\n",filename,p-begin,tempbuf);
       ftruncate(fd,(p-begin));
       write(fd,begin,(p-begin));
       close(fd);
@@ -573,13 +569,14 @@ int main()
  
    int ret = 0;
    //读文件配置
-   read_cfg();
+//   read_cfg();
 
 
 
   //使用多线程
   while(FCGI_Accept()>=0)
   {
+	read_cfg();
     char * contentlength  = getenv("CONTENT_LENGTH");
     
     printf("Content-type: text/html\r\n\r\n");
