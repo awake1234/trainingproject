@@ -404,15 +404,15 @@ int get_ranking_filelist(int start,int count)
 			  ret = -1;
 			  goto END;
 		  }
-	  }
-
-
 	  char fileid[1024]={0};
 	  sprintf(fileid,"%s%s",row[0],row[1]);    //redis中zset中的文件标示
-
+      LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"sprintf fileid has done\n");
 	  rop_zset_add(redis_conn,FILE_PUBLIC_ZSET,atoi(row[2]),fileid); //下载量作为权重
       //增加hash记录
 	  rop_hash_set(redis_conn,FILE_NAME_HASH,fileid,row[1]);
+
+	  LOG(SHAREFILES_LOG_MODULE,SHAREFILES_LOG_PROC,"rop_zset_add has done\n");
+	  }
  }
 
 

@@ -205,7 +205,7 @@ char * memstr(char * fulldata,int full_data_len,char *substr)
    int last_possible = full_data_len-sublen+1;
    for(i=0;i<last_possible;++i)
    {
-      if(*cur = *substr)
+      if(*cur == *substr)
 	  {
 		  if(memcmp(cur,substr,sublen)==0)
 		  {
