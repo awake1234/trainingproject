@@ -108,7 +108,6 @@ login::login(QWidget *parent) :
      //注册确认按钮
      connect(ui->toolButton_reg,&QToolButton::clicked,this,[=]()
      {
-
          //所有的errorlabel全为空则正确
          if((ui->username_error_label->text().toUtf8()==""&&
              ui->Nickname_error_label->text().toUtf8()==""&&
@@ -508,8 +507,6 @@ int login::send_logininfo(QString ip,QString port, QString code,QString  token)
                     this->show(); //登录界面显示
                     w->deleteLater();
                 });
-
-
             }else if(code=="001"){
                QMessageBox::warning(this,"result","登录失败，用户名或密码错误");
            }
