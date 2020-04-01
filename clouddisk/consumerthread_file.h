@@ -30,7 +30,6 @@ public:
     QByteArray setMD5Json(QString  user,QString token,QString md5,QString filename);
     //手动添加一个事件循环
     QEventLoop loop;
-    QEventLoop loop1;
 
 
 private:
@@ -43,7 +42,6 @@ signals:
      void clear_filelist();      //发送一个清理上传文件的信号
      void sig_progressvalue(qint64,qint64, dataprocess*);      //发送进度条的值的信号
      void sig_deleteprogress();    //删除进度条的信号
-
 
 
 public slots:

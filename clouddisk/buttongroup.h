@@ -6,6 +6,7 @@
 #include<QSignalMapper>
 #include<QMap>
 #include "logininfoinstance.h"
+#include <QProgressBar>
 
 
 namespace Ui {
@@ -21,9 +22,10 @@ class Buttongroup : public QWidget
 
 public:
     explicit Buttongroup(QWidget *parent = nullptr);
-    //获得显示用户名的label的地址
-    QLabel *getlabelusername();
 
+    QLabel *getlabelusername();  //获得显示用户名的label的地址
+    QLabel *getlabelsize();       //得到显示用户容量大小的标签的地址
+    QProgressBar * getprogress();  //得到进度条的地址
     ~Buttongroup();
 signals:
     void closewindow();   //窗口关闭信号

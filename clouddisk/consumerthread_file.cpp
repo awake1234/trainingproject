@@ -10,7 +10,6 @@ consumerthread_file:: consumerthread_file(QObject *parent) : QObject(parent)
 {
     uploadtask = uploadtask::get_uploadtask_instance();
 
-  //  connect(this,SIGNAL(clear_filelist()),this,SLOT(refreshindex()));
 
 
 
@@ -26,21 +25,13 @@ while(1){
     mutex.lock();
 
     //当上传队列为空或者没有任务可取时阻塞等待
-    while(uploadtask->isEmpty())
+    while(uploadtask->isEmpty()||index==uploadtask->uploadfile_list.size())
     {
         //阻塞等待
         qDebug()<<"consumer thread is waiting because listsize="<<uploadtask->uploadfile_list.size();
         notempty.wait(&mutex);
     }
 
-    //如果所有的认为已经处理完成
-    while(index==uploadtask->uploadfile_list.size())
-    {
-        qDebug()<<"all task has been uploaded";
-        emit clear_filelist();
-        notempty.wait(&mutex);
-        continue;
-    }
 
     qDebug()<<"uploadlist size:"<<uploadtask->uploadfile_list.size();
 
@@ -80,10 +71,9 @@ while(1){
 
     QNetworkReply * reply = manager->post(request,filejson);
     qDebug()<<"manager has post filejson:"<<filejson;
+    connect(reply,&QNetworkReply::finished,&loop,&QEventLoop::quit);
+    loop.exec();
 
-
-    connect(reply,&QNetworkReply::readyRead,[=]()
-    {
        QByteArray data = reply->readAll();
        qDebug()<<"reply read"<<data;
 
@@ -108,13 +98,7 @@ while(1){
            //发送一个信号
           emit sig_loginAgain();
        }
-        reply->deleteLater();
-
-         //退出事件循环
-         loop.exit();
-     });
-         loop.exec();
-
+       reply->deleteLater();
 }
 
 }
@@ -158,8 +142,6 @@ void consumerthread_file::uploadfileslow(uploadfileinfo *info)
     qDebug()<<"send data size"<<data.size();
     qDebug()<<"send data:"<<data.data();          //输出发送的信息
     QNetworkReply *reply  = manager->post(request,data);
-
-
     //返回一些上传过程中的传输的字节大小
     connect(reply,&QNetworkReply::uploadProgress,[=](qint64 bytesent,qint64 byteTotal)
     {
@@ -169,32 +151,29 @@ void consumerthread_file::uploadfileslow(uploadfileinfo *info)
             qDebug()<<"emit sig_progressvalue";
         }
      });
-
-    connect(reply,&QNetworkReply::readyRead,[=]()
+    connect(reply,&QNetworkReply::readyRead,&loop,&QEventLoop::quit);
+    loop.exec();
+    if(reply->error()!=QNetworkReply::NoError)
     {
-        if(reply->error()!=QNetworkReply::NoError)
-        {
             qDebug()<<reply->errorString();
             reply->deleteLater();
             return;
-        }
+    }
 
-        QByteArray data = reply->readAll();
-        reply->deleteLater();
+    QByteArray recvdata = reply->readAll();
+    reply->deleteLater();
 
 
-        if("008"==m_common.getcode(data))
+        if("008"==m_common.getcode(recvdata))
         {
             qDebug()<<info->filename<<"上传成功";
             m_common.writeRecord(login->getuser(),info->filename,"008");
-        }if("009" == m_common.getcode(data) )
+        }if("009" == m_common.getcode(recvdata) )
         {
             qDebug()<<info->filename<<"上传失败";
             m_common.writeRecord(login->getuser(),info->filename,"009");
 
         }
-
-
         uploadtask=uploadtask::get_uploadtask_instance();
         if(uploadtask==nullptr)
         {
@@ -203,9 +182,7 @@ void consumerthread_file::uploadfileslow(uploadfileinfo *info)
         }
         //发送信号删除进度条
         emit sig_deleteprogress();
-        loop1.exit();
-    });
-    loop1.exec();
+
 }
 
 

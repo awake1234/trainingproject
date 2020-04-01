@@ -144,19 +144,33 @@ void MainWindow::managesignals()
 //显示窗口
 void MainWindow::ShowMainWindow()
 {
+    //显示用户的容量大小
+    ui->page_mydisk->getuserspace();
 
+    //得到信号以后 进行UI设置
+    connect(ui->page_mydisk,&mydiskwg::getusedspace,[=]()
+    {
+    //拼接一个字符串显示用户容量大小
+    qint64 size = ui->page_mydisk->usedspace;
+    QString text = QString("%1MB/1024MB").arg(size/(1024*1024));
+    //设置标签的值
+    QLabel *  labeluserspace = ui->title_widget->getlabelsize();
+    labeluserspace->setText(text);
+
+    //设置当前值
+    QProgressBar * userspace = ui->title_widget->getprogress();
+    userspace->setRange(0,1024);
+    userspace->setValue(static_cast<int>(size/(1024*1024))+1);
+    });
 
    //显示用户的文件列表
    ui->page_mydisk->getuserfilecount();
-
-
-
-
-
    //获取设置用户名信息的label的地址
    QLabel * temp = ui->title_widget->getlabelusername();
    logininfoinstance * info = logininfoinstance::getinstance();
    temp->setText(info->getuser());
+
+
 
    this->show();
 

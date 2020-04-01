@@ -52,6 +52,7 @@ public:
     void deal_pv(FileInfo *info);          //下载操作
     void downloadfileAction();             //下载文件的过程
     void dealFilepv(QString md5,QString filename);  //处理服务器端数据库相关数据的修改
+    void deal_sharelink(FileInfo * info);    //分享链接的操作
     //设置处理文件的发送的json包
     QByteArray setdealfilejson(QString username,QString token,QString md5,QString filename);
 
@@ -78,7 +79,7 @@ public:
     QByteArray setcountjson(QString user,QString token);  //设置查询用户文件数量的json包
     QStringList getcountstatus(QByteArray json);    //得到服务器返回的json文件
     void clearfilelist();               //清空文件列表
-
+    void getuserspace();                //获取用户容量
 
     //清除所有的任务
     void clearAllTask();
@@ -89,6 +90,7 @@ public:
     QList<FileInfo * > m_picList;                  //维护一个图片信息的列表
     //公有成员变量
     QAction *m_upload;   //上传文件
+    qint64 usedspace = 0;      //用户容量的大小
 
 public   slots:
     void rightMenu(const QPoint pos);
@@ -107,7 +109,7 @@ signals:
    void startproducer();
    void startconsumer();
    void loginAgainSignal();
-
+   void getusedspace();
 
 private:
 
@@ -127,6 +129,7 @@ private:
     QAction *m_refresh;  //刷新
     QAction *m_Download_ASC;//按下载量升序
     QAction *m_Download_Des; //按下载量降序
+    QAction *m_sharelink;    //分享文件链接给别人
 
     /*线程*/
     QThread * thread_adduploadfiles;  //生产者线程

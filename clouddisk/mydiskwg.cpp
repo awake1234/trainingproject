@@ -12,12 +12,9 @@ mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
     //添加右键菜单的内容
     this->AddMenuAction();
 
-
     //获取上传文件的QNetworkAcessmanager
     m_manager = m_common.getmanager();
-
     m_common.getFileTypeList(); //得到文件类型列表
-
 
 
     for(int i = 0;i<thread_num;++i)
@@ -31,39 +28,20 @@ mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
        consumer_thread[i]->moveToThread(thread_consume_uploadfiles[i]);
     }
 
-    //thread_consumer = new QThread();
-    //consumerthread_file *  consumer = new consumerthread_file;
-    //consumer->moveToThread(thread_consumer);
-
-
-
     //消费者线程启动后执行相应的操作
     for(int i = 0;i<thread_num;++i)
     {
       connect(this,&mydiskwg::startconsumer,consumer_thread[i],&consumerthread_file::uploadfilesAction);
       connect(consumer_thread[i],SIGNAL(sig_progressvalue(qint64,qint64,dataprocess *)),this,SLOT(update_progress_value(qint64, qint64 , dataprocess *)),Qt::BlockingQueuedConnection);
       connect(consumer_thread[i],SIGNAL(sig_deleteprogress()),this,SLOT(delete_finishedfile()),Qt::BlockingQueuedConnection);
-   }
-
-
-
-    //通过自定义信号来启动消费者线程
-    //connect(this,&mydiskwg::startconsumer,consumer,&consumerthread_file::uploadfilesAction);
-    //connect(consumer,SIGNAL(sig_progressvalue(qint64,qint64,dataprocess *)),this,SLOT(update_progress_value(qint64, qint64 , dataprocess *)));
-    //connect(consumer,SIGNAL(sig_deleteprogress()),this,SLOT(delete_finishedfile()));
-
+    }
 
     for(int i = 0;i<thread_num;i++)
     {
-     //启动线程
-       thread_consume_uploadfiles[i]->start();
-       qDebug()<<"thread"<<i<<"has been started";
+       //启动线程
+      thread_consume_uploadfiles[i]->start();
+      qDebug()<<"thread"<<i<<"has been started";
     }
-
-
-    //thread_consumer->start();
-    //qDebug()<<"thread has been started";
-
 
 }
 
@@ -94,10 +72,16 @@ void mydiskwg::initlistwidget()
     {
        if(selected->text()=="上传文件")
        {
+           emit startconsumer();
            //执行上传文件操作
            adduploadfiles();
-           emit startconsumer();
+           //唤醒所有的线程
+           mutex.lock();
+           notempty.wakeAll();
+           qDebug()<<"producer thread has waken up all consumer threads";
+           mutex.unlock();
        }
+
     });
 
 }
@@ -110,11 +94,14 @@ void mydiskwg::AddMenuAction()
     m_download = new QAction("下载",this);
     m_delete = new QAction("删除",this);
     m_share = new QAction("分享",this);
+    m_sharelink = new QAction("分享链接",this);
     m_property = new QAction("属性",this);
+
     m_menu1->addAction(m_download);
     m_menu1->addAction(m_delete);
     m_menu1->addAction(m_share);
-    m_menu1->addAction(m_property);
+    m_menu1->addAction(m_sharelink);
+    m_menu1->addAction(m_property);   
 
 
     m_empty = new mymenu(this);
@@ -122,6 +109,9 @@ void mydiskwg::AddMenuAction()
     m_refresh = new QAction("刷新",this);
     m_Download_ASC = new QAction("按文件大小升序",this);
     m_Download_Des = new QAction("按文件大小降序",this);
+
+
+
     m_empty->addAction(m_upload);
     m_empty->addAction(m_refresh);
     m_empty->addAction(m_Download_ASC);
@@ -133,8 +123,14 @@ void mydiskwg::AddMenuAction()
     connect(m_upload,&QAction::triggered,[=]()
     {
          //执行上传文件操作
-        adduploadfiles();
         emit startconsumer();
+        adduploadfiles();
+        //唤醒所有的线程
+        mutex.lock();
+        notempty.wakeAll();
+        qDebug()<<"producer thread has waken up all consumer threads";
+        mutex.unlock();
+
     });
 
     //刷新界面
@@ -263,6 +259,13 @@ void mydiskwg::dealselectedfile(QString cmd)
     {
         deal_pv(info);
     }
+
+    if(cmd=="分享链接")
+    {
+        deal_sharelink(info);
+    }
+
+
 
 
 
@@ -537,6 +540,16 @@ void mydiskwg::dealFilepv(QString md5, QString filename)
 
 }
 
+
+//分享链接给好友的操作
+void mydiskwg::deal_sharelink(FileInfo *info)
+{
+
+
+
+
+}
+
 //设置分享的json包
 QByteArray mydiskwg::setdealfilejson(QString username, QString token, QString md5, QString filename)
 {
@@ -677,30 +690,27 @@ void mydiskwg::getuserfilelist(mydiskwg::DISPLAY cmd)
         return;
     }
 
-    connect(reply,&QNetworkReply::readyRead,[=]()
+    connect(reply,&QNetworkReply::readyRead,[=](){
+    QByteArray data = reply->readAll();
+
+    if("111"==m_common.getcode(data))
     {
-        QByteArray data = reply->readAll();
+        QMessageBox::warning(this,"账户异常","请重新登录");
+        emit  loginAgainSignal();   //发送重新登录的信号
+        return;
+    }
 
-        if("111"==m_common.getcode(data))
-        {
-            QMessageBox::warning(this,"账户异常","请重新登录");
-            emit  loginAgainSignal();   //发送重新登录的信号
+      //不是错误码就处理文件列表json信息
+     if("015"!=m_common.getcode(data))
+     {
+        getFileJsonInfo(data);  //解析文件列表json信息，放入文件列表中
 
-            return;
-        }
-
-        //不是错误码就处理文件列表json信息
-        if("015"!=m_common.getcode(data))
-        {
-            getFileJsonInfo(data);  //解析文件列表json信息，放入文件列表中
-
-            //继续获取用户文件列表
-            getuserfilelist(cmd);
-
-            qDebug()<<"getuserfilelist:"<<m_fileList.size();
-        }
+        //继续获取用户文件列表
+        getuserfilelist(cmd);
+        qDebug()<<"getuserfilelist:"<<m_fileList.size();
+      }
         reply->deleteLater();
-});
+      });
 }
 
 //显示文件Item
@@ -825,6 +835,11 @@ void mydiskwg::getuserfilecount(mydiskwg::DISPLAY cmd)
             emit loginAgainSignal();  //重新登录
         }
  });
+
+        //重新获取用户容量
+        this->getuserspace();
+        //发送设置用户容量的信号
+        emit getusedspace();
 }
 
 QByteArray mydiskwg::setcountjson(QString user, QString token)
@@ -867,6 +882,64 @@ void mydiskwg::clearfilelist()
         delete  info;
     }
 
+}
+
+
+//用来获取用户的容量
+void  mydiskwg::getuserspace()
+{
+    //组织需要发送的json字符串
+    logininfoinstance  * login = logininfoinstance::getinstance();
+
+    QByteArray data = setcountjson(login->getuser(),login->gettoken());
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setHeader(QNetworkRequest::ContentLengthHeader,data.size());
+
+    //cmd=size获取用户已使用文件的大小
+    QString url = QString("http://%1:%2/myfiles?cmd=size").arg(login->getip()).arg(login->getport());
+    request.setUrl(QUrl(url));
+
+    QNetworkReply * reply = m_manager->post(request,data);
+
+
+    connect(reply,&QNetworkReply::readyRead,[=]() mutable
+    {
+       if(reply->error()!=QNetworkReply::NoError)
+       {
+           qDebug()<<"reply get an error";
+           return;
+       }
+
+       QByteArray ret = reply->readAll();
+       /*解析json
+        * 结果正确：110
+        * 口令验证错误：111
+        * 其他错误：12
+       {
+         "code":10
+         "size":xxx
+       }
+       */
+       QJsonDocument doc = QJsonDocument::fromJson(ret);
+       if(doc.isObject())
+       {
+           QString code = doc.object().value("code").toString();
+           if(code=="110")
+           {
+              usedspace = doc.object().value("size").toInt();
+              emit getusedspace();
+              qDebug()<<"获取用户容量成功";
+           }else if (code=="111")
+           {
+               qDebug()<<"口令验证失败，请重新登录";
+               emit loginAgainSignal();  //发送重新登录信号
+           }else{
+               qDebug()<<"获取用户容量失败";
+           }
+       }
+     });
 }
 
 //清除所有的任务

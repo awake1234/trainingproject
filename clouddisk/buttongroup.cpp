@@ -82,7 +82,19 @@ Buttongroup::Buttongroup(QWidget *parent) :
 
 QLabel *Buttongroup::getlabelusername()
 {
-   return   labelusername;
+    return   labelusername;
+}
+
+
+QLabel *Buttongroup::getlabelsize()
+{
+    return ui->label_userspace;
+}
+
+
+QProgressBar *Buttongroup::getprogress()
+{
+    return ui->userspace;
 }
 
 Buttongroup::~Buttongroup()

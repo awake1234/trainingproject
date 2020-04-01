@@ -141,11 +141,7 @@ int uploadtask::appendtolist(QString filepath)
     //解锁
     mutex.unlock();
 
-    //唤醒所有的线程
-    mutex.lock();
-    notempty.wakeAll();
-    qDebug()<<"producer thread has waken up all consumer threads";
-    mutex.unlock();
+
     return 0;
 }
 
