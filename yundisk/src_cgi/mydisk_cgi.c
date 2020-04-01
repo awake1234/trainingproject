@@ -420,13 +420,84 @@ END:
 }
 
 
+//获取用户空间
+int getuserspace(char * username)
+{
+	int ret = 0;
+	char sql_cmd[SQL_MAX_LEN]={0};
+	MYSQL * conn = NULL;
+    char * out = NULL;
+	char * out2 = NULL;
+	cJSON * root = NULL;
+
+	//连接数据库
+    conn = msql_conn(mysql_user,mysql_pwd,mysql_db);
+    if (conn == NULL)
+    {
+        LOG(MYFILES_LOG_MODULE, MYFILES_LOG_PROC, "msql_conn err\n");
+        ret = -1;
+        goto END;
+    }
+
+    mysql_query(conn, "set names utf8");
+	//查询出所有文件数量的总和
+	sprintf(sql_cmd,"select SUM(size) from file_info where md5 in (select md5 from user_file_list where user='%s')",username);
+
+
+    char tmp[512] = {0};
+    ret = process_result_one(conn,sql_cmd,tmp);
+    if(ret!=0)
+    {
+    	LOG(MYFILES_LOG_MODULE,MYFILES_LOG_PROC,"%s 操作失败\n",sql_cmd);
+    	goto END;
+    }
+
+	//将获取的结果转换成long型
+	long size = atol(tmp);
+
+	//构造json字符串
+	root = cJSON_CreateObject();
+    cJSON_AddStringToObject(root,"code","110");   //成功的code
+    cJSON_AddNumberToObject(root, "size",size);
+ 
+    out = cJSON_Print(root);
+	
+
+
+
+END:
+	if(ret==0)
+	{
+		printf(out); //给前端返回结构
+	    free(out);
+	}else{
+		out2 = NULL;
+		out2 = return_status("112"); //返回错误结果
+	}
+	if(out2!=NULL)
+	{
+		printf(out2);
+	}
+
+	if(conn!=NULL)
+	{
+		mysql_close(conn);
+	}
+
+	if(root!=NULL)
+	{
+		cJSON_Delete(root);
+	}
+
+     return ret;
+}
+
+
+
 int main()
 {
    char cmd[20];  //保存用户的命令
    
-   
-   //1.读取配置文件信息
-//	read_cfg();
 
    while(FCGI_Accept()>=0)
    {
@@ -492,9 +563,27 @@ int main()
 			  continue;
            }
 
-
             //给前端返回结果
            return_count_status(num,ret);
+         }else if(strcmp(cmd,"size")==0)               //获得用户的容量
+		 {
+            //解析json包
+			get_count_json_info(buf,user,token);     //获取用户名和token口令
+            ret = verify_token("user_token",user,token);
+			if(ret!=0)
+			{
+				LOG(MYFILES_LOG_MODULE,MYFILES_LOG_PROC,"verify token error\n");
+				//给前端返回错误结果
+				char * out = return_status("111");
+				if(out!=NULL)
+				{
+					printf(out);  //给前端返回结果
+					free(out);
+				}
+          }else{
+			  //获取用空间大小
+              getuserspace(user);
+		  }
          }else
          {  //获取用户文件信息 127.0.0.1:80/myfiles&cmd=normal
             //按下载量升序 127.0.0.1:80/myfiles?cmd=pvasc
