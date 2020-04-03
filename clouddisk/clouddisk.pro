@@ -46,7 +46,9 @@ SOURCES += \
     sharefilelist.cpp \
     ranklist.cpp \
     downloadtask.cpp \
-    downloadlayout.cpp
+    downloadlayout.cpp \
+    createlink.cpp \
+    linkdownload.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -69,7 +71,9 @@ HEADERS += \
     sharefilelist.h \
     ranklist.h \
     downloadtask.h \
-    downloadlayout.h
+    downloadlayout.h \
+    createlink.h \
+    linkdownload.h
 
 FORMS += \
         mainwindow.ui \
@@ -82,7 +86,9 @@ FORMS += \
     fileproperty.ui \
     mypicwg.ui \
     sharefilelist.ui \
-    ranklist.ui
+    ranklist.ui \
+    createlink.ui \
+    linkdownload.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -23,9 +23,6 @@ public:
     void uploadfilesAction();
 
 
-
-
-
     //设置MD5信息的JSON包
     QByteArray setMD5Json(QString  user,QString token,QString md5,QString filename);
     //手动添加一个事件循环

@@ -176,6 +176,11 @@ void mydiskwg::AddMenuAction()
     {
         this->dealselectedfile("分享");
     });
+
+    connect(m_sharelink,&QAction::triggered,[=]()
+    {
+       this->dealselectedfile("分享链接");
+    });
 }
 
 
@@ -544,10 +549,69 @@ void mydiskwg::dealFilepv(QString md5, QString filename)
 //分享链接给好友的操作
 void mydiskwg::deal_sharelink(FileInfo *info)
 {
+    //显示窗口
+    createlink * mylink = new createlink();
+    mylink->show();
 
+    //默认只显示连接没有提取码
+    //生成不带提取码的链接
+    QString filepath = info->url;
+    logininfoinstance * login = logininfoinstance::getinstance();
+    //拼接连接
+    QString sharelink = QString("%1?shareuser=%2&md5=%3").arg(filepath).arg(login->getuser()).arg(info->md5);
+    //对连接进行加密
+    QByteArray encode_link(sharelink.toLocal8Bit());
+    QByteArray link_base64 = encode_link.toBase64(QByteArray::Base64UrlEncoding|QByteArray::OmitTrailingEquals);
+    QString link(link_base64);
+    //设置到界面上
+    mylink->setsharelink_code(link);
 
+    //查看是否选择了带提取码
+    //被选中了
+    connect(mylink,&createlink::buttonchecked,[=](bool ischecked)
+    {
+        if(ischecked==true)
+        {
+            //生成带提取码的链接
+            QString filepath = info->url;
 
-
+            //生成随机的四位的密码
+            qsrand(QTime::currentTime().second() * 1000 + QTime::currentTime().msec());
+            QString sharecode = nullptr;
+            for(int i = 0;i<4;i++)
+            {
+                int flg = qrand()%4;
+                switch (flg) {
+                case 0: sharecode+='0'+qrand()%10;break;   //数字
+                case 1: sharecode+='a'+qrand()%26;break;   //小写字母
+                case 2: sharecode+='A'+qrand()%26;break;    //大写字母
+                default:sharecode+='z';
+              }
+            }
+            logininfoinstance * login = logininfoinstance::getinstance();
+            //拼接连接
+            QString sharelink = QString("%1?sharecode=%2&shareuser=%3&md5=%4").arg(filepath).arg(sharecode).arg(login->getuser()).arg(info->md5);
+            //对连接进行加密
+            QByteArray encode_link(sharelink.toLocal8Bit());
+            QByteArray link_base64 = encode_link.toBase64(QByteArray::Base64UrlEncoding|QByteArray::OmitTrailingEquals);
+            QString link(link_base64);
+            //设置到界面上
+            mylink->setsharelink_code(link,sharecode);
+         }else{
+            //生成不带提取码的链接
+            QString filepath = info->url;
+            logininfoinstance * login = logininfoinstance::getinstance();
+            //拼接连接
+            QString sharelink = QString("%1?shareuser=%2&md5=%3").arg(filepath).arg(login->getuser()).arg(info->md5);
+            qDebug()<<"sharelink"<<sharelink;
+            //对连接进行加密
+            QByteArray encode_link(sharelink.toLocal8Bit());
+            QByteArray link_base64 = encode_link.toBase64(QByteArray::Base64UrlEncoding|QByteArray::OmitTrailingEquals);
+            QString link(link_base64);
+            //设置到界面上
+            mylink->setsharelink_code(link);
+        }
+    });
 }
 
 //设置分享的json包
@@ -613,6 +677,221 @@ QListWidget *mydiskwg::getfilelistwidget()
 }
 
 
+//检测到鼠标进入到界面
+void mydiskwg::enterEvent(QEvent *)
+{
+
+        //检测剪切板中是否有内容
+        QClipboard *clipboard = QApplication::clipboard();
+        //如果为空
+        if(clipboard->text()==nullptr)
+        {
+            qDebug()<<"clipbard is empty";
+            return;
+        }
+        //"link:%1\npassword:%2\n"
+        //取出分享的连接
+        QString text = clipboard->text();
+        //查找链接所在的位置
+        int index = text.indexOf("link",0);
+        index+=5;
+
+        //查找链接结束的位置
+        int end = text.indexOf("password",index);
+        end--;    //此时指向/n的位置
+
+        //得到整体的url
+        QString url = nullptr;
+        for(int i = index;i<end;i++)
+        {
+            url.append(text.at(i));
+        }
+
+        //解析url
+        QByteArray filelink = QByteArray::fromBase64(url.toUtf8());
+
+        QString filelink_str(filelink);
+        qDebug()<<"完整的url:"<<filelink_str;
+
+        //如果是个链接
+        if(m_common.isMatch(LINK_MATCH,filelink_str))
+        {
+            linkdownload * mylinkdownload = new linkdownload();
+
+            //获取用户名
+            int index_username = filelink_str.indexOf("shareuser",0);
+            index_username+=10;
+            int index_md5 = filelink_str.indexOf("md5",index_username);
+            //解析得到md5
+            QString md5=nullptr;
+            int tempindex = index_md5+4;
+            for(int i = tempindex;i<filelink_str.size();i++)
+            {
+                md5.append(filelink_str.at(i));
+            }
+            qDebug()<<"md5:"<<md5;
+
+            //解析得到用户名
+            index_md5--;
+            QString shareuser = nullptr;
+            for(int i = index_username;i<index_md5;i++)
+            {
+                shareuser.append(filelink_str.at(i));
+            }
+            qDebug()<<"shaeruser:"<<shareuser;
+
+            //如果分享的用户和当前用户一样就返回
+            logininfoinstance * login = logininfoinstance::getinstance();
+            if(shareuser==login->getuser())
+            {
+                return;
+            }
+
+            //检测是否带有提取码
+            QString code = nullptr;
+            int index_code = filelink_str.indexOf("sharecode",0);
+            //如果没有code
+            int index_fileurl_end=0;
+            if(index_code==-1)
+            {
+              index_fileurl_end = filelink_str.indexOf("shareuser",0);
+            }else{
+              index_fileurl_end = filelink_str.indexOf("sharecode",0);
+            }
+            //提取出get请求的文件链接，不带参数
+            QString  getfileurl = nullptr;
+            for(int i = 0;i<index_fileurl_end-1;i++)
+            {
+                getfileurl.append(filelink_str.at(i));
+            }
+            qDebug()<<"不带参数的url"<<getfileurl;
+            //解析的得到文件名
+
+            //找到最后一个'/'
+            int index_filename=getfileurl.lastIndexOf("/");
+            index_filename++;
+            qDebug()<<"index_filename"<<index_filename;
+            QString filename = nullptr;
+            for(int i = index_filename;i<getfileurl.size();i++)
+            {
+                filename.append(getfileurl.at(i));
+            }
+            qDebug()<<"filename"<<filename;
+
+
+            shareuser.append("给你分享了链接");
+            //设置界面
+            mylinkdownload->setcontent(url,shareuser);
+
+
+            //没有提取码
+            if(index_code==-1)
+            {
+                //隐藏提取码输入框
+                mylinkdownload->hidecode(true);
+
+                //执行下载操作
+                //检测用户输入的密码是否正确
+                connect(mylinkdownload,&linkdownload::sig_download,[=]()
+                {
+                       //打开文件存储位置
+                       QString filepath =  QFileDialog::getSaveFileName(this,tr("select one dictory to save"));
+                       //执行下载操作
+                       QFile * file = new QFile(filepath);  //文件指针分配空间
+                       if(!file->open(QIODevice::WriteOnly))
+                       { //如果打开文件失败，则删除 file，并使 file 指针为 NULL，然后返回
+                          qDebug() << "file open error";
+                           delete file;
+                           file = nullptr;
+                           return -2;
+                       }
+
+                      QNetworkReply * reply = m_manager->get(QNetworkRequest(getfileurl));
+                      connect(reply,&QNetworkReply::finished,[=]()
+                      {
+                          QByteArray data = reply->readAll();
+                          file->write(data);
+                          QMessageBox::information(this,"下载结果","恭喜你下载成功");
+                      });
+                });
+
+                //没有提取码 文件进行转存
+                //转存处理
+                connect(mylinkdownload,&linkdownload::sigSave,[=]()
+                {
+                     //文件转存
+                    this->SavefileLink(login->getuser(),filename,md5);
+                });
+
+            }else{
+                //提取出code
+                index_code+=10;
+                for(int i =index_code;i<(index_code+4);i++)
+                {
+                    code.append(filelink_str.at(i));
+                }
+                 //显示操作
+                qDebug()<<"code"<<code;
+
+
+            //检测用户输入的密码是否正确
+            connect(mylinkdownload,&linkdownload::sig_download,[=]()
+            {
+               QString inputcode = mylinkdownload->getcode();
+               if(inputcode!=code)
+               {
+                   QMessageBox::warning(this,"code error","对不起，您输入的提取码错误请重新输入");
+               }else{
+                   //打开文件存储位置
+                   QString filepath =  QFileDialog::getSaveFileName(this,tr("select one dictory to save"));
+                   //执行下载操作
+                   QFile * file = new QFile(filepath);  //文件指针分配空间
+                   if(!file->open(QIODevice::WriteOnly))
+                   { //如果打开文件失败，则删除 file，并使 file 指针为 NULL，然后返回
+                      qDebug() << "file open error";
+
+                       delete file;
+                       file = nullptr;
+                       return -2;
+                   }
+
+                  QNetworkReply * reply = m_manager->get(QNetworkRequest(getfileurl));
+                  connect(reply,&QNetworkReply::finished,[=]()
+                  {
+                      QByteArray data = reply->readAll();
+                      file->write(data);
+                      QMessageBox::information(this,"下载结果","恭喜你下载成功");
+
+                  });
+              }
+           });
+            //转存处理
+            connect(mylinkdownload,&linkdownload::sigSave,[=]()
+            {
+                //检查密码是否正确
+                QString inputcode = mylinkdownload->getcode();
+                if(inputcode!=code)
+                {
+                    QMessageBox::warning(this,"code error","对不起，您输入的提取码错误请重新输入");
+                }else{
+                    //文件转存
+                    this->SavefileLink(login->getuser(),filename,md5);
+
+                 }
+
+            });
+
+        }
+
+            mylinkdownload->show();
+            //清除剪切板
+            clipboard->clear();
+
+      }
+
+}
+
+
 
 //将文件添加到上传列表中
 void mydiskwg::adduploadfiles()
@@ -637,7 +916,7 @@ void mydiskwg::adduploadfiles()
     }
 
 
-    return;
+     return;
 }
 
 //获取用户文件列表
@@ -939,8 +1218,64 @@ void  mydiskwg::getuserspace()
                qDebug()<<"获取用户容量失败";
            }
        }
-     });
+    });
 }
+
+
+//通过链接转存文件
+void mydiskwg::SavefileLink(QString user, QString filename, QString md5)
+{
+    logininfoinstance * login  = logininfoinstance::getinstance();
+
+     QByteArray data = setfilejson(user,filename,md5);
+     QNetworkRequest request;
+     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+     request.setHeader(QNetworkRequest::ContentLengthHeader,data.size());
+
+     QString url = QString("http://%1:%2/dealsharefile?cmd=save").arg(login->getip()).arg(login->getport());
+     request.setUrl(QUrl(url));
+
+     QNetworkReply * reply = m_manager->post(request,data);
+     connect(reply,&QNetworkReply::readyRead,[=]()
+     {
+
+         if(reply->error()!=QNetworkReply::NoError)
+         {
+             qDebug()<<reply->errorString();
+             reply->deleteLater();
+             return;
+         }
+
+         QByteArray data = reply->readAll();
+         reply->deleteLater();
+
+         if("020"==m_common.getcode(data))
+         {
+            QMessageBox::information(this,"操作成功","此文件转存成功");
+         }else if("021"==m_common.getcode(data))
+         {
+             QMessageBox::information(this,"操作失败","此文件已经在您的列表中");
+         }else if ("022"==m_common.getcode(data)) {
+             QMessageBox::warning(this,"操作失败","转存文件操作失败");
+         }
+     });
+     return;
+
+}
+
+QByteArray  mydiskwg::setfilejson(QString user, QString filename, QString md5)
+{
+    QMap<QString,QVariant> filejson;
+    filejson.insert("user",user);
+    filejson.insert("md5",md5);
+    filejson.insert("filename",filename);
+
+    QJsonDocument doc = QJsonDocument::fromVariant(filejson);
+    return doc.toJson();
+
+}
+
+
 
 //清除所有的任务
 void mydiskwg::clearAllTask()

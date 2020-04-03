@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include<QMouseEvent>
+#include <QClipboard>
+#include "linkdownload.h"
+#include "common.h"
+#include <QString>
+
 
 namespace Ui {
 class MainWindow;

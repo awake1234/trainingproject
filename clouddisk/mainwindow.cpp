@@ -10,13 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //去除边框
     this->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-
     //将title_widget的父对象设置为mainwindow
     ui->title_widget->setParent(this);
 
-
     managesignals();
-
 
 }
 
@@ -130,11 +127,7 @@ void MainWindow::managesignals()
            ui->stackedWidget->setCurrentIndex(2);  //切换到分享界面
        }
 
-
-
-
     });
-
 
     connect(ui->tabWidget,SIGNAL(tabBarClicked(int)),this,SLOT(setmytabwig(int)));
 
@@ -170,9 +163,12 @@ void MainWindow::ShowMainWindow()
    logininfoinstance * info = logininfoinstance::getinstance();
    temp->setText(info->getuser());
 
-
-
    this->show();
+
+
+
+
+
 
 }
 
@@ -186,6 +182,8 @@ void MainWindow::loginagain()
     //清除所有的传输任务
     ui->page_mydisk->clearAllTask();
 }
+
+
 
 
 //重写鼠标点击事件

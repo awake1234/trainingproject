@@ -25,7 +25,7 @@
 #define EMail_MATCH     "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
 #define IP_MATCH        "((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))"
 #define PORT_MATCH      "^[1-9]$|(^[1-9][0-9]$)|(^[1-9][0-9][0-9]$)|(^[1-9][0-9][0-9][0-9]$)|(^[1-6][0-5][0-5][0-3][0-5]$)"
-
+#define LINK_MATCH      "(https?|ftp|file):// [-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]"
 
 #define CONFILE_PATH  "conf/config.json"    //定义保存配置文件的路径
 #define FILETYPE_DIR  "conf/filetype"  //存放文件类型图片的目录

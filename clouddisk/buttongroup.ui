@@ -306,6 +306,9 @@
    </item>
    <item>
     <widget class="QLabel" name="label_userspace">
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 85, 0);</string>
+     </property>
      <property name="text">
       <string>500/1024MB</string>
      </property>

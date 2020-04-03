@@ -13,6 +13,8 @@
 #include<QJsonArray>
 #include "fileproperty.h"
 #include "downloadtask.h"
+#include "createlink.h"
+#include "linkdownload.h"
 
 
 
@@ -81,6 +83,8 @@ public:
     void clearfilelist();               //清空文件列表
     void getuserspace();                //获取用户容量
 
+    void SavefileLink(QString user,QString filename,QString md5);  //通过链接转存文件
+    QByteArray setfilejson(QString user,QString filename,QString md5);
     //清除所有的任务
     void clearAllTask();
 
@@ -111,6 +115,8 @@ signals:
    void loginAgainSignal();
    void getusedspace();
 
+protected:
+    void enterEvent(QEvent *);
 private:
 
 
