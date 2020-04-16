@@ -16,32 +16,8 @@ mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
     m_manager = m_common.getmanager();
     m_common.getFileTypeList(); //得到文件类型列表
 
-
-    for(int i = 0;i<thread_num;++i)
-    {
-       QThread * thread = new QThread;
-       consumerthread_file * temp = new consumerthread_file();
-       //加入到数组中
-       thread_consume_uploadfiles.insert(i,thread);
-       consumer_thread.insert(i,temp);
-       //将当前对象放到消费者线程中处理
-       consumer_thread[i]->moveToThread(thread_consume_uploadfiles[i]);
-    }
-
-    //消费者线程启动后执行相应的操作
-    for(int i = 0;i<thread_num;++i)
-    {
-      connect(this,&mydiskwg::startconsumer,consumer_thread[i],&consumerthread_file::uploadfilesAction);
-      connect(consumer_thread[i],SIGNAL(sig_progressvalue(qint64,qint64,dataprocess *)),this,SLOT(update_progress_value(qint64, qint64 , dataprocess *)),Qt::BlockingQueuedConnection);
-      connect(consumer_thread[i],SIGNAL(sig_deleteprogress()),this,SLOT(delete_finishedfile()),Qt::BlockingQueuedConnection);
-    }
-
-    for(int i = 0;i<thread_num;i++)
-    {
-       //启动线程
-      thread_consume_uploadfiles[i]->start();
-      qDebug()<<"thread"<<i<<"has been started";
-    }
+    //定期检查任务
+    checktask();
 
 }
 
@@ -72,16 +48,9 @@ void mydiskwg::initlistwidget()
     {
        if(selected->text()=="上传文件")
        {
-           emit startconsumer();
-           //执行上传文件操作
+           //上传文件操作
            adduploadfiles();
-           //唤醒所有的线程
-           mutex.lock();
-           notempty.wakeAll();
-           qDebug()<<"producer thread has waken up all consumer threads";
-           mutex.unlock();
        }
-
     });
 
 }
@@ -122,14 +91,8 @@ void mydiskwg::AddMenuAction()
     //设置具体的事件实现
     connect(m_upload,&QAction::triggered,[=]()
     {
-         //执行上传文件操作
-        emit startconsumer();
+        //执行上传文件操作
         adduploadfiles();
-        //唤醒所有的线程
-        mutex.lock();
-        notempty.wakeAll();
-        qDebug()<<"producer thread has waken up all consumer threads";
-        mutex.unlock();
 
     });
 
@@ -445,6 +408,11 @@ void mydiskwg::downloadfileAction()
 
 
     if(downloadtask->isEmpty())
+    {
+        return;
+    }
+
+    if(downloadtask->isdownload())
     {
         return;
     }
@@ -902,7 +870,6 @@ void mydiskwg::adduploadfiles()
     uploadtask = uploadtask::get_uploadtask_instance();
 
 
-
     for(int i = 0;i<filepath.size();i++)
     {
         int ret = uploadtask->appendtolist(filepath.at(i));
@@ -915,8 +882,181 @@ void mydiskwg::adduploadfiles()
         }
     }
 
+    return;
+}
 
-     return;
+void mydiskwg::uploadFilesAction()
+{
+    uploadtask = uploadtask::get_uploadtask_instance();
+    if(uploadtask->isEmpty())
+    {
+        return;
+    }
+    if(uploadtask->isupload())
+    {
+        return;
+    }
+
+    uploadfileinfo * uploadfileinfo = uploadtask->takeTask();
+
+    //获取保存用户登录信息的实例
+    logininfoinstance *login = logininfoinstance::getinstance();
+    QByteArray filejson = setMD5Json(login->getuser(),login->gettoken(),uploadfileinfo->md5,uploadfileinfo->filename);
+
+    //创建一个新的发送的manager
+    m_manager = new QNetworkAccessManager();
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setHeader(QNetworkRequest::ContentLengthHeader,filejson.size());  //设置长度
+
+    QString url = QString("http://%1:%2/md5").arg(login->getip()).arg(login->getport());
+    qDebug()<<"md5 url is"<<url;
+    request.setUrl(url);
+
+
+
+    QNetworkReply * reply = m_manager->post(request,filejson);
+    qDebug()<<"manager has post filejson:"<<filejson;
+    connect(reply,&QNetworkReply::readyRead,[=](){
+
+       QByteArray data = reply->readAll();
+
+       QString status = m_common.getcode(data);
+       if("007"==status)
+       {
+         qDebug()<<uploadfileinfo->filename<<"秒传失败";
+         //调用真正的上传文件的函数
+         this->uploadfileslow(uploadfileinfo);
+       }else if("006"==status)
+       {
+         qDebug()<<uploadfileinfo->filename<<"秒传成功";
+         //删除进度条
+         uploadtask->delete_uploadtask();
+
+       }else if("005"==status)
+       {
+          qDebug()<<uploadfileinfo->filename<<"文件已经存在";
+          //发送信号删除进度条
+          uploadtask->delete_uploadtask();
+       }else {
+           //发送重新登录的信号
+          emit loginAgainSignal();
+       }
+       reply->deleteLater();
+    });
+}
+
+
+//打包MD5的json包
+QByteArray mydiskwg::setMD5Json(QString user, QString token, QString md5, QString filename)
+{
+        QMap<QString,QVariant> filejson;
+        filejson.insert("user",user);
+        filejson.insert("token",token);
+        filejson.insert("md5",md5);
+        filejson.insert("filename",filename);
+
+        QJsonDocument doc = QJsonDocument::fromVariant(filejson);
+        return doc.toJson();
+
+
+}
+
+//慢速上传文件的操作
+void mydiskwg::uploadfileslow(uploadfileinfo * info)
+{
+    logininfoinstance * login = logininfoinstance::getinstance();
+    QString boundry = m_common.getBoundry();
+
+    //组织要发送的数据
+    QByteArray data;
+
+    data.append(boundry);
+    data.append("\r\n");
+
+    //添加一些要传输的信息
+    data.append("Content-Disposition:form-data;");
+    data.append(QString("user=\"%1\"").arg(login->getuser()));
+    data.append(QString("filename=\"%1\"").arg(info->filename));
+    data.append(QString("md5=\"%1\"").arg(info->md5));
+    data.append(QString("size=%1").arg(info->filesize));
+    data.append("\r\n");
+
+    data.append("Content-Type: multipart/form-data");
+    data.append("\r\n");
+    data.append("\r\n");
+
+    //这里是真正的文件的内容
+    data.append(info->filepoint->readAll());
+    data.append("\r\n");
+
+    data.append(boundry);
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"multipart/form-data"); //传输文件要使用form-data格式
+    QString url = QString("http://%1:%2/upload").arg(login->getip()).arg(login->getport());
+    request.setUrl(QUrl(url));
+
+    qDebug()<<"send data size"<<data.size();
+    qDebug()<<"send data:"<<data.data();          //输出发送的信息
+    QNetworkReply *reply  = m_manager->post(request,data);
+    //返回一些上传过程中的传输的字节大小
+    connect(reply,&QNetworkReply::uploadProgress,[=](qint64 bytesent,qint64 byteTotal)
+    {
+        if(byteTotal!=0)
+        {
+            update_progress_value(bytesent,byteTotal,info->dp);
+        }
+     });
+    connect(reply,&QNetworkReply::readyRead,[=]()
+    {
+       if(reply->error()!=QNetworkReply::NoError)
+        {
+            qDebug()<<reply->errorString();
+            reply->deleteLater();
+            return;
+        }
+
+        QByteArray recvdata = reply->readAll();
+        reply->deleteLater();
+
+
+        if("008"==m_common.getcode(recvdata))
+        {
+            qDebug()<<info->filename<<"上传成功";
+            m_common.writeRecord(login->getuser(),info->filename,"008");
+        }if("009" == m_common.getcode(recvdata) )
+        {
+            qDebug()<<info->filename<<"上传失败";
+            m_common.writeRecord(login->getuser(),info->filename,"009");
+
+        }
+        uploadtask=uploadtask::get_uploadtask_instance();
+        if(uploadtask==nullptr)
+        {
+            qDebug()<<"get uploadtask fail";
+            return;
+        }
+        //发送信号删除进度条
+         uploadtask->delete_uploadtask();
+       });
+
+
+}
+
+//定时检查处理任务队列中的任务
+void mydiskwg::checktask()
+{
+    m_uploadFileTimer.start(500);
+    connect(&m_uploadFileTimer,&QTimer::timeout,[=]()
+    {
+       this->uploadFilesAction();
+    });
+    m_downloadFileTimer.start(500);
+    {
+        this->downloadfileAction();
+    }
 }
 
 //获取用户文件列表
@@ -1281,7 +1421,6 @@ QByteArray  mydiskwg::setfilejson(QString user, QString filename, QString md5)
 void mydiskwg::clearAllTask()
 {
    uploadtask = uploadtask::get_uploadtask_instance();
-
    uploadtask->clearlist();
 
    DownloadTask * downloadtask = DownloadTask::getInstance();

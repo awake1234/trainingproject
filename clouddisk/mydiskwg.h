@@ -9,12 +9,15 @@
 #include<QFileDialog>
 #include "uploadtask.h"
 #include <QThread>
-#include "consumerthread_file.h"
+#include <QTimer>
 #include<QJsonArray>
 #include "fileproperty.h"
 #include "downloadtask.h"
 #include "createlink.h"
 #include "linkdownload.h"
+#include "logininfoinstance.h"
+#include<QNetworkReply>
+#include<QMessageBox>
 
 
 
@@ -65,6 +68,10 @@ public:
     void Adduploaditem(QString iconpath=":/ico/images/upload.png",QString text = "上传文件");
     void adduploadfiles();
     int  appendtolist(QString filepath);
+    void uploadFilesAction();
+    QByteArray setMD5Json(QString  user,QString token,QString md5,QString filename);
+    void uploadfileslow(uploadfileinfo * info);
+    void checktask();
 
 
     /*****显示用户的文件列表******/
@@ -138,19 +145,18 @@ private:
     QAction *m_sharelink;    //分享文件链接给别人
 
     /*线程*/
-    QThread * thread_adduploadfiles;  //生产者线程
-    QVector <QThread *> thread_consume_uploadfiles; //消费者线程数组
-    QVector <consumerthread_file *> consumer_thread;  //消费者线程处理工作的对象指针数组
-    QThread * thread_consumer;
+    //QThread * thread_adduploadfiles;  //生产者线程
+    //QVector <QThread *> thread_consume_uploadfiles; //消费者线程数组
+    //QVector <consumerthread_file *> consumer_thread;  //消费者线程处理工作的对象指针数组
+    //QThread * thread_consumer;
 
     //上传任务的实例
     uploadtask * uploadtask;
     dataprocess *m_process;
 
 
-
     //消费者
-    int thread_num = 3;  //定义一个消费者线程数，默认为3，后期加上UI操作
+   // int thread_num = 3;  //定义一个消费者线程数，默认为3，后期加上UI操作
 
     //用户文件数量
     long m_userfilecount;   //用户文件数量
@@ -160,7 +166,9 @@ private:
     QNetworkAccessManager *m_manager;
     common m_common;
 
-
+    //定时器
+    QTimer m_uploadFileTimer;
+    QTimer m_downloadFileTimer;
 
 
 };

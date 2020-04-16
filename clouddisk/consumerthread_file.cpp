@@ -9,17 +9,12 @@ static QMutex mutex_index;     //用来你锁住下标，一次只能允许一�
 consumerthread_file:: consumerthread_file(QObject *parent) : QObject(parent)
 {
     uploadtask = uploadtask::get_uploadtask_instance();
-
-
-
-
 }
 
 
 //文件上传的真正的操作
 void consumerthread_file::uploadfilesAction()
 {
-
 while(1){
 
     mutex.lock();
@@ -41,7 +36,7 @@ while(1){
 
 
     //处理任务
-    uploadfileinfo *uploadfileinfo = uploadtask->takeTask(index);
+    uploadfileinfo *uploadfileinfo = uploadtask->takeTask();
     qDebug()<<"consumer thread has taketask"<<index;
     mutex.unlock();
 

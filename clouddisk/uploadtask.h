@@ -42,7 +42,6 @@ public:
    static uploadtask *  get_uploadtask_instance();
 
 
-
    //上传的文件的列表
    QList<uploadfileinfo*> uploadfile_list;
 
@@ -50,10 +49,11 @@ public:
    bool isEmpty();
 
    //取任务
-   uploadfileinfo * takeTask(int index);
+   uploadfileinfo * takeTask();
+
 
    void clearlist();
-
+   bool isupload();   //是否有文件上传
    int appendtolist(QString filepath);
 
    //删除掉已经完成的任务

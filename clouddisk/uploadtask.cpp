@@ -21,16 +21,13 @@ bool uploadtask::isEmpty()
     return uploadfile_list.isEmpty();
 }
 
-//取指定的任务
-uploadfileinfo *uploadtask::takeTask(int index)
+//取第0个的任务
+uploadfileinfo *uploadtask::takeTask()
 {
-    //如果当前任务没有被上传
-    if(uploadfile_list.at(index)->isupload==false)
-    {
-        //改为正在上传
-        uploadfile_list.at(index)->isupload = true;
+    if(uploadfile_list.at(0)->isupload==false){
+        uploadfile_list.at(0)->isupload = true;
     }
-    return uploadfile_list.at(index);
+    return uploadfile_list.at(0);
 }
 
 
@@ -133,13 +130,8 @@ int uploadtask::appendtolist(QString filepath)
     tempfileinfo->dp = fileprogress;    //这边暂时先设为空指针
     tempfileinfo->filepath = filepath;
 
-    qDebug()<<Fileinfo_filename<<":添加到队列成功";
-
-    //加锁
-    mutex.lock();
+    qDebug()<<Fileinfo_filename<<":添加到队列成功"; 
     uploadfile_list.append(tempfileinfo);  //加入到文件列表的数据结构list中
-    //解锁
-    mutex.unlock();
 
 
     return 0;
@@ -157,6 +149,19 @@ void uploadtask::clearlist()
         delete  info;
     }
 
+}
+
+//是否有文件在上传
+bool uploadtask::isupload()
+{
+   for(int i = 0;i<uploadfile_list.size();i++)
+   {
+       if(uploadfile_list.at(i)->isupload)
+       {
+           return true;
+       }
+   }
+    return false;
 }
 
 
