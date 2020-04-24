@@ -32,5 +32,13 @@
         <file>images/password.PNG</file>
         <file>images/fire.gif</file>
         <file>images/firegray.jpg</file>
+        <file>images/last.png</file>
+        <file>images/next.png</file>
+        <file>images/play.png</file>
+        <file>images/stop.png</file>
+        <file>images/playerlog.png</file>
+        <file>images/muscicover.gif</file>
+        <file>images/noise.png</file>
+        <file>images/playlist.png</file>
     </qresource>
 </RCC>

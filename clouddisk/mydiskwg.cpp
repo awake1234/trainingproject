@@ -1,5 +1,9 @@
 #include "mydiskwg.h"
 #include "ui_mydiskwg.h"
+#include<QtMultimedia>
+#include<QtMultimediaWidgets>
+#include<QVideoWidget>
+#include "musicplayerwidget.h"
 
 extern QMutex mutex;   //加锁文件列表资源
 extern QWaitCondition notempty;  //条件变量文件列表不为空
@@ -51,6 +55,46 @@ void mydiskwg::initlistwidget()
            //上传文件操作
            adduploadfiles();
        }
+    });
+
+    //监听所有的item双击事件
+    connect(ui->filelistWidget,&QListWidget::itemDoubleClicked,[=](QListWidgetItem * curitem)
+    {
+        //得到名字
+        QString filename = curitem->text();
+        //解析得到后缀名
+        //解析文件名得到后缀名
+        int n = filename.indexOf(QChar('.'),0);
+        //截取后缀
+        QString suffix = filename.mid(n+1);
+
+        if(suffix=="mp3"||suffix=="wav"||suffix=="wmv"||suffix=="wma")
+        {
+            //播放音频
+            //得到当前音频的url
+            //在文件列表中查找到对应的文件
+            FileInfo * info = nullptr;
+            for(int i = 0;i<m_fileList.size();i++)
+            {
+                if(m_fileList.at(i)->item==curitem)
+                {
+                    info = m_fileList.at(i);
+                    break;
+                }
+            }
+            QString fileurl = info->url;
+            //this->playmusic(fileurl);
+
+            //创建一个播放器音乐界面
+            MusicPlayerWidget * musicplayer = new MusicPlayerWidget();
+
+            //将音乐加入音乐列表，并且设置音乐名称
+            musicplayer->addmusic(fileurl);
+            musicplayer->setmusicname(info->filename);
+            musicplayer->show();
+
+         }
+
     });
 
 }
@@ -581,6 +625,8 @@ void mydiskwg::deal_sharelink(FileInfo *info)
         }
     });
 }
+
+
 
 //设置分享的json包
 QByteArray mydiskwg::setdealfilejson(QString username, QString token, QString md5, QString filename)

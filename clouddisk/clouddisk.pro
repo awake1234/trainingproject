@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -48,7 +48,8 @@ SOURCES += \
     downloadtask.cpp \
     downloadlayout.cpp \
     createlink.cpp \
-    linkdownload.cpp
+    linkdownload.cpp \
+    musicplayerwidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -73,7 +74,8 @@ HEADERS += \
     downloadtask.h \
     downloadlayout.h \
     createlink.h \
-    linkdownload.h
+    linkdownload.h \
+    musicplayerwidget.h
 
 FORMS += \
         mainwindow.ui \
@@ -88,7 +90,8 @@ FORMS += \
     sharefilelist.ui \
     ranklist.ui \
     createlink.ui \
-    linkdownload.ui
+    linkdownload.ui \
+    musicplayerwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -97,3 +100,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     picture.qrc
+
+DISTFILES +=
