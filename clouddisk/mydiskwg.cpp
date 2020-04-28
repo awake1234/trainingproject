@@ -3,7 +3,6 @@
 #include<QtMultimedia>
 #include<QtMultimediaWidgets>
 #include<QVideoWidget>
-#include "musicplayerwidget.h"
 
 extern QMutex mutex;   //加锁文件列表资源
 extern QWaitCondition notempty;  //条件变量文件列表不为空
@@ -20,8 +19,14 @@ mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
     m_manager = m_common.getmanager();
     m_common.getFileTypeList(); //得到文件类型列表
 
-    //定期检查任务
-    checktask();
+    //删除该指针，并置位空
+    connect(musicplayer,&MusicPlayerWidget::sigwindowclose,[=]()
+    {
+        delete  musicplayer;
+        musicplayer=nullptr;
+    });
+     //定期检查任务
+     checktask();
 
 }
 
@@ -70,6 +75,7 @@ void mydiskwg::initlistwidget()
 
         if(suffix=="mp3"||suffix=="wav"||suffix=="wmv"||suffix=="wma")
         {
+
             //播放音频
             //得到当前音频的url
             //在文件列表中查找到对应的文件
@@ -83,16 +89,24 @@ void mydiskwg::initlistwidget()
                 }
             }
             QString fileurl = info->url;
-            //this->playmusic(fileurl);
 
+            //先判断当前的音乐播放器是否已经分配空间
+            if(musicplayer!=nullptr)
+            {
+                //如果已经创建了就把音乐加入到播放器
+                musicplayer->addmusic(fileurl);
+                musicplayer->insertmusicname(info->filename);
+                musicplayer->addmusicitem(info->filename);
+            }else{
             //创建一个播放器音乐界面
-            MusicPlayerWidget * musicplayer = new MusicPlayerWidget();
-
+            musicplayer = new MusicPlayerWidget();
             //将音乐加入音乐列表，并且设置音乐名称
             musicplayer->addmusic(fileurl);
-            musicplayer->setmusicname(info->filename);
+            musicplayer->insertmusicname(info->filename);
+            musicplayer->initmusicname();   //初始化音乐的名字
+            musicplayer->addmusicitem(info->filename);
             musicplayer->show();
-
+            }
          }
 
     });

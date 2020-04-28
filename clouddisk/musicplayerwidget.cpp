@@ -1,30 +1,39 @@
 #include "musicplayerwidget.h"
 #include "ui_musicplayerwidget.h"
+#include<QListWidgetItem>
 MusicPlayerWidget::MusicPlayerWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MusicPlayerWidget)
 {
     ui->setupUi(this);
+
+
     player = new QMediaPlayer();
     playlist = new QMediaPlaylist;
 
     //初始音量设为30
     player->setVolume(30);
     ui->verticalSlider_noise->setValue(player->volume());
-
     //添加封面动态图片
     cover = new QMovie(":/ico/images/muscicover.gif");
     ui->label_cover->setMovie(cover);
     cover->start();
-
     //让声音滑动条隐藏
     ui->verticalSlider_noise->hide();
+    //隐藏播放列表
+    ui->scrollArea_playlist->hide();
     //修改音量
     connect(ui->verticalSlider_noise,SIGNAL(valueChanged(int)),this,SLOT(on_noise_changed(int)));
     //获取总时长
     connect(player,SIGNAL(durationChanged(qint64)),this,SLOT(getduration(qint64)));
     //获取当前的位置
     connect(player,SIGNAL(positionChanged(qint64)),this,SLOT(getcurduration(qint64)));
+    //给布局申请空间
+    musicitemwidget = new QListWidget;
+    musicitemwidget->setViewMode(QListView::ListMode); //设置列表的形式
+    musicitemwidget->setMovement(QListView::Static);  //不可移动
+    QVBoxLayout * vlayout = new QVBoxLayout;
+    musicitemwidget->setLayout(vlayout);
 }
 
 MusicPlayerWidget::~MusicPlayerWidget()
@@ -36,18 +45,41 @@ MusicPlayerWidget::~MusicPlayerWidget()
 //添加音乐到playerlist
 void MusicPlayerWidget::addmusic(QString filepath)
 {
+    //如果playlist不为空
+    if(!playlist->isEmpty())
+    {
+       playlist->insertMedia(player->playlist()->currentIndex()+1,QUrl(filepath));
+    }else{
     playlist->addMedia(QUrl(filepath));
-    playlist->setCurrentIndex(1);
     player->setPlaylist(playlist);
+    playlist->setCurrentIndex(0);
     //播放
     player->play();
+    }
 }
 
 
-//设置音乐名称
-void MusicPlayerWidget::setmusicname(QString filename)
+//将音乐名称插入到vector中
+void MusicPlayerWidget::insertmusicname(QString filename)
 {
-    ui->label_songname->setText(filename);
+    musicname.push_back(filename);
+}
+
+//初始化名字
+void MusicPlayerWidget::initmusicname()
+{
+    //设置歌曲名称
+    ui->label_songname->setText(musicname[0]);
+}
+
+//将item添加到播放列表中
+void MusicPlayerWidget::addmusicitem(QString filename)
+{
+    QListWidgetItem * newitem = new QListWidgetItem(filename);
+    musicitemwidget->addItem(newitem);
+    QGridLayout * Glayout = new QGridLayout;
+    Glayout->addWidget(musicitemwidget);
+    ui->scrollAreaWidgetContents->setLayout(Glayout);
 }
 
 //关闭时停止音乐播放
@@ -58,8 +90,9 @@ void MusicPlayerWidget::closeEvent(QCloseEvent *)
     {
         player->stop();
         cover->stop();
-
+        playlist->clear();   //清除音乐列表
     }
+    emit sigwindowclose();
 }
 
 
@@ -120,4 +153,45 @@ void MusicPlayerWidget::getcurduration(qint64 curtime)
     QString curtimestr = totalTime.toString("mm:ss");
     ui->label_curtime->setText(curtimestr);
     ui->horizontalSlider_progress->setValue(m_curdurationtime);
+}
+
+//下一首音乐
+void MusicPlayerWidget::on_toolButton_nexr_clicked()
+{
+
+    int nextindex = player->playlist()->nextIndex();
+    if(nextindex==-1)
+    {
+        return;
+    }
+    //设定为下一首音乐
+    player->playlist()->setCurrentIndex(nextindex);
+    ui->label_songname->setText(musicname[nextindex]);
+    player->play();
+}
+
+//上一首歌曲
+void MusicPlayerWidget::on_toolButton_last_clicked()
+{
+    int previousindex = player->playlist()->previousIndex();
+    if(previousindex==-1)
+    {
+        return;
+    }
+    //设定为下一首音乐
+    player->playlist()->setCurrentIndex(previousindex);
+    ui->label_songname->setText(musicname[previousindex]);
+    player->play();
+}
+
+//点击显示播放列表
+void MusicPlayerWidget::on_toolButton_playlist_clicked()
+{
+    //如果播放列表被隐藏
+    if(ui->scrollArea_playlist->isHidden())
+    {
+        ui->scrollArea_playlist->show();
+    }else{
+        ui->scrollArea_playlist->hide();
+    }
 }

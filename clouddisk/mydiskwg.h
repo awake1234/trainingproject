@@ -18,6 +18,8 @@
 #include "logininfoinstance.h"
 #include<QNetworkReply>
 #include<QMessageBox>
+#include "musicplayerwidget.h"
+
 
 
 
@@ -169,6 +171,9 @@ private:
     //定时器
     QTimer m_uploadFileTimer;
     QTimer m_downloadFileTimer;
+
+    //音乐播放器界面
+    MusicPlayerWidget * musicplayer;
 
 
 };
