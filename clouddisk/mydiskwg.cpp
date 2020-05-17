@@ -503,9 +503,18 @@ void mydiskwg::downloadfileAction()
         reply->deleteLater();
     });
 
-    connect(reply,&QNetworkReply::downloadProgress,[=](qint64 bytesReceived,qint64 bytesTotal){
+
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+    qDebug()<<"start  time:"<<current_date<<endl;
+    connect(reply,&QNetworkReply::downloadProgress,[=](qint64 bytesReceived,qint64 bytesTotal) mutable{
         if(bytesTotal!=0)
         {
+            //记录传输速率
+            QDateTime current_date_time =QDateTime::currentDateTime();
+            QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+            qDebug()<<"current time:"<<current_date<<endl;
+            qDebug()<<"has recv data:"<<bytesReceived<<endl;
             downloadfileinfo->dp->setprogress(bytesReceived/1024,bytesTotal/1024);
         }
 
@@ -947,6 +956,8 @@ void mydiskwg::adduploadfiles()
 
 void mydiskwg::uploadFilesAction()
 {
+
+
     uploadtask = uploadtask::get_uploadtask_instance();
     if(uploadtask->isEmpty())
     {
@@ -1026,6 +1037,16 @@ QByteArray mydiskwg::setMD5Json(QString user, QString token, QString md5, QStrin
 //慢速上传文件的操作
 void mydiskwg::uploadfileslow(uploadfileinfo * info)
 {
+    //先判断空间是否不足
+    int space = getuserspace();
+    float totalspace = space+info->filesize;
+    float maxsize = 2048;
+    if(totalspace/(1024*1024)>=maxsize)
+    {
+       QMessageBox::warning(this,"no space","您的空间已不足，无法继续上传");
+       return;
+    }
+
     logininfoinstance * login = logininfoinstance::getinstance();
     QString boundry = m_common.getBoundry();
 
@@ -1061,14 +1082,27 @@ void mydiskwg::uploadfileslow(uploadfileinfo * info)
     qDebug()<<"send data size"<<data.size();
     qDebug()<<"send data:"<<data.data();          //输出发送的信息
     QNetworkReply *reply  = m_manager->post(request,data);
+
+
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+    qDebug()<<"start  time:"<<current_date<<endl;
     //返回一些上传过程中的传输的字节大小
-    connect(reply,&QNetworkReply::uploadProgress,[=](qint64 bytesent,qint64 byteTotal)
+    connect(reply,&QNetworkReply::uploadProgress,[=](qint64 bytesent,qint64 byteTotal) mutable
     {
+
         if(byteTotal!=0)
         {
+            //记录传输速率
+            QDateTime current_date_time =QDateTime::currentDateTime();
+            QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+            qDebug()<<"current time:"<<current_date<<endl;
+            qDebug()<<"has send data:"<<bytesent<<endl;
             update_progress_value(bytesent,byteTotal,info->dp);
-        }
-     });
+       }
+    });
+
+
     connect(reply,&QNetworkReply::readyRead,[=]()
     {
        if(reply->error()!=QNetworkReply::NoError)
@@ -1113,10 +1147,12 @@ void mydiskwg::checktask()
     {
        this->uploadFilesAction();
     });
+
     m_downloadFileTimer.start(500);
+    connect(&m_downloadFileTimer,&QTimer::timeout,[=]()
     {
         this->downloadfileAction();
-    }
+    });
 }
 
 //获取用户文件列表
@@ -1298,7 +1334,6 @@ void mydiskwg::getuserfilecount(mydiskwg::DISPLAY cmd)
         {
             //得到用户的文件数量
             m_userfilecount = status.at(1).toLong();
-
             //用户有文件
             if(m_userfilecount>0)
             {
@@ -1365,7 +1400,7 @@ void mydiskwg::clearfilelist()
 
 
 //用来获取用户的容量
-void  mydiskwg::getuserspace()
+int  mydiskwg::getuserspace()
 {
     //组织需要发送的json字符串
     logininfoinstance  * login = logininfoinstance::getinstance();
@@ -1404,6 +1439,7 @@ void  mydiskwg::getuserspace()
        QJsonDocument doc = QJsonDocument::fromJson(ret);
        if(doc.isObject())
        {
+
            QString code = doc.object().value("code").toString();
            if(code=="110")
            {
@@ -1419,6 +1455,8 @@ void  mydiskwg::getuserspace()
            }
        }
     });
+
+    return usedspace;   //返回已经使用的空间
 }
 
 

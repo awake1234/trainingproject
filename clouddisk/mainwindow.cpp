@@ -145,15 +145,16 @@ void MainWindow::ShowMainWindow()
     {
     //拼接一个字符串显示用户容量大小
     qint64 size = ui->page_mydisk->usedspace;
-    QString text = QString("%1MB/1024MB").arg(size/(1024*1024));
+    QString text = QString("%1MB/2048MB").arg(size/(1024*1024*2));
     //设置标签的值
     QLabel *  labeluserspace = ui->title_widget->getlabelsize();
     labeluserspace->setText(text);
 
     //设置当前值
     QProgressBar * userspace = ui->title_widget->getprogress();
-    userspace->setRange(0,1024);
-    userspace->setValue(static_cast<int>(size/(1024*1024))+1);
+    userspace->setRange(0,2048);
+    userspace->setValue(static_cast<int>(size/(1024*1024*2))+1);
+
     });
 
    //显示用户的文件列表
@@ -164,10 +165,6 @@ void MainWindow::ShowMainWindow()
    temp->setText(info->getuser());
 
    this->show();
-
-
-
-
 
 
 }
