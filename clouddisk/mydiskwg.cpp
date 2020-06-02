@@ -19,12 +19,6 @@ mydiskwg::mydiskwg(QWidget *parent):QWidget(parent),
     m_manager = m_common.getmanager();
     m_common.getFileTypeList(); //得到文件类型列表
 
-    //删除该指针，并置位空
-    connect(musicplayer,&MusicPlayerWidget::sigwindowclose,[=]()
-    {
-        delete  musicplayer;
-        musicplayer=nullptr;
-    });
      //定期检查任务
      checktask();
 
@@ -100,6 +94,14 @@ void mydiskwg::initlistwidget()
             }else{
             //创建一个播放器音乐界面
             musicplayer = new MusicPlayerWidget();
+
+            //删除该指针，并置位空
+            connect(musicplayer,&MusicPlayerWidget::sigwindowclose,[=]()
+            {
+                delete  musicplayer;
+                musicplayer=nullptr;
+            });
+
             //将音乐加入音乐列表，并且设置音乐名称
             musicplayer->addmusic(fileurl);
             musicplayer->insertmusicname(info->filename);
